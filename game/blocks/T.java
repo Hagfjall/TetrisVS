@@ -21,7 +21,7 @@ public class T extends Shape {
 	}
 
 	@Override
-	protected void setOrient(byte orientation) {
+	protected void setOrient() {
 		// TODO Auto-generated method stub
 		
 	}

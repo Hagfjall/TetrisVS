@@ -83,5 +83,6 @@ public abstract class Shape {
 			}
 		}
 	}
-	protected abstract void setOrient(byte orientation);
+	protected abstract void setOrient();
+	
 }

@@ -22,7 +22,7 @@ public class Z_Left extends Shape {
 	}
 
 	@Override
-	protected void setOrient(byte orientation) {
+	protected void setOrient() {
 		// TODO Auto-generated method stub
 		
 	}

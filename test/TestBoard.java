@@ -10,7 +10,6 @@ public class TestBoard {
 		Board b = new Board(x, y);
 
 		Shape s = new Square();
-		System.out.println(s.getWidth() + s.getHeight());
 		
 		for (int i = 0; i < s.getWidth(); i++)
 			for (int j = 0; j < s.getHeight(); j++) {
