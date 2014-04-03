@@ -22,7 +22,7 @@ public class Z_Left extends Shape {
 	}
 
 	@Override
-	protected void setOrient() {
+	protected void reDraw() {
 		// TODO Auto-generated method stub
 		
 	}
