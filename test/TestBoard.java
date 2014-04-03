@@ -16,7 +16,7 @@ public class TestBoard {
 
 	public void test() {
 		x = 10;
-		y = 14;
+		y = 22;
 		b = new Board(x, y);
 		s = new Square();
 		addShape(2, 4);
