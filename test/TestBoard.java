@@ -16,7 +16,7 @@ public class TestBoard {
 
 	public void test() {
 		x = 10;
-		y = 18;
+		y = 14;
 		b = new Board(x, y);
 		s = new Square();
 		addShape(2, 4);
@@ -27,7 +27,10 @@ public class TestBoard {
 	private void printBoard() {
 		for (int iy = 0; iy < y; iy++) {
 			for (int ix = 0; ix < x; ix++) {
-				System.out.print(b.getType(ix, iy));
+				if(b.checkSlot(ix, iy))
+					System.out.print(b.getType(ix, iy));
+				else
+					System.out.print(".");
 			}
 			System.out.println(" ");
 		}
