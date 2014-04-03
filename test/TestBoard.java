@@ -12,6 +12,9 @@ public class TestBoard {
 		System.out.println(Boolean.toString(b.checkSlot(1, 1)));
 		for(int i = 0; i< x; i++){
 			for(int j = 0; j < y; j++){
+				if(j == 0 || j == y-1){
+				System.out.print("|");	
+				}
 				if(b.checkSlot(i, j))
 					System.out.print(" ");
 				else
