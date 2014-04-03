@@ -15,7 +15,6 @@ public class Board {
 	public void setSlot(int x, int y, byte type) {
 		if (x >= 0 && y >= 0 && x < board.length && y < board[0].length)
 			board[x][y] = type;
-			System.out.println(type);
 	}
 
 	/**
