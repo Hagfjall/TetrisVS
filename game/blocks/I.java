@@ -26,13 +26,11 @@ public class I extends Shape {
 
 	@Override
 	protected void setOrient() {
-		switch(orientation){
-		case NORTH:
-			for(int i = 0; i < 4; i++){
-				matrix[i][s];
-			}
+//		switch(orientation){
+//		case NORTH:
+//			for(int i = 0; i < 4; i++){
+//				matrix[i][s];
+//			}
 		
 	}
-
-	tru true föase 
 }
