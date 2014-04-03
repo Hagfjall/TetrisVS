@@ -2,6 +2,7 @@ package test;
 
 import game.Board;
 
+
 public class TestBoard {
 
 	public static void main(String[] args) {
