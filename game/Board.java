@@ -5,21 +5,26 @@ public class Board {
 	private byte[][] board;
 
 	public Board(int x, int y) {
-		board = new byte[x][y];
-		for (int i = 0; i < x; i++)
-			for (int j = 0; j < y; j++)
+		board = new byte[y][x];
+		for (int i = 0; i < y; i++)
+			for (int j = 0; j < x; j++)
 				board[i][j] = 0;
 
 	}
+	
+	public Board(Board b){
+//		board = new byte[x][y];
+	}
+	
 
 	public void setSlot(int x, int y, byte type) {
 		if (insideMatrix(x,y))
-			board[x][y] = type;
+			board[y][x] = type;
 	}
 	
 	public byte getType(int x, int y){
 		if(insideMatrix(x,y))
-			return board[x][y];
+			return board[y][x];
 		else
 			return 0;
 	}
@@ -33,13 +38,13 @@ public class Board {
 	 *         outside the matrix
 	 */
 	public boolean checkSlot(int x, int y) {
-		if (x >= 0 && y >= 0 && x < board.length && y < board[0].length) {
-			return (board[x][y] != 0);
+		if (insideMatrix(x,y)) {
+			return (board[y][x] != 0);
 		} else
 			return true;
 	}
 	
 	private boolean insideMatrix(int x, int y) {
-		return x >= 0 && x < board.length && y >= 0 && y < board[0].length;
+		return y >= 0 && y < board.length && x >= 0 && x < board[0].length;
 	}
 }

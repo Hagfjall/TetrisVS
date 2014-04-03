@@ -6,6 +6,7 @@ public class I extends Shape {
 		super(Shape.I);
 		matrix = new boolean[4][4];
 		setMatrix();
+		System.out.println(" ");
 	}
 
 	private void setMatrix(){

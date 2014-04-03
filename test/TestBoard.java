@@ -6,7 +6,7 @@ import game.blocks.*;
 public class TestBoard {
 
 	public static void main(String[] args) {
-		int x = 10, y = 10;
+		int x = 2, y = 10;
 		Board b = new Board(x, y);
 
 		Shape s = new Square();
