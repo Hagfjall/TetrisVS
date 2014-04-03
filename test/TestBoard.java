@@ -8,16 +8,17 @@ public class TestBoard {
 	public static void main(String[] args) {
 		int x = 10, y = 10;
 		Board b = new Board(x, y);
-		for (int i = 0; i < x; i++)
-			b.setSlot(0, i, (byte) 1);
 
 		Shape s = new Square();
 		for (int i = 0; i < s.getWidth(); i++)
-			for (int j = 0; j < s.getHeight(); i++) {
+			for (int j = 0; j < s.getHeight(); j++) {
 				if (s.checkSlot(x, y))
 					b.setSlot(i, j, s.getType());
 			}
-
+		System.out.print(" ");
+		for(int i = 0; i < x ; i++)
+			System.out.print("_");
+		System.out.println("");
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
 				if (j == 0)
