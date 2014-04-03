@@ -30,7 +30,14 @@ public abstract class Shape {
 	 * @param y
 	 * @return
 	 */
-	public abstract boolean checkEmpty(int x, int y);
+	public boolean checkSlot(int x, int y) {
+		return insideMatrix(x,y) && matrix[x][y];
+
+	}
+
+	protected boolean insideMatrix(int x, int y) {
+		return x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length;
+	}
 
 	/**
 	 * rotate the block inside the matrix
@@ -55,9 +62,9 @@ public abstract class Shape {
 	public void printShape() {
 		for (int i = 0; i < getWidth(); i++) {
 			for (int j = 0; j < getHeight(); j++) {
-				if(matrix[i][j])
+				if (matrix[i][j])
 					System.out.print("*");
-				else{
+				else {
 					System.out.print(" ");
 				}
 			}
