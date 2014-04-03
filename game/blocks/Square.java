@@ -25,4 +25,10 @@ public class Square extends Shape {
 		// TODO Auto-generated method stub
 	}
 
+	@Override
+	protected void setOrient() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

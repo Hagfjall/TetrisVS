@@ -5,39 +5,35 @@ import game.blocks.*;
 
 public class TestBoard {
 
-	public static void main(String[] args) {
-		int x = 2, y = 10;
-		Board b = new Board(x, y);
+	static Board b;
+	static Shape s;
+	static int x, y;
+	static byte p;
 
-		Shape s = new Square();
-		
-		for (int i = 0; i < s.getWidth(); i++)
-			for (int j = 0; j < s.getHeight(); j++) {
-				if (s.checkSlot(i, j))
-					b.setSlot(i, j, s.getType());
-			}
-		System.out.print(" ");
-		for(int i = 0; i < x ; i++)
-			System.out.print("_");
-		System.out.println("");
-		for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; j++) {
-				if (j == 0)
-					System.out.print("|");
-				if (b.checkSlot(i, j)) {
-					System.out.print(b.getType(i, j));
-				}
-				else {
-					System.out.print(" ");
-				}
-				if (j == y - 1) {
-					System.out.print("|");
-				}
+	public static void main(String[] args) {
+		x = 10;
+		y = 18;
+		b = new Board(x, y);
+
+		s = new Square();
+		addShape(2,4);
+		printBoard(b);
+	}
+
+	private static void printBoard(Board b) {
+		for (int iy = 0; iy < y; iy++) {
+			for (int ix = 0; ix < x; ix++) {
+				System.out.print(b.getType(ix, iy));
 			}
 			System.out.println(" ");
 		}
-		System.out.print(" ");
-		for (int i = 0; i < x; i++)
-			System.out.print("-");
+	}
+
+	private static void addShape(int ix, int iy) {
+		for (int y = 0; y < s.getHeight(); y++) {
+			for (int x = 0; x < s.getWidth(); x++) {
+				b.setSlot(ix+x, iy+y, s.getType());
+			}
+		}
 	}
 }
