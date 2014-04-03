@@ -28,12 +28,9 @@ public abstract class Shape {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return true if a part of a block is in that coridinate, false oterwise
+	 * @return
 	 */
-	public boolean checkEmpty(int x, int y){
-		if()
-		return matrix[x][y];
-	}
+	public abstract boolean checkEmpty(int x, int y);
 
 	/**
 	 * rotate the block inside the matrix

@@ -22,7 +22,7 @@ public class Board {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return true when the square is empty ( == 0) or the coordinate is
+	 * @return true when the slot is empty ( == 0) or the coordinate is
 	 *         outside the matrix
 	 */
 	public boolean checkSlot(int x, int y) {
