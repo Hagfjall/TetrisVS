@@ -5,24 +5,17 @@ public class Square extends Shape {
 	public Square() {
 		super(Shape.SQUARE);
 		matrix = new boolean[2][2];
-		setMatrix();
+		init();
 	}
 
-	private void setMatrix(){
-		for(int i = 0; i < 2; i++)
-			for(int j = 0; j < 2; j++)
+	private void init() {
+		for (int i = 0; i < 2; i++)
+			for (int j = 0; j < 2; j++)
 				matrix[i][j] = true;
 	}
 
-	@Override
 	public void rotate(boolean clockwise) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	protected void reDraw() {
-		// TODO Auto-generated method stub
+		// Do nothing, no point of rotating the square.
 	}
 
 	@Override
