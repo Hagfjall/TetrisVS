@@ -15,6 +15,7 @@ public class Board {
 	public void setSlot(int x, int y, byte type) {
 		if (x >= 0 && y >= 0 && x < board.length && y < board[0].length)
 			board[x][y] = type;
+			System.out.println(type);
 	}
 
 	/**
@@ -26,7 +27,7 @@ public class Board {
 	 *         outside the matrix
 	 */
 	public boolean checkSlot(int x, int y) {
-		if (x >= 0 && y >= 0 && x < board.length && y > board[0].length) {
+		if (x >= 0 && y >= 0 && x < board.length && y < board[0].length) {
 			if (board[x][y] == 0)
 				return true;
 			else {
