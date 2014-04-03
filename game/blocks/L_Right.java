@@ -20,4 +20,10 @@ public class L_Right extends Shape {
 
 	}
 
+	@Override
+	protected void setOrient(byte orientation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

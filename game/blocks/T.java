@@ -20,4 +20,10 @@ public class T extends Shape {
 
 	}
 
+	@Override
+	protected void setOrient(byte orientation) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
