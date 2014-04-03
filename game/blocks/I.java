@@ -16,14 +16,21 @@ public class I extends Shape {
 	@Override
 	public void rotate(boolean clockwise) {
 		cleanMatrix();
-		orientation++;
+		if(orientation == WEST){
+			orientation = NORTH;
+		}
+		else orientation++;
+		setOrient();
 		
 	}
 
 	@Override
 	protected void setOrient(byte orientation) {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stubS
+		swithc(ori)
+		case: nort: setNort();
 		
 	}
 
+	tru true föase 
 }
