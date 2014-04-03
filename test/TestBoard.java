@@ -1,7 +1,6 @@
 package test;
 
 import game.Board;
-import game.blocks.Shape;
 
 public class TestBoard {
 
