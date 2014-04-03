@@ -49,7 +49,24 @@ public abstract class Shape {
 	 * @param clockwise
 	 *            or not
 	 */
-	public abstract void rotate(boolean clockwise);
+	public void rotate(boolean clockwise){
+		cleanMatrix();
+		if(clockwise){
+			if (orientation == WEST) {
+				orientation = NORTH;
+			} else
+				orientation++;
+			}
+			else{
+				if(orientation == NORTH){
+					orientation = WEST;
+				}
+				else{
+					orientation--;
+				}
+			}
+		reDraw();
+	}
 
 	public byte getType() {
 		return type;
@@ -83,6 +100,6 @@ public abstract class Shape {
 			}
 		}
 	}
-	protected abstract void setOrient();
+	protected abstract void reDraw();
 	
 }

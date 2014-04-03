@@ -21,7 +21,7 @@ public class Square extends Shape {
 	}
 
 	@Override
-	protected void setOrient() {
+	protected void reDraw() {
 		// TODO Auto-generated method stub
 	}
 
