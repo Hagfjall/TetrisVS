@@ -27,13 +27,8 @@ public class Board {
 	 */
 	public boolean checkSlot(int x, int y) {
 		if (x >= 0 && y >= 0 && x < board.length && y < board[0].length) {
-			if (board[x][y] == 0)
-				return true;
-			else {
-				return false;
-			}
-		}
-		return false;
+			return (board[x][y] == 0);
+		} else
+			return false;
 	}
-
 }
