@@ -17,11 +17,4 @@ public class Square extends Shape {
 	public void rotate(boolean clockwise) {
 		// Do nothing, no point of rotating the square.
 	}
-
-	@Override
-	protected void setOrient() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

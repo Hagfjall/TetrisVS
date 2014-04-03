@@ -1,6 +1,5 @@
 package game.blocks;
 
-
 public abstract class Shape {
 
 	/**
@@ -49,23 +48,23 @@ public abstract class Shape {
 	 * @param clockwise
 	 *            or not
 	 */
-	public void rotate(boolean clockwise){
-		cleanMatrix();
-		if(clockwise){
-			if (orientation == WEST) {
-				orientation = NORTH;
-			} else
-				orientation++;
-			}
-			else{
-				if(orientation == NORTH){
-					orientation = WEST;
-				}
-				else{
-					orientation--;
+	public void rotate(boolean clockwise) {
+		int r;
+		if (clockwise)
+			r = 1;
+		else
+			r = 3;
+		for (int k = 1; k <= r; k++) {
+			boolean sec[][] = new boolean[matrix.length][matrix[0].length];
+
+			for (int i = 0; i < matrix[0].length; i++) {
+				for (int j = matrix.length - 1; j >= 0; j--) {
+					sec[i][matrix.length - 1 - j] = matrix[j][i];
 				}
 			}
-		reDraw();
+			matrix = sec;
+
+		}
 	}
 
 	public byte getType() {
@@ -93,14 +92,4 @@ public abstract class Shape {
 		}
 	}
 
-	protected void cleanMatrix() {
-		for (int i = 0; i < getWidth(); i++) {
-			for (int j = 0; j < getHeight(); j++) {
-				matrix[i][j] = false;
-			}
-		}
-	}
-	protected abstract void setOrient();
-	protected abstract void reDraw();
-	
 }
