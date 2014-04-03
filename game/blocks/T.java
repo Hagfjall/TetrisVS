@@ -12,7 +12,6 @@ public class T extends Shape {
 		for(int i = 0; i < 3; i++)
 			matrix[0][i] = true;
 		matrix[1][1] = true;
-		matrix[2][1] = true;
 	}
 
 	@Override
