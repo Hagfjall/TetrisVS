@@ -15,8 +15,15 @@ public class I extends Shape {
 
 	@Override
 	public void rotate(boolean clockwise) {
-		// TODO Auto-generated method stub
+		cleanMatrix();
+		orientation++;
+		
+	}
 
+	@Override
+	protected void setOrient(byte orientation) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

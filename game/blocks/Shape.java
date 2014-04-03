@@ -1,6 +1,5 @@
 package game.blocks;
 
-import client.logic.Orientation;
 
 public abstract class Shape {
 
@@ -14,13 +13,18 @@ public abstract class Shape {
 	public static final byte Z_RIGHT = L_LEFT + 1;
 	public static final byte Z_LEFT = Z_RIGHT + 1;
 	public static final byte I = Z_LEFT + 1;
+	protected static final byte NORTH = 1;
+	protected static final byte EAST = 2;
+	protected static final byte SOUTH = 3;
+	protected static final byte WEST = 4;
 
 	protected byte type;
-	protected Orientation orientation;
+	protected int orientation;
 	protected boolean[][] matrix;
 
 	public Shape(byte type) {
 		this.type = type;
+		orientation = NORTH;
 	}
 
 	/**
@@ -31,7 +35,7 @@ public abstract class Shape {
 	 * @return
 	 */
 	public boolean checkSlot(int x, int y) {
-		return insideMatrix(x,y) && matrix[x][y];
+		return insideMatrix(x, y) && matrix[x][y];
 
 	}
 
@@ -72,4 +76,12 @@ public abstract class Shape {
 		}
 	}
 
+	protected void cleanMatrix() {
+		for (int i = 0; i < getWidth(); i++) {
+			for (int j = 0; j < getHeight(); j++) {
+				matrix[i][j] = false;
+			}
+		}
+	}
+	protected abstract void setOrient(byte orientation);
 }

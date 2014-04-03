@@ -25,7 +25,6 @@ public class TestBoard {
 				if (b.checkSlot(i, j)) {
 					System.out.print(b.getType(i, j));
 				}
-
 				else {
 					System.out.print(" ");
 				}
@@ -36,7 +35,7 @@ public class TestBoard {
 			System.out.println(" ");
 		}
 		System.out.print(" ");
-		for (int i = 0; i < x - 1; i++)
-			System.out.print("¨");
+		for (int i = 0; i < x; i++)
+			System.out.print("-");
 	}
 }
