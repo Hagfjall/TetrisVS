@@ -1,6 +1,4 @@
-package game;
-
-import game.blocks.*;
+package game.blocks;
 
 import java.util.Random;
 
@@ -14,16 +12,18 @@ public class ShapeFactory {
 
 	/**
 	 * return a shape randomly
+	 * 
 	 * @return Shape
 	 */
 	public Shape getShape() {
-		byte rnd = (byte) rand.nextInt(Shape.I + 1);
-		return getShape(rnd);
+		return getShape((byte) rand.nextInt(Shape.I + 1));
 	}
 
 	/**
 	 * returns the specified shape representing the type
-	 * @param type one of the Shape-constant
+	 * 
+	 * @param type
+	 *            one of the Shape-constant
 	 * @return
 	 */
 	public Shape getShape(byte type) {
