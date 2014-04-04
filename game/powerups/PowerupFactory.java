@@ -2,20 +2,22 @@ package game.powerups;
 
 import java.util.Random;
 
-public class PowerupFactory {
+public abstract class PowerupFactory {
 
 	private static Random rand = new Random();
 
-	private PowerupFactory() {
-	}
-
-	public static Powerup getPowerup(){
-		return getPowerup((byte)rand.nextInt(Powerup.MIRROR+1));
+	/**
+	 * 
+	 * @return new randomized powerup
+	 */
+	public static Powerup getPowerup() {
+		return getPowerup((byte) (rand.nextInt(Powerup.MIRROR ) + 1));
 	}
 
 	/**
 	 * 
 	 * @param type
+	 *            which type of powerup to create
 	 * @return the shape that matches type, otherwise NULL
 	 */
 	public static Powerup getPowerup(byte type) {

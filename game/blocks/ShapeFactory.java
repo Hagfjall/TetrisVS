@@ -16,7 +16,7 @@ public class ShapeFactory {
 	 * @return Shape
 	 */
 	public Shape getShape() {
-		return getShape((byte) rand.nextInt(Shape.I + 1));
+		return getShape((byte) (rand.nextInt(Shape.I) + 1));
 	}
 
 	/**
