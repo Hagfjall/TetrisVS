@@ -1,12 +1,13 @@
 package test;
 
 import game.Board;
+import game.GameBoard;
 import game.blocks.Shape;
 import game.blocks.Square;
 
 public class TestBoard {
 
-	Board b;
+	GameBoard b;
 	Shape s;
 	int x, y;
 
@@ -18,9 +19,13 @@ public class TestBoard {
 	public void test() {
 		x = 10;
 		y = 22;
-		b = new Board(x, y);
+		b = new GameBoard(x, y);
 		s = new Square();
 		addShape(2, 4);
+		addShape(4, 4);
+		addShape(6, 4);
+		addShape(0, 4);
+		b.removeRows(4);
 		printBoard();
 
 	}
