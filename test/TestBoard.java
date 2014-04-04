@@ -12,6 +12,7 @@ public class TestBoard {
 
 	public static void main(String[] args) {
 		new TestBoard().test();
+		
 	}
 
 	public void test() {
