@@ -1,6 +1,5 @@
 package test;
 
-import game.Board;
 import game.GameBoard;
 import game.blocks.Shape;
 import game.blocks.Square;
