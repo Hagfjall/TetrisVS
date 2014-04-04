@@ -2,9 +2,9 @@ package game;
 
 public class Board {
 
-	private byte[][] board;
-	private int width;
-	private int height;
+	protected byte[][] board;
+	protected int width;
+	protected int height;
 
 	public Board(int width, int height) {
 		this.width = width;
