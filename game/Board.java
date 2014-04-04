@@ -3,13 +3,22 @@ package game;
 public class Board {
 
 	private byte[][] board;
+	private int width;
+	private int height;
 
-	public Board(int x, int y) {
-		board = new byte[x][y];
+	public Board(int width, int height) {
+		this.width = width;
+		this.height = height;
+		board = new byte[width][height];
 //		for (int i = 0; i < x; i++)
 //			for (int j = 0; j < y; j++)
 //				board[i][j] = 0;
-
+	}
+	public int getWidth(){
+		return width;
+	}
+	public int getHeight(){
+		return height;
 	}
 
 	public Board(Board b) {
