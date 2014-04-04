@@ -1,6 +1,7 @@
 package game;
 
 import game.blocks.Shape;
+import game.blocks.ShapeFactory;
 
 
 public class Game extends Thread {
