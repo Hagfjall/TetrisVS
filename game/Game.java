@@ -2,6 +2,7 @@ package game;
 
 import game.blocks.Shape;
 
+
 public class Game extends Thread {
 	private Board board;
 	private Shape currentShape;
