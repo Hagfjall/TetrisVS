@@ -1,4 +1,4 @@
-# Created by http://www.gitignore.io
+l# Created by http://www.gitignore.io
 
 ### Java ###
 *.class
@@ -30,6 +30,7 @@ local.properties
 .settings/
 .loadpath
 .project
+.classpath
 
 # External tool builders
 .externalToolBuilders/
