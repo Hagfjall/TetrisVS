@@ -32,6 +32,7 @@ public class ShapeBoard extends Board {
 			clearBoard();
 			currentY++;
 			printShape();
+			System.out.println(currentY);
 			// ta bort föregående slots
 		}
 	}
@@ -59,6 +60,31 @@ public class ShapeBoard extends Board {
 				}
 			}
 		}
+	}
+
+	public void rotateClockwise() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void rotateCounterClockwise() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void moveLeft() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void moveBottom() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void fireAttack() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
