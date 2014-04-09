@@ -26,7 +26,7 @@ public class TestHorisont extends Thread {
 		// putShapeInBoard(3, 15);
 		b.setSlot(0, 3, (byte) 1);
 		printBoard();
-		int[] curve = curveDown(0, 9);
+		int[] curve = curveDown(0, 9,-1);
 		System.out.println("\nresult:");
 		for (int i = 0; i <= 9 - 0; i++) {
 			System.out.print(curve[i] + " ");
@@ -36,7 +36,7 @@ public class TestHorisont extends Thread {
 
 	}
 
-	private int[] curveDown(int start, int end) {
+	private int[] curveDown(int start, int end, int currentY) {
 		int[] result = new int[end - start + 1];
 		for (int c = start; c <= end; c++) {
 			for (int r = b.getHeight(); r >= 0; r--) {

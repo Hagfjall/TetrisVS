@@ -18,6 +18,7 @@ public class TestShape {
 		s.printShape();
 		System.out.println("South: " + s.getMostSouth());
 		System.out.println("East: " + s.getMostEast());
+		
 		s = new T();
 		System.out.println(" ");
 		s.printShape();

@@ -55,4 +55,17 @@ public class Board {
 	private boolean insideMatrix(int x, int y) {
 		return x >= 0 && x < board.length && y >= 0 && y < board[0].length;
 	}
+	
+	
+	public void print(){
+		for (int iy = 0; iy < height; iy++) {
+			for (int ix = 0; ix < width; ix++) {
+				if(checkSlot(ix, iy))
+					System.out.print(getType(ix, iy));
+				else
+					System.out.print(".");
+			}
+			System.out.println(" ");
+		}
+	}
 }
