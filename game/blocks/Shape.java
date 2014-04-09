@@ -79,13 +79,50 @@ public abstract class Shape {
 		return matrix[0].length;
 	}
 
+	/**
+	 * Return the mostSouth value in the matrix that contains something. Returns
+	 * -1 if (should never happen) it doesn't contains anything
+	 * 
+	 * @return
+	 */
+	public int getMostSouth() {
+		for (int r = matrix.length - 1; r >= 0; r--) {
+			for (int c = matrix.length - 1; c >= 0; c--) {
+				if (checkSlot(r, c)) {
+					return r;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	public int getMostWest(){
+		for(int c = 0;  c < matrix.length; c++){
+			for(int r = 0; r < matrix.length; r++){
+				if(checkSlot(r,c))
+					return c;
+			}
+		}
+		return -1;
+	}
+	
+	public int getMostEast(){
+		for(int c = matrix.length -1 ; c >= 0; c--){
+			for(int r = 0; r < matrix.length ; r++){
+				if(checkSlot(r,c))
+					return c;
+			}
+		}
+		return -1;
+	}
+
 	public void printShape() {
 		for (int i = 0; i < getWidth(); i++) {
 			for (int j = 0; j < getHeight(); j++) {
 				if (matrix[i][j])
-					System.out.print("*");
+					System.out.print("#");
 				else {
-					System.out.print(" ");
+					System.out.print("-");
 				}
 			}
 			System.out.println("");

@@ -26,28 +26,34 @@ public class TestHorisont extends Thread {
 		// putShapeInBoard(3, 15);
 		b.setSlot(0, 3, (byte) 1);
 		printBoard();
-		curveDown(0, 9);
-
+		int[] curve = curveDown(0, 9);
+		System.out.println("\nresult:");
+		for (int i = 0; i <= 9 - 0; i++) {
+			System.out.print(curve[i] + " ");
+		}
 		// pause på 1 sek
 		// printBoard();
 
 	}
 
-	private void curveDown(int start, int end) {
+	private int[] curveDown(int start, int end) {
 		int[] result = new int[end - start + 1];
 		for (int c = start; c <= end; c++) {
 			for (int r = b.getHeight(); r >= 0; r--) {
 				if (b.checkSlot(c, r))
 					result[c-start] = r;
 			}
-
 		}
-
-		System.out.println("\nresult:");
-		for (int i = 0; i <= end - start; i++) {
-			System.out.print(result[i] + " ");
-		}
+		return result;
 	}
+	
+	private void testShapeSouth(){
+		
+	}
+	
+//	private int[] curveLeft(int start, int end, int x){
+//		
+//	}
 
 	private void printBoard() {
 		for (int iy = 0; iy < y; iy++) {
