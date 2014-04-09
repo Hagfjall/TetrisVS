@@ -27,7 +27,7 @@ public abstract class Shape {
 	}
 
 	/**
-	 * return true if the place is empty or outside the matrix
+	 * return true if the place is filled, otherwise false
 	 * 
 	 * @param x
 	 * @param y

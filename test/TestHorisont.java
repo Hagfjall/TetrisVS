@@ -23,29 +23,49 @@ public class TestHorisont extends Thread {
 		s = new T();
 		addValues();
 		s.rotate(true);
-		putShapeInBoard(3,15);
+		// putShapeInBoard(3, 15);
+		b.setSlot(0, 3, (byte) 1);
 		printBoard();
-		//pause på 1 sek
-//		printBoard();
+		curveDown(0, 9);
+
+		// pause på 1 sek
+		// printBoard();
+
+	}
+
+	private void curveDown(int start, int end) {
+		int[] result = new int[end - start + 1];
+		for (int c = start; c <= end; c++) {
+			for (int r = b.getHeight(); r >= 0; r--) {
+				if (b.checkSlot(c, r))
+					result[c-start] = r;
+			}
+
+		}
+
+		System.out.println("\nresult:");
+		for (int i = 0; i <= end - start; i++) {
+			System.out.print(result[i] + " ");
+		}
 	}
 
 	private void printBoard() {
 		for (int iy = 0; iy < y; iy++) {
 			for (int ix = 0; ix < x; ix++) {
-				if (b.checkSlot(ix, iy)){
-						System.out.print(b.getType(ix, iy));
-				}
-				else
+				if (b.checkSlot(ix, iy)) {
+					System.out.print(b.getType(ix, iy));
+				} else
 					System.out.print(".");
 			}
 			System.out.println(" ");
 		}
 	}
-	private void putShapeInBoard(int ix, int iy){
-		for(int i = 0; i < s.getHeight(); i++){
-			for(int j = 0; j < s.getWidth(); j++){
-				if(s.checkSlot(i, j))
-						b.setSlot(ix + i, iy + j, s.getType());
+
+	private void putShapeInBoard(int ix, int iy) {
+		for (int i = 0; i < s.getHeight(); i++) {
+			for (int j = 0; j < s.getWidth(); j++) {
+				if (s.checkSlot(i, j))
+					b.setSlot(ix + i, iy + j, s.getType());
 			}
 		}
 	}

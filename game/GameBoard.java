@@ -15,5 +15,4 @@ public class GameBoard extends Board {
 		}
 		board = temp;
 	}
-
 }

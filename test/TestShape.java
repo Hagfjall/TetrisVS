@@ -19,7 +19,6 @@ public class TestShape {
 		s = new T();
 		System.out.println(" ");
 		s.printShape();
-
 		
 		s = new L_Right();
 		System.out.println(" ");
@@ -32,7 +31,6 @@ public class TestShape {
 		s = new Z_Right();
 		System.out.println(" ");
 		s.printShape();
-
 		
 		s = new Z_Left();
 		System.out.println(" ");
