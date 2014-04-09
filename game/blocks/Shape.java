@@ -95,21 +95,21 @@ public abstract class Shape {
 		}
 		return -1;
 	}
-	
-	public int getMostWest(){
-		for(int c = 0;  c < matrix.length; c++){
-			for(int r = 0; r < matrix.length; r++){
-				if(checkSlot(r,c))
+
+	public int getMostWest() {
+		for (int c = 0; c < matrix.length; c++) {
+			for (int r = 0; r < matrix.length; r++) {
+				if (checkSlot(r, c))
 					return c;
 			}
 		}
 		return -1;
 	}
-	
-	public int getMostEast(){
-		for(int c = matrix.length -1 ; c >= 0; c--){
-			for(int r = 0; r < matrix.length ; r++){
-				if(checkSlot(r,c))
+
+	public int getMostEast() {
+		for (int c = matrix.length - 1; c >= 0; c--) {
+			for (int r = 0; r < matrix.length; r++) {
+				if (checkSlot(r, c))
 					return c;
 			}
 		}
@@ -117,9 +117,9 @@ public abstract class Shape {
 	}
 
 	public void printShape() {
-		for (int i = 0; i < getWidth(); i++) {
-			for (int j = 0; j < getHeight(); j++) {
-				if (matrix[i][j])
+		for (int r = 0; r < getHeight(); r++) {
+			for (int c = 0; c < getWidth(); c++) {
+				if (matrix[r][c])
 					System.out.print("#");
 				else {
 					System.out.print("-");

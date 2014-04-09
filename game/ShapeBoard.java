@@ -27,9 +27,10 @@ public class ShapeBoard extends Board {
 	}
 
 	public void moveDown() {
-		if (currentY + s.getMostSouth() < height) {
-			updateOld();
+		if (currentY + 1 + s.getMostSouth() < height) {
+			int i = s.getMostSouth();
 			clearBoard();
+			updateOld();
 			currentY++;
 			printShape();
 			// ta bort föregående slots
@@ -39,8 +40,8 @@ public class ShapeBoard extends Board {
 	public void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
-				if(s.checkSlot(r, c)){
-					setSlot(r,c,s.getType());
+				if (s.checkSlot(r, c)) {
+					setSlot(r + currentX, c + currentY, s.getType());
 				}
 			}
 		}
@@ -55,7 +56,7 @@ public class ShapeBoard extends Board {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
 				if (s.checkSlot(r, c)) {
-					board[r][c] = 0;
+					board[r + currentX][c + currentY] = 0;
 				}
 			}
 		}

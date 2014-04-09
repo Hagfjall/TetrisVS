@@ -10,6 +10,6 @@ public class I extends Shape {
 
 	private void init() {
 		for (int i = 0; i < 4; i++)
-			matrix[i][1] = true;
+			matrix[1][i] = true;
 	}
 }
