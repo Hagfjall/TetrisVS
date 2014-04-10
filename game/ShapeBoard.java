@@ -9,8 +9,8 @@ public class ShapeBoard extends Board {
 	private Shape s;
 	private boolean rotated = true, turnedClockwise = true;
 
-	public ShapeBoard(int width, int height) {
-		super(width, height);
+	public ShapeBoard(int row, int col) {
+		super(row, col);
 		currentX = currentY = 0;
 
 	}
@@ -26,66 +26,75 @@ public class ShapeBoard extends Board {
 
 	}
 
-	public void moveDown() {
-		if (currentY + 1 + s.getMostSouth() < height) {
-			int i = s.getMostSouth();
-			clearBoard();
-			updateOld();
-			currentY++;
-			printShape();
-			System.out.println(currentY);
-			// ta bort föregående slots
-		}
-	}
-
 	public void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
 				if (s.checkSlot(r, c)) {
-					setSlot(r + currentX, c + currentY, s.getType());
+					setSlot(r + currentY, c + currentX, s.getType());
 				}
 			}
 		}
 	}
 
-	private void updateOld() {
+	private void clearAndUpdateOld() {
+		for (int r = 0; r < s.getHeight(); r++) {
+			for (int c = 0; c < s.getWidth(); c++) {
+				if (s.checkSlot(r, c)) {
+					setSlot(r + currentY, c + currentX, (byte) 0);
+				}
+			}
+		}
 		oldX = currentX;
 		oldY = currentY;
 	}
 
-	private void clearBoard() {
-		for (int r = 0; r < s.getHeight(); r++) {
-			for (int c = 0; c < s.getWidth(); c++) {
-				if (s.checkSlot(r, c)) {
-					board[r + currentX][c + currentY] = 0;
-				}
-			}
-		}
-	}
-
 	public void rotateClockwise() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void rotateCounterClockwise() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void moveLeft() {
-		// TODO Auto-generated method stub
-		
+		int i = s.getMostWest();
+		if (currentX + s.getMostWest() > 0) {
+			clearAndUpdateOld();
+			currentX--;
+			printShape();
+		}
+	}
+
+	public void moveRight() {
+		int i = s.getMostEast();
+		if (currentX + s.getMostEast() < width - 1) {
+			clearAndUpdateOld();
+			currentX++;
+			printShape();
+		}
 	}
 
 	public void moveBottom() {
-		// TODO Auto-generated method stub
-		
+		// TODO will not be needed?
+
+	}
+
+	public void moveDown() {
+		int i = s.getMostSouth();
+
+		if (currentY + s.getMostSouth() < height - 1) {
+			clearAndUpdateOld();
+			currentY++;
+			printShape();
+			// ta bort föregående slots
+		}
 	}
 
 	public void fireAttack() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

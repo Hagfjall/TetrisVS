@@ -6,10 +6,10 @@ public class Board {
 	protected int width;
 	protected int height;
 
-	public Board(int width, int height) {
-		this.width = width;
-		this.height = height;
-		board = new byte[width][height];
+	public Board(int row, int col) {
+		this.width = col;
+		this.height = row;
+		board = new byte[row][col];
 //		for (int i = 0; i < x; i++)
 //			for (int j = 0; j < y; j++)
 //				board[i][j] = 0;
@@ -25,14 +25,14 @@ public class Board {
 		// board = new byte[x][y];
 	}
 
-	public void setSlot(int x, int y, byte type) {
-		if (insideMatrix(x,y))
-			board[x][y] = type;
+	public void setSlot(int row, int col, byte type) {
+		if (insideMatrix(row,col))
+			board[row][col] = type;
 	}
 
-	public byte getType(int x, int y) {
-		if (insideMatrix(x, y))
-			return board[x][y];
+	public byte getType(int row, int col) {
+		if (insideMatrix(row, col))
+			return board[row][col];
 		else
 			return 0;
 	}
@@ -45,23 +45,23 @@ public class Board {
 	 * @return true when the slot is filled ( == 0) or the coordinate is outside
 	 *         the matrix
 	 */
-	public boolean checkSlot(int x, int y) {
-		if (insideMatrix(x, y)) {
-			return (board[x][y] != 0);
+	public boolean checkSlot(int row, int col) {
+		if (insideMatrix(row, col)) {
+			return (board[row][col] != 0);
 		} else
 			return true;
 	}
 
-	private boolean insideMatrix(int x, int y) {
-		return x >= 0 && x < board.length && y >= 0 && y < board[0].length;
+	private boolean insideMatrix(int row, int col) {
+		return row >= 0 && row < getHeight() && col >= 0 && col < getWidth();
 	}
 	
 	
 	public void print(){
-		for (int iy = 0; iy < height; iy++) {
-			for (int ix = 0; ix < width; ix++) {
-				if(checkSlot(ix, iy))
-					System.out.print(getType(ix, iy));
+		for (int r = 0; r < getHeight(); r++) {
+			for (int c = 0; c < getWidth(); c++) {
+				if(checkSlot(r, c))
+					System.out.print(getType(r, c));
 				else
 					System.out.print(".");
 			}

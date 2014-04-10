@@ -33,13 +33,13 @@ public abstract class Shape {
 	 * @param y
 	 * @return
 	 */
-	public boolean checkSlot(int x, int y) {
-		return insideMatrix(x, y) && matrix[x][y];
+	public boolean checkSlot(int row, int col) {
+		return insideMatrix(row, col) && matrix[row][col];
 
 	}
 
-	protected boolean insideMatrix(int x, int y) {
-		return x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length;
+	protected boolean insideMatrix(int row, int col) {
+		return row >= 0 && row < matrix.length && col >= 0 && col < matrix[0].length;
 	}
 
 	/**
