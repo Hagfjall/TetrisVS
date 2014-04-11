@@ -103,6 +103,7 @@ public class Game extends Observable implements Observer {
 		}
 
 	}
+	
 
 	// ----------------------------------- INTERATCTIONS
 
