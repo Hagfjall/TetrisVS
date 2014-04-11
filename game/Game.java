@@ -4,10 +4,8 @@ import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
 public class Game extends Thread {
-	private Board board;
-	private Shape currentShape;
-	private int currentX;
-	private int currentY;
+	private GameBoard gameBoard;
+	private ShapeBoard shapeBoard;
 	protected static final byte NORTH = 1;
 	protected static final byte EAST = 2;
 	protected static final byte SOUTH = 3;
@@ -15,8 +13,7 @@ public class Game extends Thread {
 
 	private ShapeFactory factory;
 
-	private Game(Board board, ShapeFactory factory) {
-		this.board = board;
+	private Game(ShapeFactory factory) {
 		this.factory = factory;
 	}
 
