@@ -10,8 +10,8 @@ public class TestGame {
 	}
 
 	public void run() {
-		game = new Game(0,0);
-		game.test();
+		game = new Game(10,10);
+		
 	}
 	
 	public void getBoard(){
