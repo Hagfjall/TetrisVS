@@ -53,7 +53,8 @@ public class GridPanel extends JPanel {
 		for (int x = 0; x < col- 1; x++) {
 			for (int y = 0; y < row - 1; y++) {
 				if (board.checkSlot(y, x)) {
-					typeColor("I", g);
+					byte type = board.getType(y, x);
+					typeColor(type, g);
 					g.fillRect(x * square + square, y * square + square,
 							square, square);
 				}
@@ -61,28 +62,28 @@ public class GridPanel extends JPanel {
 		}
 	}
 
-	public void typeColor(String type, Graphics2D g) {
+	public void typeColor(Byte type, Graphics2D g) {
 
-		switch (type.charAt(0)) {
-		case 'I':
+		switch (type) {
+		case '1':
 			g.setColor(Color.red);
 			break;
-		case 'J':
+		case '2':
 			g.setColor(Color.magenta);
 			break;
-		case 'L':
+		case '3':
 			g.setColor(Color.orange);
 			break;
-		case 'Z':
+		case '4':
 			g.setColor(Color.blue);
 			break;
-		case 'S':
+		case '5':
 			g.setColor(Color.green);
 			break;
-		case 'O':
+		case '6':
 			g.setColor(Color.yellow);
 			break;
-		case 'T':
+		case '7':
 			g.setColor(Color.black);
 			break;
 		}

@@ -17,7 +17,8 @@ public class GuiTest {
 	private static void createAndShowGUI() {
 		JFrame f = new JFrame("Tetris VS");
 		ShapeBoard b = new ShapeBoard(22, 10);
-		Shape s = new L_Left();
+		Shape r = new L_Left();
+		Shape s = new Square();
 		b.setShape(s);
 		b.printShape();
 		InputListener input = new InputListener(b);
