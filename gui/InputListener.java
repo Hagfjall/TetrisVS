@@ -36,7 +36,7 @@ public class InputListener implements KeyListener {
 			b.moveLeft();
 			break;
 		case KeyEvent.VK_RIGHT:
-			b.moveLeft();
+			b.moveRight();
 			break;
 		case KeyEvent.VK_SPACE:
 			b.moveBottom();
