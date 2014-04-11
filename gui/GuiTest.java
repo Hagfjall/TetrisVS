@@ -1,12 +1,10 @@
 package gui;
 
 import game.ShapeBoard;
-import game.blocks.L_Left;
+import game.blocks.I;
 import game.blocks.Shape;
-import game.blocks.Square;
 
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 public class GuiTest {
 
@@ -17,8 +15,7 @@ public class GuiTest {
 	private static void createAndShowGUI() {
 		JFrame f = new JFrame("Tetris VS");
 		ShapeBoard b = new ShapeBoard(22, 10);
-		Shape r = new L_Left();
-		Shape s = new Square();
+		Shape s = new I();
 		b.setShape(s);
 		b.printShape();
 		InputListener input = new InputListener(b);
