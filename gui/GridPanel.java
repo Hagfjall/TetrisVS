@@ -23,9 +23,7 @@ public class GridPanel extends JPanel {
 	public GridPanel(Board b) {
 
 		col = b.getWidth() + 1;
-		System.out.println(col);
 		row = b.getHeight() + 1;
-		System.out.println(row);
 		width = col * (square + 2);
 		height = row * (square + 1);
 		board = b;

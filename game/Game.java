@@ -18,6 +18,7 @@ public class Game extends Observable implements Observer {
 	protected static final byte WEST = 4;
 
 	private ShapeFactory factory;
+	private int score;
 
 	public Game(int row, int col) {
 		gameBoard = new GameBoard(row, col);
