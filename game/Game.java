@@ -80,9 +80,10 @@ public class Game extends Observable implements Observer {
 
 	private boolean canMoveDown() {
 		shapeBoard.moveDown();
-		if (checkMove())
+		if (checkMove()) {
+			shapeBoard.rollBack();
 			return true;
-		else {
+		} else {
 			shapeBoard.rollBack();
 			return false;
 		}
