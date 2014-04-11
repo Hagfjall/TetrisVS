@@ -4,10 +4,10 @@ import game.blocks.Shape;
 
 //Hello
 public class ShapeBoard extends Board {
-	int currentX, oldX;
-	int currentY, oldY;
+	private int currentX, oldX;
+	private int currentY, oldY;
 	private Shape s;
-	private boolean rotated = true, turnedClockwise = true;
+	private boolean turnedClockwise = true;
 
 	public ShapeBoard(int row, int col) {
 		super(row, col);
@@ -20,6 +20,7 @@ public class ShapeBoard extends Board {
 		currentX = (int) Math.round(((double) getWidth() / 2)
 				- ((double) s.getWidth() / 2));
 		currentY = 0;
+		printShape();
 	}
 
 	public int getX() {
@@ -132,7 +133,6 @@ public class ShapeBoard extends Board {
 
 	public void moveDown() {
 		int i = s.getMostSouth();
-
 		if (currentY + s.getMostSouth() < height - 1) {
 			clear();
 			updateOld();
