@@ -13,7 +13,7 @@ public class GuiTest {
 	}
 
 	private static void createAndShowGUI() {
-		JFrame f = new JFrame("Tetris VS");
+		JFrame f = new JFrame("TetrisVS");
 		ShapeBoard b = new ShapeBoard(22, 10);
 		Shape s = new Z_Left();
 		b.setShape(s);

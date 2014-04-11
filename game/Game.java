@@ -1,9 +1,9 @@
 package game;
 
-import game.blocks.I;
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
+import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,37 +12,46 @@ import test.TestMethods;
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
+	
+	/* ta bort?? */
 	protected static final byte NORTH = 1;
 	protected static final byte EAST = 2;
 	protected static final byte SOUTH = 3;
 	protected static final byte WEST = 4;
 
-	private ShapeFactory factory;
+	private ShapeFactory shapeFactory;
 	private int score;
 
 	public Game(int row, int col) {
+		shapeFactory = new ShapeFactory(1000);
 		gameBoard = new GameBoard(row, col);
+		for(int i = 0; i < col; i++)
+		gameBoard.setSlot(row-2, i, (byte) 2);
 		shapeBoard = new ShapeBoard(row, col);
-		this.factory = factory;
+		shapeBoard.setShape(shapeFactory.getShape());
+		run();
 	}
-
-	public void test() {
-		gameBoard = new GameBoard(6, 10);
-		shapeBoard = new ShapeBoard(6, 10);
-		for (int i = 0; i < 10; i++)
-			gameBoard.setSlot(3, i, (byte) 1);
-		shapeBoard.setShape(new I());
-		shapeBoard.print();
-		while (canMoveDown()) {
-			shapeBoard.moveDown();
-			TestMethods.printMatrix(getBoard());
+	
+	private void run(){
+		while(true){
 			try {
-				Thread.sleep(500);
-			} catch (Exception e) {
+				//TODO någon vettigare timer...?
+				Thread.sleep(900);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if(canMoveDown()){
+				shapeBoard.moveDown();
+			}else{
+				Shape s = shapeBoard.getShape();
+				gameBoard.setShape(new Point(shapeBoard.getX(),shapeBoard.getY()), s);
+				shapeBoard.setShape(shapeFactory.getShape());
+			}
+			TestMethods.printMatrix(getBoard());
 		}
 	}
+
 
 	public byte[][] getBoard() {
 		int width = gameBoard.getWidth();
@@ -78,11 +87,13 @@ public class Game extends Observable implements Observer {
 		return true;
 	}
 
+	
 	private boolean canMoveDown() {
 		shapeBoard.moveDown();
-		if (checkMove())
+		if (checkMove()) {
+			shapeBoard.rollBack();
 			return true;
-		else {
+		} else {
 			shapeBoard.rollBack();
 			return false;
 		}
@@ -92,16 +103,22 @@ public class Game extends Observable implements Observer {
 	public void update(Observable o, Object arg) {
 		if (o instanceof ShapeBoard) {
 			if (checkMove()) {
-				// TODO update gui
+				update();
 			} else {
 				shapeBoard.rollBack();
 			}
 
 		} else if (o instanceof GameBoard) {
-			// TODO notify gui/listener
+			update();
 		}
 
 	}
+	
+	private void update(){
+		setChanged();
+		notifyObservers();
+	}
+	
 
 	// ----------------------------------- INTERATCTIONS
 

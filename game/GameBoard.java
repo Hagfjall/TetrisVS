@@ -28,7 +28,7 @@ public class GameBoard extends Board {
 			}
 		}
 		if (count == 4) {
-			//TELL SOMEONE ABOUT THIS SHIT
+			// TELL SOMEONE ABOUT THIS SHIT
 		}
 	}
 
