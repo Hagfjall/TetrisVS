@@ -20,10 +20,15 @@ public class GameBoard extends Board {
 				}
 			}
 		}
+		int count = 0;
 		for (int i = 0; i < rowsAffected.length; i++) {
 			if (isRowFull(rowsAffected[i])) {
 				removeRow(rowsAffected[i]);
+				count++;
 			}
+		}
+		if (count == 4) {
+			//TELL SOMEONE ABOUT THIS SHIT
 		}
 	}
 
@@ -35,24 +40,22 @@ public class GameBoard extends Board {
 		}
 		return true;
 	}
+
 	/**
-	 * Moves all rows down one step. Starting at startRow 
+	 * Moves all rows down one step. Starting at startRow
+	 * 
 	 * @param startRow
 	 */
 	public void removeRow(int startRow) {
-		for (int row = startRow; row > 1; row--) {
+		for (int row = startRow; row > 0; row--) {
 			for (int col = 0; col < getWidth(); col++) {
-				if (checkSlot(row - 1, col)) {
-					setSlot(row, col, getType(row, col));
+				if (row == 0) {
+					board[row][col] = 0;
+				} else {
+					board[row][col] = board[row - 1][col];
 				}
 			}
 		}
-		cleanTopRow();
 	}
-	private void cleanTopRow(){
-		for(int col = 0; col < getWidth(); col++){
-			setSlot(0, col, (byte) 0);
-		}
-		
-	}
+
 }
