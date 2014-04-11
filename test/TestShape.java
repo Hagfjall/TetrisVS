@@ -49,7 +49,7 @@ public class TestShape {
 //		System.out.println("South: " + s.getMostSouth());
 //		System.out.println("East: " + s.getMostEast());
 //		
-		s = new L_Left();
+		s = new Z_Left();
 		System.out.println(" ");
 		s.printShape();
 		System.out.println("South: " + s.getMostSouth());

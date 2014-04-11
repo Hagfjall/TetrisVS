@@ -1,10 +1,13 @@
 package game;
 
+import game.blocks.I;
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import test.TestMethods;
 
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
@@ -16,14 +19,36 @@ public class Game extends Observable implements Observer {
 
 	private ShapeFactory factory;
 
-	private Game(ShapeFactory factory) {
+	public Game(int row, int col) {
+		gameBoard = new GameBoard(row, col);
+		shapeBoard = new ShapeBoard(row, col);
 		this.factory = factory;
 	}
 
+	public void test() {
+		gameBoard = new GameBoard(6, 10);
+		shapeBoard = new ShapeBoard(6, 10);
+		for (int i = 0; i < 10; i++)
+			gameBoard.setSlot(3, i, (byte) 1);
+		shapeBoard.setShape(new I());
+		shapeBoard.print();
+		while (canMoveDown()) {
+			shapeBoard.moveDown();
+			TestMethods.printMatrix(getBoard());
+			try {
+				Thread.sleep(500);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
 	public byte[][] getBoard() {
-		byte[][] ret = new byte[gameBoard.height][gameBoard.width];
-		for (int r = 0; r < gameBoard.height; r++) {
-			for (int c = 0; r < gameBoard.width; c++) {
+		int width = gameBoard.getWidth();
+		int height = gameBoard.getHeight();
+		byte[][] ret = new byte[height][width];
+		for (int r = 0; r < height; r++) {
+			for (int c = 0; c < width; c++) {
 				if (gameBoard.checkSlot(r, c)) {
 					ret[r][c] = gameBoard.getType(r, c);
 				} else if (shapeBoard.checkSlot(r, c)) {
@@ -50,6 +75,16 @@ public class Game extends Observable implements Observer {
 			}
 		}
 		return true;
+	}
+
+	private boolean canMoveDown() {
+		shapeBoard.moveDown();
+		if (checkMove())
+			return true;
+		else {
+			shapeBoard.rollBack();
+			return false;
+		}
 	}
 
 	@Override
