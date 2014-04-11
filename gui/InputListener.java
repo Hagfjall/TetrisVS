@@ -23,14 +23,12 @@ public class InputListener implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		input = e.getKeyCode();
-		System.out.println("something pressed");
 		switch (input) {
 		case KeyEvent.VK_UP:
 			b.rotateClockwise();
 			break;
 		case KeyEvent.VK_DOWN:
-			b.moveDown();
-			System.out.println("down");
+			b.rotateCounterClockwise();
 			break;
 		case KeyEvent.VK_LEFT:
 			b.moveLeft();
@@ -39,7 +37,7 @@ public class InputListener implements KeyListener {
 			b.moveRight();
 			break;
 		case KeyEvent.VK_SPACE:
-			b.moveBottom();
+			b.moveDown();
 			break;
 		case KeyEvent.VK_X:
 			b.fireAttack();

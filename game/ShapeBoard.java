@@ -22,6 +22,18 @@ public class ShapeBoard extends Board {
 		currentY = 0;
 	}
 
+	public int getX() {
+		return currentX;
+	}
+
+	public int getY() {
+		return currentY;
+	}
+
+	public Shape getShape() {
+		return s;
+	}
+
 	public void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
@@ -50,21 +62,20 @@ public class ShapeBoard extends Board {
 
 	private void rotate(boolean clockwise) {
 
+		clear();
 		s.rotate(clockwise);
-
 		// left
-		if (currentX + s.getMostWest() < 0) {
-
+		while (currentX + s.getMostWest() < 0) {
+			currentX++;
 		}
 		// right
-		if (currentX + s.getMostEast() < width - 1) {
+		while (currentX + s.getMostEast() > width - 1) {
+			currentX--;
 		}
 		// down
-		if (currentY + s.getMostSouth() > height - 1) {
-			currentY++;
+		while (currentY + s.getMostSouth() > height - 1) {
+			currentY--;
 		}
-		clear();
-		s.rotate(true);
 		printShape();
 	}
 

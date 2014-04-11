@@ -8,7 +8,23 @@ public class TestShapeBoard {
 	Shape s;
 
 	public static void main(String[] args) {
-		new TestShapeBoard().testCorners();
+		new TestShapeBoard().testRotate();
+	}
+	
+	
+	public void testRotate(){
+		b = new ShapeBoard(6, 10);
+		s = new L_Left();
+		b.setShape(s);
+		b.printShape();
+		b.print();
+		System.out.println("\nrotate");
+		b.rotateClockwise();
+		b.print();
+		System.out.println("\nmove and rotateCounterClockwise \n");
+		b.moveDown();
+		b.rotateCounterClockwise();
+		b.print();
 	}
 	
 	public void testRollback(){
