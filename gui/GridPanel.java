@@ -15,47 +15,47 @@ public class GridPanel extends JPanel {
 	private Board board;
 	private int width;
 	private int height;
-	private int x;
-	private int y;
-	private final int bW = 25;
+	private int col;
+	private int row;
+	private final int square = 25;
 	private Graphics2D g2;
 
 	public GridPanel(Board b) {
 
-		x = b.getWidth();
-		y = b.getHeight();
-		width = x * (bW + 2);
-		height = y * (bW + 1);
+		col = b.getWidth() + 1;
+		System.out.println(col);
+		row = b.getHeight() + 1;
+		System.out.println(row);
+		width = col * (square + 2);
+		height = row * (square + 1);
 		board = b;
 		setPreferredSize(new Dimension(width, height));
 	}
 
 	public void paintComponent(Graphics g) {
-		
+
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
 
 		g2.setColor(Color.black);
 		drawGrid(g2);
-		drawBricks(g2);
-		g2.setColor(Color.black);
-		
-		// more?
-
+		 drawBricks(g2);
+		 g2.setColor(Color.black);
 		g.dispose();
 	}
 
-	public void drawBricks(){
+	public void drawBricks() {
 		drawBricks(g2);
 	}
-	
+
 	public void drawBricks(Graphics2D g) {
 
-		for (int x = 0; x < board.getWidth(); x++) {
-			for (int y = 0; y < board.getHeight(); y++) {
-				if (board.checkSlot(x, y)) {
+		for (int x = 0; x < col- 1; x++) {
+			for (int y = 0; y < row - 1; y++) {
+				if (board.checkSlot(y, x)) {
 					typeColor("I", g);
-					g.fillRect(x * bW + bW, y * bW + bW, bW, bW);
+					g.fillRect(x * square + square, y * square + square,
+							square, square);
 				}
 			}
 		}
@@ -91,11 +91,13 @@ public class GridPanel extends JPanel {
 	public void drawGrid(Graphics2D g) {
 
 		// Vertical
-		for (int i = 1; i <= x; i++)
-			g.drawLine(i * bW, bW, i * bW, y * bW);
+		for (int i = 1; i <= col; i++) {
+			g.drawLine(i * square, square, i * square, row * square);
+		}
 
 		// Horizontal
-		for (int i = 1; i <= y; i++)
-			g.drawLine(bW, i * bW, x * bW, i * bW);
+		for (int i = 1; i <= row; i++){
+			g.drawLine(square, i * square, col * square, i * square);
+		}
 	}
 }

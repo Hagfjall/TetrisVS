@@ -10,17 +10,12 @@ import javax.swing.SwingUtilities;
 public class GuiTest {
 
 	public static void main(String[] args) {
-
 		createAndShowGUI();
-
 	}
 
 	private static void createAndShowGUI() {
-		System.out.println("Created GUI on EDT? "
-				+ SwingUtilities.isEventDispatchThread());
-		JFrame f = new JFrame("Swing Paint Demo");
-		ShapeBoard b = new ShapeBoard(10, 22);
-
+		JFrame f = new JFrame("Tetris VS");
+		ShapeBoard b = new ShapeBoard(22, 10);
 		Shape s = new Square();
 		b.setShape(s);
 		b.printShape();
