@@ -22,7 +22,7 @@ public class RotateMatrix {
 		}
 
 		// The magic code that turns everything 90´ clockvise
-		for (int k = 1; k <= 6; k++) {
+		for (int k = 1; k <= 1; k++) {
 			String[][] sec = new String[first.length][first[0].length];
 			for (int i = 0; i < first[0].length; i++) {
 				for (int j = first.length - 1; j >= 0; j--) {
