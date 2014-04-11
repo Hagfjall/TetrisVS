@@ -8,7 +8,7 @@ public class TestShapeBoard {
 	Shape s;
 
 	public static void main(String[] args) {
-		new TestShapeBoard().testRollback();
+		new TestShapeBoard().testCorners();
 	}
 	
 	public void testRollback(){

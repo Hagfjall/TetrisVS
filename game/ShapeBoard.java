@@ -22,7 +22,6 @@ public class ShapeBoard extends Board {
 		currentY = 0;
 	}
 
-
 	public void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
@@ -42,42 +41,57 @@ public class ShapeBoard extends Board {
 			}
 		}
 	}
-	private void updateOld(){
+
+	private void updateOld() {
 		oldX = currentX;
 		oldY = currentY;
-		
+
+	}
+
+	private void rotate(boolean clockwise) {
+
+		s.rotate(clockwise);
+
+		// left
+		if (currentX + s.getMostWest() < 0) {
+
+		}
+		// right
+		if (currentX + s.getMostEast() < width - 1) {
+		}
+		// down
+		if (currentY + s.getMostSouth() > height - 1) {
+			currentY++;
+		}
+		clear();
+		s.rotate(true);
+		printShape();
 	}
 
 	public void rotateClockwise() {
 		turnedClockwise = true;
-		clear();
-		s.rotate(true);
-		printShape();
-		
-
+		rotate(turnedClockwise);
 	}
 
 	public void rotateCounterClockwise() {
 		turnedClockwise = false;
-		clear();
-		s.rotate(false);
-		printShape();
+		rotate(turnedClockwise);
 	}
+
 	public void rollBack() {
-		
-		//rotated if true
-		if(oldX == currentX && oldY == currentY){
+
+		// rotated if true
+		if (oldX == currentX && oldY == currentY) {
 			clear();
 			s.rotate(!turnedClockwise);
-		}
-		else{
-			
+		} else {
+
 			clear();
 			currentX = oldX;
 			currentY = oldY;
 		}
 		printShape();
-		
+
 	}
 
 	public void moveLeft() {
