@@ -1,6 +1,8 @@
 package game;
 
-public class Board {
+import java.util.Observable;
+
+public class Board extends Observable{
 
 	protected byte[][] board;
 	protected int width;
@@ -67,5 +69,11 @@ public class Board {
 			}
 			System.out.println(" ");
 		}
+	}
+	
+	
+	protected void updated(){
+		setChanged();
+		notifyObservers();
 	}
 }

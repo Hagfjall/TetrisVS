@@ -27,7 +27,7 @@ public class GuiTest {
 		f.setVisible(true);
 		while (true) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
