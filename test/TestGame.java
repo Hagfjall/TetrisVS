@@ -12,7 +12,6 @@ public class TestGame {
 	public void run() {
 		game = new Game(0,0);
 		game.test();
-		
 	}
 	
 	public void getBoard(){

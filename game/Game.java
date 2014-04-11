@@ -27,12 +27,11 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void test() {
-		gameBoard = new GameBoard(6, 10);
-		shapeBoard = new ShapeBoard(6, 10);
+		gameBoard = new GameBoard(8, 10);
+		shapeBoard = new ShapeBoard(8, 10);
 		for (int i = 0; i < 10; i++)
-			gameBoard.setSlot(3, i, (byte) 1);
+			gameBoard.setSlot(5, i, (byte) 1);
 		shapeBoard.setShape(new I());
-		shapeBoard.print();
 		while (canMoveDown()) {
 			shapeBoard.moveDown();
 			TestMethods.printMatrix(getBoard());
@@ -42,6 +41,7 @@ public class Game extends Observable implements Observer {
 				e.printStackTrace();
 			}
 		}
+		System.out.println("moving finished");
 	}
 
 	public byte[][] getBoard() {
