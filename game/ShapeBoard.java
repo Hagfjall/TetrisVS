@@ -22,9 +22,6 @@ public class ShapeBoard extends Board {
 		currentY = 0;
 	}
 
-	public void rollBack() {
-
-	}
 
 	public void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
@@ -36,7 +33,7 @@ public class ShapeBoard extends Board {
 		}
 	}
 
-	private void clearAndUpdateOld() {
+	private void clear() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
 				if (s.checkSlot(r, c)) {
@@ -44,24 +41,50 @@ public class ShapeBoard extends Board {
 				}
 			}
 		}
+	}
+	private void updateOld(){
 		oldX = currentX;
 		oldY = currentY;
+		
 	}
 
 	public void rotateClockwise() {
-		// TODO Auto-generated method stub
+		turnedClockwise = true;
+		clear();
+		s.rotate(true);
+		printShape();
+		
 
 	}
 
 	public void rotateCounterClockwise() {
-		// TODO Auto-generated method stub
-
+		turnedClockwise = false;
+		clear();
+		s.rotate(false);
+		printShape();
+	}
+	public void rollBack() {
+		
+		//rotated if true
+		if(oldX == currentX && oldY == currentY){
+			clear();
+			s.rotate(!turnedClockwise);
+		}
+		else{
+			
+			clear();
+			currentX = oldX;
+			currentY = oldY;
+		}
+		printShape();
+		
 	}
 
 	public void moveLeft() {
 		int i = s.getMostWest();
 		if (currentX + s.getMostWest() > 0) {
-			clearAndUpdateOld();
+			clear();
+			updateOld();
 			currentX--;
 			printShape();
 		}
@@ -70,7 +93,8 @@ public class ShapeBoard extends Board {
 	public void moveRight() {
 		int i = s.getMostEast();
 		if (currentX + s.getMostEast() < width - 1) {
-			clearAndUpdateOld();
+			clear();
+			updateOld();
 			currentX++;
 			printShape();
 		}
@@ -85,15 +109,15 @@ public class ShapeBoard extends Board {
 		int i = s.getMostSouth();
 
 		if (currentY + s.getMostSouth() < height - 1) {
-			clearAndUpdateOld();
+			clear();
+			updateOld();
 			currentY++;
 			printShape();
-			// ta bort föregående slots
 		}
 	}
 
 	public void fireAttack() {
-		// TODO Auto-generated method stub
+		// TODO SKA inte finnas?
 
 	}
 
