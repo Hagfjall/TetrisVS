@@ -35,16 +35,24 @@ public class GameBoard extends Board {
 		}
 		return true;
 	}
-
+	/**
+	 * Moves all rows down one step. Starting at startRow 
+	 * @param startRow
+	 */
 	public void removeRow(int startRow) {
-		byte[][] temp = new byte[width][height];
-		for(int row = startRow; row > 0; row--){
-			for(int col = 0; col < getWidth(); col++){
-				if(checkSlot(row - 1, col)){
-					setSlot(row, col, type)
+		for (int row = startRow; row > 1; row--) {
+			for (int col = 0; col < getWidth(); col++) {
+				if (checkSlot(row - 1, col)) {
+					setSlot(row, col, getType(row, col));
 				}
-				this.setSlot(row, col, type)
+			}
 		}
+		cleanTopRow();
+	}
+	private void cleanTopRow(){
+		for(int col = 0; col < getWidth(); col++){
+			setSlot(0, col, (byte) 0);
 		}
+		
 	}
 }
