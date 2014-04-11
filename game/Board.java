@@ -2,7 +2,7 @@ package game;
 
 import java.util.Observable;
 
-public class Board extends Observable{
+public class Board extends Observable {
 
 	protected byte[][] board;
 	protected int width;
@@ -12,14 +12,22 @@ public class Board extends Observable{
 		this.width = col;
 		this.height = row;
 		board = new byte[row][col];
-//		for (int i = 0; i < x; i++)
-//			for (int j = 0; j < y; j++)
-//				board[i][j] = 0;
+		// for (int i = 0; i < x; i++)
+		// for (int j = 0; j < y; j++)
+		// board[i][j] = 0;
 	}
-	public int getWidth(){
+
+	public int update(int i) {
+		setChanged();
+		notifyObservers(i);
+		return 1;
+	}
+
+	public int getWidth() {
 		return width;
 	}
-	public int getHeight(){
+
+	public int getHeight() {
 		return height;
 	}
 
@@ -28,7 +36,7 @@ public class Board extends Observable{
 	}
 
 	public void setSlot(int row, int col, byte type) {
-		if (insideMatrix(row,col))
+		if (insideMatrix(row, col))
 			board[row][col] = type;
 	}
 
@@ -57,12 +65,11 @@ public class Board extends Observable{
 	private boolean insideMatrix(int row, int col) {
 		return row >= 0 && row < getHeight() && col >= 0 && col < getWidth();
 	}
-	
-	
-	public void print(){
+
+	public void print() {
 		for (int r = 0; r < getHeight(); r++) {
 			for (int c = 0; c < getWidth(); c++) {
-				if(checkSlot(r, c))
+				if (checkSlot(r, c))
 					System.out.print(getType(r, c));
 				else
 					System.out.print(".");
@@ -70,9 +77,8 @@ public class Board extends Observable{
 			System.out.println(" ");
 		}
 	}
-	
-	
-	protected void updated(){
+
+	protected void updated() {
 		setChanged();
 		notifyObservers();
 	}

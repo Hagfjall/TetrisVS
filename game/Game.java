@@ -3,7 +3,10 @@ package game;
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
-public class Game extends Thread {
+import java.util.Observable;
+import java.util.Observer;
+
+public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
 	protected static final byte NORTH = 1;
@@ -17,77 +20,68 @@ public class Game extends Thread {
 		this.factory = factory;
 	}
 
-	private boolean checkLeft() {
-		return false;
-
-	}
-
-	private boolean checkRight() {
-		return false;
-	}
-
-	private boolean checkOneDown() {
-		boolean free = true;
-		return false;
-
-	}
-
-	/**
-	 * Tries to set a new shape. If false, game is lost.
-	 * 
-	 * @return false if shapes exists on the spawn-spot
-	 */
-	private boolean newShape() {
-		currentShape = factory.getShape();
-		currentX = (int) Math.round(((double) board.getWidth() / 2)
-				- ((double) currentShape.getWidth() / 2));
-		currentY = 0;
-		for (int r = 0; r < currentShape.getHeight(); r++) {
-			for (int c = 0; c < currentShape.getWidth(); c++) {
-				if (board.checkSlot(currentX + r, currentY + c)
-						&& currentShape.checkSlot(r, c)) {
-					return false;
+	public byte[][] getBoard() {
+		byte[][] ret = new byte[gameBoard.height][gameBoard.width];
+		for (int r = 0; r < gameBoard.height; r++) {
+			for (int c = 0; r < gameBoard.width; c++) {
+				if (gameBoard.checkSlot(r, c)) {
+					ret[r][c] = gameBoard.getType(r, c);
+				} else if (shapeBoard.checkSlot(r, c)) {
+					ret[r][c] = shapeBoard.getType(r, c);
 				}
 			}
 		}
-		putShapeOnBoard();
+		return ret;
+	}
+
+	// running when ShapeBoard notify game
+	/**
+	 * 
+	 * @return true if the move was possible, otherwise false
+	 */
+	private boolean checkMove() {
+		Shape s = shapeBoard.getShape();
+		int x = shapeBoard.getX();
+		int y = shapeBoard.getY();
+		for (int r = 0; r < s.getHeight(); r++) {
+			for (int c = 0; c < s.getWidth(); c++) {
+				if (gameBoard.checkSlot(r + y, c + x) && s.checkSlot(r, c))
+					return false;
+			}
+		}
 		return true;
 	}
 
-	private void putShapeOnBoard() {
-		for (int r = 0; r < currentShape.getHeight(); r++) {
-			for (int c = 0; c < currentShape.getWidth(); c++) {
-				if (currentShape.checkSlot(r, c)) {
-					board.setSlot(currentX + r, currentY + c,
-							currentShape.getType());
-				}
+	@Override
+	public void update(Observable o, Object arg) {
+		if (o instanceof ShapeBoard) {
+			if (checkMove()) {
+				// TODO update gui
+			} else {
+				shapeBoard.rollBack();
 			}
+
+		} else if (o instanceof GameBoard) {
+			// TODO notify gui/listener
 		}
+
 	}
 
-	// private boolean checkPossible(byte orientation) {
-	// if (orientation < NORTH && orientation > WEST)
-	// return false;
-	// boolean free;
-	// switch (orientation) {
-	// case SOUTH:
-	// for (int r = currentX; r < currentX + currentShape.getWidth(); r++) {
-	// if (board.checkSlot(r, currentShape.getHeight() + currentY)) {
-	// // Kolla internt i shapens matris
-	// if (!currentShape.checkSlot(r - currentX,
-	// currentShape.getHeight() - 1)) {
-	// return true;
-	// } else if (currentShape.checkSlot(r - currentX,
-	// currentShape.getHeight() - 2)) {
-	// free = true;
-	// }
-	// else{
-	// free = false;
-	// }
-	// } else {
-	// free = true;
-	// }
-	// }
-	// }
-	// }
+	// ----------------------------------- INTERATCTIONS
+
+	/**
+	 * 
+	 */
+	public void moveLeft() {
+
+	}
+
+	public void moveRight() {
+
+	}
+
+	public void moveBottom() {
+
+	}
+
 }
