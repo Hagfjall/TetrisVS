@@ -49,10 +49,12 @@ public class TestShape {
 //		System.out.println("South: " + s.getMostSouth());
 //		System.out.println("East: " + s.getMostEast());
 //		
-		s = new I();
+		s = new L_Left();
 		System.out.println(" ");
 		s.printShape();
 		System.out.println("South: " + s.getMostSouth());
 		System.out.println("East: " + s.getMostEast());
+		s.rotate(true);
+		s.printShape();
 	}
 }
