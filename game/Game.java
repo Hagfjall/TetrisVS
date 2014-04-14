@@ -11,8 +11,6 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
-import test.TestMethods;
-
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
@@ -44,7 +42,8 @@ public class Game extends Observable implements Observer {
 							new Point(shapeBoard.getX(), shapeBoard.getY()), s);
 					shapeBoard.setShape(shapeFactory.getShape());
 				}
-				TestMethods.printMatrix(getBoard());
+				update();
+//				TestMethods.printMatrix(getBoard());
 			}
 
 		});
@@ -60,6 +59,10 @@ public class Game extends Observable implements Observer {
 
 	public int getHeight() {
 		return gameBoard.getHeight();
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 	public byte[][] getBoard() {
@@ -105,7 +108,7 @@ public class Game extends Observable implements Observer {
 				shapeBoard.rollBack();
 				return false;
 			}
-		} 
+		}
 		return false;
 	}
 

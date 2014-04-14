@@ -1,16 +1,17 @@
 package gui;
 
+import game.Game;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import game.Board;
-import game.Game;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JPanel;
 
-public class TetrisPanel extends JPanel {
+public class TetrisPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = -4465366882639674458L;
 	private Game game;
 	private int width;
@@ -27,6 +28,7 @@ public class TetrisPanel extends JPanel {
 		width = col * (square + 2);
 		height = row * (square + 1);
 		setPreferredSize(new Dimension(width, height));
+		game.addObserver(this);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -49,7 +51,7 @@ public class TetrisPanel extends JPanel {
 					byte type = board[r][c];
 					typeColor(type);
 					g2.fillRect(c * square + square + 1, r * square + square
-							+ 1, square-1, square-1);
+							+ 1, square - 1, square - 1);
 				}
 			}
 		}
@@ -93,6 +95,11 @@ public class TetrisPanel extends JPanel {
 		for (int i = 1; i <= row; i++) {
 			g2.drawLine(square, i * square, col * square, i * square);
 		}
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		repaint();
 	}
 
 }
