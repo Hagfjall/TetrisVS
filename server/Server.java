@@ -2,8 +2,6 @@ package server;
 
 import java.io.IOException;
 import java.net.*;
-import java.nio.*;
-import java.nio.channels.*;
 
 public class Server {
 
@@ -14,7 +12,7 @@ public class Server {
 
 	private void start() {
 		int port = 3000;
-		
+
 		try {
 			ServerSocket server = new ServerSocket(port);
 			while (true) {
