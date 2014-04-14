@@ -43,13 +43,13 @@ public class TetrisPanel extends JPanel {
 	public void drawBricks() {
 
 		byte[][] board = game.getBoard();
-		for (int x = 0; x < col- 1; x++) {
-			for (int y = 0; y < row - 1; y++) {
-				if (board.checkSlot(y, x)) {
-					byte type = board.getType(y, x);
-					typeColor(type, g);
-					g.fillRect(x * square + square, y * square + square,
-							square, square);
+		for (int r = 0; r < row - 1; r++) {
+			for (int c = 0; c < col - 1; c++) {
+				if (board[r][c] != 0) {
+					byte type = board[r][c];
+					typeColor(type);
+					g2.fillRect(c * square + square + 1, r * square + square
+							+ 1, square-1, square-1);
 				}
 			}
 		}
@@ -58,25 +58,25 @@ public class TetrisPanel extends JPanel {
 	public void typeColor(Byte type) {
 
 		switch (type) {
-		case '1':
-			g2.setColor(Color.red);
+		case 1:
+			g2.setColor(Color.RED);
 			break;
-		case '2':
+		case 2:
 			g2.setColor(Color.magenta);
 			break;
-		case '3':
+		case 3:
 			g2.setColor(Color.orange);
 			break;
-		case '4':
+		case 4:
 			g2.setColor(Color.blue);
 			break;
-		case '5':
+		case 5:
 			g2.setColor(Color.green);
 			break;
-		case '6':
+		case 6:
 			g2.setColor(Color.yellow);
 			break;
-		case '7':
+		case 7:
 			g2.setColor(Color.black);
 			break;
 		}
@@ -90,7 +90,7 @@ public class TetrisPanel extends JPanel {
 		}
 
 		// Horizontal
-		for (int i = 1; i <= row; i++){
+		for (int i = 1; i <= row; i++) {
 			g2.drawLine(square, i * square, col * square, i * square);
 		}
 	}

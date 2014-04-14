@@ -1,5 +1,6 @@
-package gui.test;
+package gui;
 
+import game.Game;
 import game.ShapeBoard;
 
 import java.awt.event.KeyEvent;
@@ -7,11 +8,11 @@ import java.awt.event.KeyListener;
 
 public class InputListener implements KeyListener {
 
-	private ShapeBoard b;
+	private Game game;
 	private int input;
 
-	public InputListener(ShapeBoard b) {
-		this.b = b;
+	public InputListener(Game game /*NETWORK */) {
+		this.game = game;
 	}
 
 	@Override
@@ -25,22 +26,22 @@ public class InputListener implements KeyListener {
 		input = e.getKeyCode();
 		switch (input) {
 		case KeyEvent.VK_UP:
-			b.rotateClockwise();
+			game.rotateClockwise();
 			break;
 		case KeyEvent.VK_DOWN:
-			b.rotateCounterClockwise();
+			game.rotateCounterClockwise();
 			break;
 		case KeyEvent.VK_LEFT:
-			b.moveLeft();
+			game.moveLeft();
 			break;
 		case KeyEvent.VK_RIGHT:
-			b.moveRight();
+			game.moveRight();
 			break;
 		case KeyEvent.VK_SPACE:
-			b.moveDown();
+			game.moveBottom();
 			break;
 		case KeyEvent.VK_X:
-			b.fireAttack();
+			game.usePowerup();
 			break;	
 		}
 

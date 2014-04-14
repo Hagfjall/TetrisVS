@@ -131,14 +131,16 @@ public class ShapeBoard extends Board {
 
 	}
 
-	public void moveDown() {
+	public boolean moveDown() {
 		int i = s.getMostSouth();
 		if (currentY + s.getMostSouth() < height - 1) {
 			clear();
 			updateOld();
 			currentY++;
 			printShape();
+			return true;
 		}
+		return false;
 	}
 
 	public void fireAttack() {

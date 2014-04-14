@@ -25,20 +25,17 @@ public class Game extends Observable implements Observer {
 	protected static final byte WEST = 4;
 
 	private ShapeFactory shapeFactory;
-	private int score;
+	private int score, level = 1;
 
 	// TODO implement the score system.
 
 	public Game(int row, int col) {
 		shapeFactory = new ShapeFactory(1000);
 		gameBoard = new GameBoard(row, col);
-		for (int i = 0; i < col; i++)
-			gameBoard.setSlot(row - 2, i, (byte) 2);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(1000, new ActionListener() {
+		timer = new Timer(1000 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				System.out.println("Actionlistener");
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
 				} else {
@@ -54,6 +51,15 @@ public class Game extends Observable implements Observer {
 
 		timer.setRepeats(true);
 		timer.start();
+	}
+
+	public int getWidth() {
+		return gameBoard.getWidth();
+
+	}
+
+	public int getHeight() {
+		return gameBoard.getHeight();
 	}
 
 	public byte[][] getBoard() {
@@ -91,14 +97,16 @@ public class Game extends Observable implements Observer {
 	}
 
 	private boolean canMoveDown() {
-		shapeBoard.moveDown();
-		if (checkMove()) {
-			shapeBoard.rollBack();
-			return true;
-		} else {
-			shapeBoard.rollBack();
-			return false;
-		}
+		if (shapeBoard.moveDown()) {
+			if (checkMove()) {
+				shapeBoard.rollBack();
+				return true;
+			} else {
+				shapeBoard.rollBack();
+				return false;
+			}
+		} 
+		return false;
 	}
 
 	@Override
@@ -135,6 +143,18 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void moveBottom() {
+
+	}
+
+	public void rotateClockwise() {
+
+	}
+
+	public void rotateCounterClockwise() {
+
+	}
+
+	public void usePowerup() {
 
 	}
 
