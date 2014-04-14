@@ -36,9 +36,9 @@ public class Game extends Observable implements Observer {
 			gameBoard.setSlot(row - 2, i, (byte) 2);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(10, new ActionListener() {
+		timer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				System.out.println("hjej");
+				System.out.println("Actionlistener");
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
 				} else {
@@ -54,6 +54,12 @@ public class Game extends Observable implements Observer {
 
 		timer.setRepeats(true);
 		timer.start();
+		int i = 0;
+//		while(true){
+//			if(i == 19){
+//				break;
+//			}
+//		}
 	}
 
 	public byte[][] getBoard() {

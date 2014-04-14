@@ -1,4 +1,4 @@
-package gui;
+package gui.test;
 
 import game.Board;
 
