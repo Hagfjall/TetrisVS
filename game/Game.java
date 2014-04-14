@@ -4,15 +4,20 @@ import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.Timer;
 
 import test.TestMethods;
 
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
-	
+	private Timer timer;
+
 	/* ta bort?? */
 	protected static final byte NORTH = 1;
 	protected static final byte EAST = 2;
@@ -22,36 +27,33 @@ public class Game extends Observable implements Observer {
 	private ShapeFactory shapeFactory;
 	private int score;
 
+	// TODO implement the score system.
+
 	public Game(int row, int col) {
 		shapeFactory = new ShapeFactory(1000);
 		gameBoard = new GameBoard(row, col);
-		for(int i = 0; i < col; i++)
-		gameBoard.setSlot(row-2, i, (byte) 2);
+		for (int i = 0; i < col; i++)
+			gameBoard.setSlot(row - 2, i, (byte) 2);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		run();
-	}
-	
-	private void run(){
-		while(true){
-			try {
-				//TODO någon vettigare timer...?
-				Thread.sleep(900);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		timer = new Timer(10, new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				System.out.println("hjej");
+				if (canMoveDown()) {
+					shapeBoard.moveDown();
+				} else {
+					Shape s = shapeBoard.getShape();
+					gameBoard.setShape(
+							new Point(shapeBoard.getX(), shapeBoard.getY()), s);
+					shapeBoard.setShape(shapeFactory.getShape());
+				}
+				TestMethods.printMatrix(getBoard());
 			}
-			if(canMoveDown()){
-				shapeBoard.moveDown();
-			}else{
-				Shape s = shapeBoard.getShape();
-				gameBoard.setShape(new Point(shapeBoard.getX(),shapeBoard.getY()), s);
-				shapeBoard.setShape(shapeFactory.getShape());
-			}
-			TestMethods.printMatrix(getBoard());
-		}
-	}
+		});
 
+		timer.setRepeats(true);
+		timer.start();
+	}
 
 	public byte[][] getBoard() {
 		int width = gameBoard.getWidth();
@@ -87,7 +89,6 @@ public class Game extends Observable implements Observer {
 		return true;
 	}
 
-	
 	private boolean canMoveDown() {
 		shapeBoard.moveDown();
 		if (checkMove()) {
@@ -113,12 +114,11 @@ public class Game extends Observable implements Observer {
 		}
 
 	}
-	
-	private void update(){
+
+	private void update() {
 		setChanged();
 		notifyObservers();
 	}
-	
 
 	// ----------------------------------- INTERATCTIONS
 
