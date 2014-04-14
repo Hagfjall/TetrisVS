@@ -1,23 +1,23 @@
 package test.gui;
 
 import game.Game;
+import gui.GamePanel;
 import gui.InputListener;
-import gui.TetrisPanel;
 
 import javax.swing.JFrame;
 
-public class TestTetrisPanel {
+public class TestGamePanel {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new TestTetrisPanel().run();
+		new TestGamePanel().run();
 	}
-
-	public void run() {
+	
+	public void run(){
 		JFrame f = new JFrame("TetrisVS");
-		Game g = new Game(22, 10);
+		Game g = new Game(22,10);
 		InputListener input = new InputListener(g);
-		TetrisPanel tetrisPanel = new TetrisPanel(g);
+		GamePanel tetrisPanel = new GamePanel("Test", g);
 		f.addKeyListener(input);
 		f.add(tetrisPanel);
 		f.pack();
