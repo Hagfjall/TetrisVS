@@ -2,7 +2,8 @@ package server;
 
 import java.io.IOException;
 import java.net.*;
-import java.nio.channels.ServerSocketChannel;
+import java.nio.*;
+import java.nio.channels.*;
 
 public class Server {
 
@@ -12,15 +13,12 @@ public class Server {
 	}
 
 	private void start() {
-
+		int port = 3000;
+		
 		try {
-			ServerSocketChannel server = ServerSocketChannel.open();
-			ServerSocket socket = server.socket();
-			SocketAddress address = new InetSocketAddress(1337);
-			socket.bind(address);
-
+			ServerSocket server = new ServerSocket(port);
 			while (true) {
-				Socket s = socket.accept();
+				Socket s = server.accept();
 				Connection c = new Connection(s);
 				c.start();
 			}
