@@ -31,6 +31,9 @@ public class Game extends Observable implements Observer {
 		shapeBoard.setShape(shapeFactory.getShape());
 		run();
 	}
+	public int getScore(){
+		return score;
+	}
 	
 	private void run(){
 		while(true){
