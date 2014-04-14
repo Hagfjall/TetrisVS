@@ -49,6 +49,7 @@ public class Game extends Observable implements Observer {
 				}
 				TestMethods.printMatrix(getBoard());
 			}
+
 		});
 
 		timer.setRepeats(true);
