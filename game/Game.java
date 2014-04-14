@@ -54,20 +54,6 @@ public class Game extends Observable implements Observer {
 
 		timer.setRepeats(true);
 		timer.start();
-		int i = 0;
-		// while(true){
-		// if(i == 19){
-		// break;
-		// }
-		// }
-	}
-
-	public int getWidth() {
-		return gameBoard.getWidth();
-	}
-
-	public int getHeight() {
-		return gameBoard.getHeight();
 	}
 
 	public byte[][] getBoard() {
