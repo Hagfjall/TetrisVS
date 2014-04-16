@@ -1,7 +1,6 @@
 package gui;
 
 import game.Game;
-import game.ShapeBoard;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -27,13 +27,13 @@ public class Game extends Observable implements Observer {
 
 	// TODO implement the score system.
 
-	public Game(int row, int col) {
-		shapeFactory = new ShapeFactory(1000);
+	public Game(int row, int col, long randomSeed) {
+		shapeFactory = new ShapeFactory(randomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(1000 / level, new ActionListener() {
+		timer = new Timer(750 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
@@ -51,6 +51,10 @@ public class Game extends Observable implements Observer {
 
 		timer.setRepeats(true);
 		timer.start();
+	}
+	
+	public Game(int row, int col) {
+		this(row,col,1000);
 	}
 
 	public int getWidth() {
@@ -139,27 +143,29 @@ public class Game extends Observable implements Observer {
 	 * 
 	 */
 	public void moveLeft() {
-
+		shapeBoard.moveLeft();
 	}
 
 	public void moveRight() {
+		shapeBoard.moveRight();
 
 	}
 
 	public void moveBottom() {
-
+		shapeBoard.moveBottom();
 	}
 
 	public void rotateClockwise() {
-
+		shapeBoard.rotateClockwise();
 	}
 
 	public void rotateCounterClockwise() {
-
+		shapeBoard.rotateCounterClockwise();
 	}
 
 	public void usePowerup() {
-
+		//TODO implementera
+		System.out.println("powerup should be sent to opponent");
 	}
 
 }

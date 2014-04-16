@@ -17,20 +17,12 @@ public class TestGamePanel {
 		JFrame f = new JFrame("TetrisVS");
 		Game g = new Game(22,10);
 		InputListener input = new InputListener(g);
-		GamePanel tetrisPanel = new GamePanel("Test", g);
+		GamePanel tetrisPanel = new GamePanel("Hallå", g);
 		f.addKeyListener(input);
 		f.add(tetrisPanel);
 		f.pack();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-		while (true) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			tetrisPanel.repaint();
-		}
 	}
 
 }
