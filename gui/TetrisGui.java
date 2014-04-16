@@ -1,8 +1,8 @@
 package gui;
 
-import java.awt.BorderLayout;
-
 import game.Game;
+
+import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,13 +16,13 @@ public class TetrisGui extends JFrame {
 	
 	
 	
-	public TetrisGui(String localName, String opponentName, Game localGame, Game opponentGame){
+	public TetrisGui(String localName, String opponentName, Game localGame, Game opponentGame, KeyListener keyListener){
 		super("TetrisTWO");
 		localPanel = new GamePanel(localName,localGame);
 		opponentPanel = new GamePanel(opponentName,opponentGame);
 		statsPanel = new StatsPanel(localName,opponentName,localGame,opponentGame);
 		setLayout(new BorderLayout());
-		addKeyListener(new InputListener(localGame));
+		addKeyListener(keyListener);
 		add(localPanel,BorderLayout.WEST);
 		add(opponentPanel,BorderLayout.CENTER);
 		add(statsPanel,BorderLayout.EAST);

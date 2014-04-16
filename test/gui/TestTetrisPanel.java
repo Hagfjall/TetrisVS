@@ -1,7 +1,7 @@
 package test.gui;
 
 import game.Game;
-import gui.InputListener;
+import gui.KeyListener;
 import gui.TetrisPanel;
 
 import javax.swing.JFrame;
@@ -16,7 +16,7 @@ public class TestTetrisPanel {
 	public void run() {
 		JFrame f = new JFrame("TetrisVS");
 		Game g = new Game(22, 10);
-		InputListener input = new InputListener(g);
+		KeyListener input = new KeyListener(g);
 		TetrisPanel tetrisPanel = new TetrisPanel(g);
 		f.addKeyListener(input);
 		f.add(tetrisPanel);
