@@ -16,6 +16,8 @@ public class TetrisGui extends JFrame {
 	
 	public TetrisGui(String localName, String opponentName, Game localGame, Game opponentGame){
 		localPanel = new GamePanel(localName,localGame);
+		opponentPanel = new GamePanel(opponentName,opponentGame);
+		statsPanel = new StatsPanel(localName,opponentName,localGame,opponentGame);
 		
 	}
 

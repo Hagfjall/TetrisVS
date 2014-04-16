@@ -11,13 +11,14 @@ public class StatsPanel extends JPanel {
 	private static final long serialVersionUID = 2860351428068208802L;
 	private StatPanel localPanel, opponentPanel;
 
-	public StatsPanel(String localName, String opponentName, Game game) {
+	public StatsPanel(String localName, String opponentName, Game localGame,
+			Game opponentGame) {
 		setLayout(new BorderLayout());
-		localPanel = new StatPanel(localName, game);
-		opponentPanel = new StatPanel(opponentName, game);
+		localPanel = new StatPanel(localName, localGame);
+		opponentPanel = new StatPanel(opponentName, opponentGame);
 		add(localPanel, BorderLayout.NORTH);
 		add(opponentPanel, BorderLayout.SOUTH);
-		
+
 	}
 
 }

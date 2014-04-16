@@ -30,13 +30,15 @@ public class StatPanel extends JPanel implements Observer {
 		add(powerupLabel, BorderLayout.SOUTH);
 		
 		game.addObserver(this);
+		this.game = game;
+		update(null,null);
 
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		powerupLabel.setText(""); // TODO ändra till icon
-		scoreLabel.setText(Integer.toString(game.getScore()));
+		powerupLabel.setText("(POWERUPICON)"); // TODO ändra till icon
+		scoreLabel.setText(Integer.toString(game.getScore()) + " p");
 	}
 
 }

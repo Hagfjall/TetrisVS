@@ -29,6 +29,7 @@ public class Game extends Observable implements Observer {
 
 	public Game(int row, int col) {
 		shapeFactory = new ShapeFactory(1000);
+		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
