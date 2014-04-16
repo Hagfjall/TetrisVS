@@ -42,24 +42,18 @@ public class NetworkInputHandler extends Thread {
 			in = new DataInputStream(s.getInputStream());
 			int read;
 			while ((read = in.read()) != -1) {
-				// System.out.print(Character.toChars(read));
-				// System.out.println(" = " + read);
 				switch (read) {
 				case 1:
 					setOpponentName(readString(in));
-					System.out.println("NetworkInputHandler: recieved " + name);
 					break;
 				case 2:
-					System.out.println("recieved " + in.readInt());
 					break;
 				case ProtocolConstants.LEFT:
-					System.out.println("moving opponent left");
 					game.moveLeft();
 					break;
 				case ProtocolConstants.UP:
-					System.out.println("opponent pressing up");
 					game.rotateClockwise();
-				}
+				} //TODO implementera resten
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

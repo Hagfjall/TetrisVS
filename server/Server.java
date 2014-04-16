@@ -32,12 +32,11 @@ public class Server extends Thread {
 			ServerSocket server = new ServerSocket(port);
 			System.out.println("server up and running on port " + port);
 			int inputCounter = 0;
-			new OutputHandler(allConnections, m).start();;
+			new ServerOutputHandler(allConnections, m).start();;
 			while (true) {
 				Socket s = server.accept();
 				if (inputCounter++ < 2) {
 					new InputHandler(s, m, playerNames).start();
-					System.out.println("opening new InputHanlder, counter = " + inputCounter);
 					sendOpponentPlayerName(s);
 				}else {
 					// send all player names since its a spectator

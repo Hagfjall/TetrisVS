@@ -30,13 +30,11 @@ public class InputHandler extends Thread {
 				for (int i = 0; i < length; i++) {
 					playerName.append(in.readChar());
 				}
-				System.out.println("InputHanlder: setting playername to " + playerName);
 				if (!playerNames.setName(playerName.toString(), socket)) {
 					socket.close();
 					return;
 				}
 				while ((read = in.read()) != -1) {
-					System.out.println("InputHanlder: waiting for inputs...");
 					int[] msg;
 					if (read == 2) {
 						msg = new int[5];
@@ -53,7 +51,6 @@ public class InputHandler extends Thread {
 					m.insert(new Input(socket, msg));
 				}
 			}
-			System.out.println("closing inputhandler");
 			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

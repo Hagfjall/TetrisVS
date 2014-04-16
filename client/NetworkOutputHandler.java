@@ -21,7 +21,6 @@ public class NetworkOutputHandler {
 
 	public void sendKey(byte key)  {
 		try {
-			System.out.println("sending key " + key);
 			out.write((int) key);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
