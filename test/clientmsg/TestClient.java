@@ -24,7 +24,7 @@ public class TestClient {
 					"testclient2");
 			Game local = new Game(22, 10);
 			new Thread(new NetworkInputHandler(server, local)).start();
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 100; i++) {
 				nout.sendKey(ProtocolConstants.LEFT);
 				Thread.sleep(1000);
 			}

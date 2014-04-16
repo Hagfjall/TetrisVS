@@ -46,8 +46,7 @@ public class NetworkInputHandler extends Thread {
 				// System.out.println(" = " + read);
 				switch (read) {
 				case 1:
-					name = readString(in);
-					notifyAll();
+					setOpponentName(readString(in));
 					System.out.println("NetworkInputHandler: recieved " + name);
 					break;
 				case 2:
@@ -62,11 +61,21 @@ public class NetworkInputHandler extends Thread {
 					game.rotateClockwise();
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+	}
+	
+	private synchronized void setOpponentName(String s) {
+		while (name != null) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		name = s;
+		notifyAll();
 	}
 
 	// What the hell should with the name when we has it?
