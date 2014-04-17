@@ -35,7 +35,7 @@ public class TetrisPanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
 
-		g2.setColor(Color.black);
+		g2.setColor(Color.GRAY);
 		drawGrid();
 		drawBricks();
 		g2.setColor(Color.black);
@@ -85,21 +85,16 @@ public class TetrisPanel extends JPanel implements Observer {
 	}
 
 	public void drawGrid() {
-
 		// Vertical
-		for (int i = 1; i <= col; i++) {
+		for (int i = 1; i <= col; i++)
 			g2.drawLine(i * square, square, i * square, row * square);
-		}
-
 		// Horizontal
-		for (int i = 1; i <= row; i++) {
+		for (int i = 1; i <= row; i++)
 			g2.drawLine(square, i * square, col * square, i * square);
-		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
-
 }

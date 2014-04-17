@@ -13,7 +13,7 @@ public class TestTetrisGui {
 	public void run() {
 		Game local = new Game(22, 10,200);
 		Game opponent = new Game(22, 10);
-		new TetrisGui("local","opponent",local,opponent);
+		new TetrisGui("local","opponent",local,opponent,null);
 		
 	}
 
