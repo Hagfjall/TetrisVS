@@ -38,7 +38,6 @@ public class TestOutputHandler implements Runnable {
 					out.write(1);
 					out.writeInt(length);
 						out.writeChars(snd);
-						System.out.println("sent " + snd + " to server");
 					//Send string
 				}else if(msg.charAt(0) == '2') {
 					int snd = Integer.parseInt(msg.substring(1));
@@ -50,7 +49,6 @@ public class TestOutputHandler implements Runnable {
 					//send byte 3
 				}
 			}
-			System.out.println("client closing");
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

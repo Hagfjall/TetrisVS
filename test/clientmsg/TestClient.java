@@ -4,6 +4,7 @@ import game.Game;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Random;
 
 import client.NetworkInputHandler;
 import client.NetworkOutputHandler;
@@ -24,8 +25,9 @@ public class TestClient {
 					"testclient2");
 			Game local = new Game(22, 10);
 			new Thread(new NetworkInputHandler(server, local)).start();
-			for (int i = 0; i < 100; i++) {
-				nout.sendKey(ProtocolConstants.LEFT);
+			Random rnd = new Random();
+			while (true) {
+				nout.sendKey((byte) (rnd.nextInt(5) + 3));
 				Thread.sleep(1000);
 			}
 		} catch (IOException e) {

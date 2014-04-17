@@ -20,43 +20,26 @@ public class ServerOutputHandler extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			System.out.println("OutputHandler: waiting for messages");
 			Input msg = m.get();
 			int[] msgarr = msg.getMessage();
-			System.out.println("OutputHandler: sending message " + msgarr[0]);
-					Iterator<Socket> it = allConnections.iterator();
-					while (it.hasNext()) {
-					   Socket s = it.next(); // must be called before you can call i.remove()
-					   if(!s.equals(msg.getSocket())) {
-						   try {
-								DataOutputStream out = new DataOutputStream(
-										s.getOutputStream());
-								for (int i = 0; i < msgarr.length; i++) {
-									out.write(msgarr[i]);
-								}
+			Iterator<Socket> it = allConnections.iterator();
+			while (it.hasNext()) {
+				Socket s = it.next(); 
+				if (!s.equals(msg.getSocket())) {
+					try {
+						DataOutputStream out = new DataOutputStream(
+								s.getOutputStream());
+						for (int i = 0; i < msgarr.length; i++) {
+							out.write(msgarr[i]);
+						}
 
-							} catch (IOException e) {
-								System.out.println("OutputHanlder: client " + s + " is removed");
-								it.remove();
-							}
-					   }
+					} catch (IOException e) {
+						System.out.println("OutputHanlder: client " + s
+								+ " is removed");
+						it.remove();
 					}
-//			for (Socket s : allConnections) {
-//				if (!s.equals(msg.getSocket())) {
-//
-//					try {
-//						DataOutputStream out = new DataOutputStream(
-//								s.getOutputStream());
-//						for (int i = 0; i < msgarr.length; i++) {
-//							out.write(msgarr[i]);
-//						}
-//
-//					} catch (IOException e) {
-//						System.out.println("OutputHanlder: client " + s + " is removed");
-//						allConnections.remove(s);
-//					}
-//				}
-//			}
+				}
+			}
 		}
 
 	}

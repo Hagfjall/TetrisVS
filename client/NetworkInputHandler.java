@@ -53,6 +53,16 @@ public class NetworkInputHandler extends Thread {
 					break;
 				case ProtocolConstants.UP:
 					game.rotateClockwise();
+					break;
+				case ProtocolConstants.RIGHT:
+					game.moveRight();
+					break;
+				case ProtocolConstants.DOWN:
+					game.rotateCounterClockwise();
+					break;
+				case ProtocolConstants.SPACE:
+					game.moveBottom();
+					break;
 				} //TODO implementera resten
 			}
 		} catch (IOException e) {

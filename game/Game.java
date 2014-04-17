@@ -33,7 +33,7 @@ public class Game extends Observable implements Observer {
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(750 / level, new ActionListener() {
+		timer = new Timer(250 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
@@ -144,23 +144,28 @@ public class Game extends Observable implements Observer {
 	 */
 	public void moveLeft() {
 		shapeBoard.moveLeft();
+		update();
 	}
 
 	public void moveRight() {
 		shapeBoard.moveRight();
+		update();
 
 	}
 
 	public void moveBottom() {
 		shapeBoard.moveBottom();
+		update();
 	}
 
 	public void rotateClockwise() {
 		shapeBoard.rotateClockwise();
+		update();
 	}
 
 	public void rotateCounterClockwise() {
 		shapeBoard.rotateCounterClockwise();
+		update();
 	}
 
 	public void usePowerup() {
