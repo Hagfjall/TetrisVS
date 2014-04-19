@@ -16,7 +16,7 @@ public class TestGamePanel {
 	public void run(){
 		JFrame f = new JFrame("TetrisVS");
 		Game g = new Game(22,10);
-		KeyListener input = new KeyListener(g);
+		KeyListener input = new KeyListener(g,null);
 		GamePanel tetrisPanel = new GamePanel("Hallå", g);
 		f.addKeyListener(input);
 		f.add(tetrisPanel);

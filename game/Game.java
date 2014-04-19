@@ -11,16 +11,13 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
-public class Game extends Observable implements Observer {
-	private GameBoard gameBoard;
-	private ShapeBoard shapeBoard;
-	private Timer timer;
+import test.TestMethods;
 
-	/* ta bort?? */
-	protected static final byte NORTH = 1;
-	protected static final byte EAST = 2;
-	protected static final byte SOUTH = 3;
-	protected static final byte WEST = 4;
+public class Game extends Observable implements Observer {
+	//TODO change to private
+	public GameBoard gameBoard;
+	public ShapeBoard shapeBoard;
+	private Timer timer;
 
 	private ShapeFactory shapeFactory;
 	private int score, level = 1;
@@ -32,8 +29,9 @@ public class Game extends Observable implements Observer {
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
+		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(250 / level, new ActionListener() {
+		timer = new Timer(500 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
@@ -46,15 +44,19 @@ public class Game extends Observable implements Observer {
 				update();
 //				TestMethods.printMatrix(getBoard());
 			}
-
 		});
 
 		timer.setRepeats(true);
 		timer.start();
 	}
-	
+
+	// TODO remove
+	public void testRollback() {
+		gameBoard.setSlot(getHeight() - 2, (getWidth() / 2) + 1, (byte) 1);
+	}
+
 	public Game(int row, int col) {
-		this(row,col,1000);
+		this(row, col, 1000);
 	}
 
 	public int getWidth() {
@@ -91,7 +93,8 @@ public class Game extends Observable implements Observer {
 	 * 
 	 * @return true if the move was possible, otherwise false
 	 */
-	private boolean checkMove() {
+	//TODO private
+	public boolean checkMove() {
 		Shape s = shapeBoard.getShape();
 		int x = shapeBoard.getX();
 		int y = shapeBoard.getY();
@@ -103,8 +106,8 @@ public class Game extends Observable implements Observer {
 		}
 		return true;
 	}
-
-	private boolean canMoveDown() {
+	//TODO private
+	public boolean canMoveDown() {
 		if (shapeBoard.moveDown()) {
 			if (checkMove()) {
 				shapeBoard.rollBack();
@@ -119,6 +122,7 @@ public class Game extends Observable implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		//TODO bugg här troligen, rollBack roterar fastän den egentligen ska fastna
 		if (o instanceof ShapeBoard) {
 			if (checkMove()) {
 				update();
@@ -169,7 +173,7 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void usePowerup() {
-		//TODO implementera
+		// TODO implementera
 		System.out.println("powerup should be sent to opponent");
 	}
 

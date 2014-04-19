@@ -35,7 +35,7 @@ public class ShapeBoard extends Board {
 		return s;
 	}
 
-	public void printShape() {
+	private void printShape() {
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
 				if (s.checkSlot(r, c)) {
@@ -43,6 +43,7 @@ public class ShapeBoard extends Board {
 				}
 			}
 		}
+		updated();
 	}
 
 	private void clear() {
@@ -90,6 +91,8 @@ public class ShapeBoard extends Board {
 		rotate(turnedClockwise);
 	}
 
+	
+	//TODO funkar inte!! roterar fastän den inte ska ( tror jag ) 
 	public void rollBack() {
 
 		// rotated if true

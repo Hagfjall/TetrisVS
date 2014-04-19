@@ -16,7 +16,6 @@ public class RotateTest {
 		s = new L_Right();
 		b = new ShapeBoard(5,10);
 		b.setShape(s);
-		b.printShape();
 		s.rotate(false);
 		b.print();
 		System.out.println("\n Rotated");
@@ -43,7 +42,7 @@ public class RotateTest {
 			System.out.println();
 		}
 		
-		// The magic code that turns everything 90´ clockvise
+		// The magic code that turns everything 90ï¿½ clockvise
 		for (int k = 1; k <= 1; k++) {
 			String[][] sec = new String[first.length][first[0].length];
 			for (int i = 0; i < first[0].length; i++) {

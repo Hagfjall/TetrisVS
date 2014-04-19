@@ -12,15 +12,6 @@ public class Board extends Observable {
 		this.width = col;
 		this.height = row;
 		board = new byte[row][col];
-		// for (int i = 0; i < x; i++)
-		// for (int j = 0; j < y; j++)
-		// board[i][j] = 0;
-	}
-
-	public int update(int i) {
-		setChanged();
-		notifyObservers(i);
-		return 1;
 	}
 
 	public int getWidth() {
@@ -29,10 +20,6 @@ public class Board extends Observable {
 
 	public int getHeight() {
 		return height;
-	}
-
-	public Board(Board b) {
-		// board = new byte[x][y];
 	}
 
 	public void setSlot(int row, int col, byte type) {
@@ -76,6 +63,7 @@ public class Board extends Observable {
 			}
 			System.out.println(" ");
 		}
+		System.out.println();
 	}
 
 	protected void updated() {
