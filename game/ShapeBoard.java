@@ -91,8 +91,7 @@ public class ShapeBoard extends Board {
 		rotate(turnedClockwise);
 	}
 
-	
-	//TODO funkar inte!! roterar fastän den inte ska ( tror jag ) 
+	// TODO funkar inte!! roterar fastän den inte ska ( tror jag )
 	public void rollBack() {
 
 		// rotated if true
@@ -129,11 +128,6 @@ public class ShapeBoard extends Board {
 		}
 	}
 
-	public void moveBottom() {
-		// TODO will not be needed?
-
-	}
-
 	public boolean moveDown() {
 		int i = s.getMostSouth();
 		if (currentY + s.getMostSouth() < height - 1) {
@@ -145,5 +139,4 @@ public class ShapeBoard extends Board {
 		}
 		return false;
 	}
-
 }
