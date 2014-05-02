@@ -32,18 +32,23 @@ public class KeyListener implements java.awt.event.KeyListener {
 			break;
 		case KeyEvent.VK_DOWN:
 			localGame.rotateCounterClockwise();
+			network.sendKey(ProtocolConstants.DOWN);
 			break;
 		case KeyEvent.VK_LEFT:
 			localGame.moveLeft();
+			network.sendKey(ProtocolConstants.LEFT);
 			break;
 		case KeyEvent.VK_RIGHT:
 			localGame.moveRight();
+			network.sendKey(ProtocolConstants.RIGHT);
 			break;
 		case KeyEvent.VK_SPACE:
 			localGame.moveBottom();
+			network.sendKey(ProtocolConstants.SPACE);
 			break;
 		case KeyEvent.VK_X:
 			localGame.usePowerup();
+			network.sendKey(ProtocolConstants.POWERUP);
 			break;	
 		}
 

@@ -25,12 +25,21 @@ public class Game extends Observable implements Observer {
 	// TODO implement the score system.
 
 	public Game(int row, int col, long randomSeed) {
+		this(row, col, randomSeed, true);
+	}
+
+	public Game(int row, int col, long randomSeed, boolean withTimer) {
 		shapeFactory = new ShapeFactory(randomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
+		if (withTimer)
+			addTimer();
+	}
+
+	private void addTimer() {
 		timer = new Timer(750 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (canMoveDown()) {
@@ -50,6 +59,7 @@ public class Game extends Observable implements Observer {
 		timer.start();
 	}
 
+	// TODO ta bort innan release
 	public Game(int row, int col) {
 		this(row, col, 1000);
 	}
@@ -83,7 +93,6 @@ public class Game extends Observable implements Observer {
 		return ret;
 	}
 
-	// running when ShapeBoard notify game
 	/**
 	 * 
 	 * @return true if the move was possible, otherwise false
@@ -119,8 +128,6 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		// TODO bugg här troligen, rollBack roterar fastän den egentligen ska
-		// fastna
 		if (o instanceof GameBoard) {
 			update();
 		}
