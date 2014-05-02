@@ -165,7 +165,9 @@ public class Game extends Observable implements Observer {
 	}
 
 	public void moveBottom() {
-		shapeBoard.moveBottom();
+		while (canMoveDown()) {
+			shapeBoard.moveDown();
+		}
 		checkMove();
 	}
 
