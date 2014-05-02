@@ -146,9 +146,4 @@ public class ShapeBoard extends Board {
 		return false;
 	}
 
-	public void fireAttack() {
-		// TODO SKA inte finnas?
-
-	}
-
 }

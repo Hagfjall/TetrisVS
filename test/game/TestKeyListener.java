@@ -1,4 +1,4 @@
-package gui;
+package test.game;
 
 import game.Game;
 
@@ -7,12 +7,12 @@ import java.awt.event.KeyEvent;
 import client.NetworkOutputHandler;
 import client.ProtocolConstants;
 
-public class KeyListener implements java.awt.event.KeyListener {
+public class TestKeyListener implements java.awt.event.KeyListener {
 
 	private Game localGame;
 	private NetworkOutputHandler network;
 
-	public KeyListener(Game localGame, NetworkOutputHandler network) {
+	public TestKeyListener(Game localGame, NetworkOutputHandler network) {
 		this.localGame = localGame;
 		this.network = network;
 	}
@@ -28,7 +28,6 @@ public class KeyListener implements java.awt.event.KeyListener {
 		switch (input) {
 		case KeyEvent.VK_UP:
 			localGame.rotateClockwise();
-			network.sendKey(ProtocolConstants.UP);
 			break;
 		case KeyEvent.VK_DOWN:
 			localGame.rotateCounterClockwise();

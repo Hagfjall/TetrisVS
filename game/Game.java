@@ -50,11 +50,6 @@ public class Game extends Observable implements Observer {
 		timer.start();
 	}
 
-	// TODO remove
-	public void testRollback() {
-		gameBoard.setSlot(getHeight() - 2, (getWidth() / 2) + 1, (byte) 1);
-	}
-
 	public Game(int row, int col) {
 		this(row, col, 1000);
 	}
@@ -120,7 +115,6 @@ public class Game extends Observable implements Observer {
 		return false;
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
 		//TODO bugg här troligen, rollBack roterar fastän den egentligen ska fastna
 		if (o instanceof ShapeBoard) {
