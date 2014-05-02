@@ -14,7 +14,7 @@ import javax.swing.Timer;
 import test.TestMethods;
 
 public class Game extends Observable implements Observer {
-	//TODO change to private
+	// TODO change to private
 	public GameBoard gameBoard;
 	public ShapeBoard shapeBoard;
 	private Timer timer;
@@ -31,7 +31,7 @@ public class Game extends Observable implements Observer {
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
-		timer = new Timer(500 / level, new ActionListener() {
+		timer = new Timer(750 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				if (canMoveDown()) {
 					shapeBoard.moveDown();
@@ -42,7 +42,7 @@ public class Game extends Observable implements Observer {
 					shapeBoard.setShape(shapeFactory.getShape());
 				}
 				update();
-//				TestMethods.printMatrix(getBoard());
+				// TestMethods.printMatrix(getBoard());
 			}
 		});
 
@@ -88,8 +88,8 @@ public class Game extends Observable implements Observer {
 	 * 
 	 * @return true if the move was possible, otherwise false
 	 */
-	//TODO private
-	public boolean checkMove() {
+	// TODO private
+	public boolean checkHit() {
 		Shape s = shapeBoard.getShape();
 		int x = shapeBoard.getX();
 		int y = shapeBoard.getY();
@@ -101,10 +101,12 @@ public class Game extends Observable implements Observer {
 		}
 		return true;
 	}
-	//TODO private
+
+	// TODO private
 	public boolean canMoveDown() {
 		if (shapeBoard.moveDown()) {
-			if (checkMove()) {
+			System.out.println("checkMove: " + checkHit());
+			if (checkHit()) {
 				shapeBoard.rollBack();
 				return true;
 			} else {
@@ -112,19 +114,14 @@ public class Game extends Observable implements Observer {
 				return false;
 			}
 		}
+		System.out.println("false");
 		return false;
 	}
 
 	public void update(Observable o, Object arg) {
-		//TODO bugg här troligen, rollBack roterar fastän den egentligen ska fastna
-		if (o instanceof ShapeBoard) {
-			if (checkMove()) {
-				update();
-			} else {
-				shapeBoard.rollBack();
-			}
-
-		} else if (o instanceof GameBoard) {
+		// TODO bugg här troligen, rollBack roterar fastän den egentligen ska
+		// fastna
+		if (o instanceof GameBoard) {
 			update();
 		}
 
@@ -135,35 +132,44 @@ public class Game extends Observable implements Observer {
 		notifyObservers();
 	}
 
+	private void checkMove() {
+		timer.restart();
+		if (checkHit()) {
+			update();
+		} else {
+			shapeBoard.rollBack();
+		}
+	}
+
 	// ----------------------------------- INTERATCTIONS
 
 	/**
 	 * 
 	 */
 	public void moveLeft() {
+
 		shapeBoard.moveLeft();
-		update();
+		checkMove();
 	}
 
 	public void moveRight() {
 		shapeBoard.moveRight();
-		update();
-
+		checkMove();
 	}
 
 	public void moveBottom() {
 		shapeBoard.moveBottom();
-		update();
+		checkMove();
 	}
 
 	public void rotateClockwise() {
 		shapeBoard.rotateClockwise();
-		update();
+		checkMove();
 	}
 
 	public void rotateCounterClockwise() {
 		shapeBoard.rotateCounterClockwise();
-		update();
+		checkMove();
 	}
 
 	public void usePowerup() {

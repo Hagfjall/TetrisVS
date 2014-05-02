@@ -67,7 +67,7 @@ public class Board extends Observable {
 	}
 
 	protected void updated() {
-		setChanged();
-		notifyObservers();
+//		setChanged();
+//		notifyObservers();
 	}
 }

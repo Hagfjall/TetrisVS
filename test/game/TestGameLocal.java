@@ -19,7 +19,7 @@ public class TestGameLocal {
 		new TestGameLocal().run();
 	}
 	public void run() {
-		Game local = new Game(10, 10, 200);
+		Game local = new Game(10, 6, 200);
 		TestKeyListener keyListener = new TestKeyListener(local, null);
 		JFrame f = new JFrame("TetrisVS");
 		TetrisPanel tetrisPanel = new TetrisPanel(local);
