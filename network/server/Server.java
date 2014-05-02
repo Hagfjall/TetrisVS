@@ -1,6 +1,5 @@
-package server;
+package network.server;
 
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -31,32 +30,24 @@ public class Server extends Thread {
 		try {
 			ServerSocket server = new ServerSocket(port);
 			System.out.println("server up and running on port " + port);
-			int inputCounter = 0;
-			new ServerOutputHandler(allConnections, m).start();;
+			ServerOutputHandler output = new ServerOutputHandler(
+					allConnections, m);
 			while (true) {
 				Socket s = server.accept();
-				if (inputCounter++ < 2) {
-					new InputHandler(s, m, playerNames).start();
-					sendOpponentPlayerName(s);
-				}else {
+				allConnections.add(s);
+				InputHandler in = new InputHandler(s, m);
+				in.start();
+				output.addPlayername(in.getPlayername());
+				if (allConnections.size() == 2) {
+					output.start();
+				} else {
 					// send all player names since its a spectator
 				}
-				allConnections.add(s);
 
 			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-	}
-
-	private void sendOpponentPlayerName(Socket s) throws IOException {
-		DataOutputStream out = new DataOutputStream(s.getOutputStream());
-		String name = playerNames.getPlayername(s);
-		if (name != null) {
-			out.write(1);
-			out.writeInt(name.length());
-			out.writeChars(name);
 		}
 	}
 }

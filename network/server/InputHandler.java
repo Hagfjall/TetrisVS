@@ -1,39 +1,44 @@
-package server;
+package network.server;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 
+import network.CommonNetworkMethods;
+
 public class InputHandler extends Thread {
-
 	private Socket socket;
+	private InputStream is;
 	private TetrisMailbox m;
-	private PlayerNames playerNames;
+	private String playerName;
 
-	public InputHandler(Socket socket, TetrisMailbox m, PlayerNames playerNames) {
+	public InputHandler(Socket socket, TetrisMailbox m) {
 		this.m = m;
 		this.socket = socket;
-		this.playerNames = playerNames;
+		try {
+			is = socket.getInputStream();
+			playerName = CommonNetworkMethods.readString(new DataInputStream(
+					socket.getInputStream()));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public String getPlayername() {
+		return playerName;
 	}
 
 	@Override
 	public void run() {
 		try {
-			DataInputStream in = new DataInputStream(socket.getInputStream());
+			DataInputStream in = new DataInputStream(is);
 			int read;
 			// check if the first thing the client sends is the name, close
 			// otherwise this is to be sure that we are following the protocol
 			if ((read = in.read()) == 1) {
-				int length = in.readInt();
-				StringBuilder playerName = new StringBuilder(length);
-				for (int i = 0; i < length; i++) {
-					playerName.append(in.readChar());
-				}
-				if (!playerNames.setName(playerName.toString(), socket)) {
-					socket.close();
-					return;
-				}
 				while ((read = in.read()) != -1) {
 					int[] msg;
 					if (read == 2) {

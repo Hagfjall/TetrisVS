@@ -20,7 +20,7 @@ public class Tetris {
 //				.showInputDialog("Please enter the server address");
 //		int port = Integer.parseInt(JOptionPane
 //				.showInputDialog("Please enter the portnumber"));
-		String address = "localhost";
+		String address = "192.168.0.101";
 		int port = 3000;
 		Socket s = new Socket(address,port);
 		Game local = new Game(22, 10, 200);

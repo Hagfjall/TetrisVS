@@ -2,7 +2,7 @@ package test.server;
 
 import java.net.Socket;
 
-import server.PlayerNames;
+import network.server.PlayerNames;
 
 public class TestPlayerNames {
 	public static void main(String[] args) {

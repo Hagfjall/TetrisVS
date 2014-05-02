@@ -1,4 +1,4 @@
-package server;
+package network.server;
 
 public class TetrisMailbox {
 
@@ -24,7 +24,6 @@ public class TetrisMailbox {
 		while (input == null) {
 			try {
 				wait();
-
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
