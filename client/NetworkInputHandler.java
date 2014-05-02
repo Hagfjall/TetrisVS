@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.Socket;
 
 import network.CommonNetworkMethods;
+import network.ProtocolConstants;
 
 public class NetworkInputHandler extends Thread {
 	private Socket socket;

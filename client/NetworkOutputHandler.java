@@ -4,6 +4,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
+import network.ProtocolConstants;
+
 public class NetworkOutputHandler {
 
 	private DataOutputStream out;

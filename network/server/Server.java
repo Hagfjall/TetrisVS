@@ -12,7 +12,6 @@ public class Server extends Thread {
 	private TetrisMailbox m;
 
 	public static void main(String[] args) {
-
 		new Server().start();
 	}
 
@@ -20,7 +19,6 @@ public class Server extends Thread {
 		playerNames = new PlayerNames();
 		allConnections = new Vector<Socket>();
 		m = new TetrisMailbox();
-
 	}
 
 	@Override
