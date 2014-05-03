@@ -3,10 +3,11 @@ package test.gui;
 import java.awt.Color;
 
 import game.Game;
-import gui.KeyListener;
 import gui.TetrisPanel;
 
 import javax.swing.JFrame;
+
+import client.KeyListener;
 
 public class TestTetrisPanel {
 

@@ -1,4 +1,4 @@
-package client;
+package test.server;
 
 import game.Game;
 import gui.TetrisGui;
@@ -9,19 +9,17 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-public class Tetris {
+import client.InitiateConnectionClient;
+import client.KeyListener;
+import client.NetworkInputHandler;
+import client.NetworkOutputHandler;
 
+public class TestStartup {
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
-		String name = JOptionPane.showInputDialog("Please enter your name");
-		if (name == null)
-			return;
-		// String address = JOptionPane
-		// .showInputDialog("Please enter the server address");
-		// int port = Integer.parseInt(JOptionPane
-		// .showInputDialog("Please enter the portnumber"));
+		String name ="he2";
 		String address = "localhost";
-		int port = 3000;
+		int port = 3001;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
@@ -31,9 +29,9 @@ public class Tetris {
 		NetworkOutputHandler nout = new NetworkOutputHandler(s);
 		NetworkInputHandler nin = new NetworkInputHandler(s, opponent);
 		nin.start();
-		KeyListener keyListener = new KeyListener(local, nout);
-		new TetrisGui(name, opponentName, local, opponent, keyListener);
-
+		System.out.println("main worked!"); 
+		System.out.println("recieved: " + rndSeed + " name: " + opponentName);
 	}
+	
 
 }

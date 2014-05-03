@@ -14,17 +14,12 @@ public class InputHandler extends Thread {
 	private TetrisMailbox m;
 	private String playerName;
 
-	public InputHandler(Socket socket, TetrisMailbox m) {
+	public InputHandler(Socket socket, TetrisMailbox m) throws IOException {
 		this.m = m;
 		this.socket = socket;
-		try {
-			is = socket.getInputStream();
-			playerName = CommonNetworkMethods.readString(new DataInputStream(
-					socket.getInputStream()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		is = socket.getInputStream();
+		playerName = CommonNetworkMethods.readString(new DataInputStream(socket
+				.getInputStream()));
 	}
 
 	public String getPlayername() {
@@ -36,8 +31,6 @@ public class InputHandler extends Thread {
 		try {
 			DataInputStream in = new DataInputStream(is);
 			int read;
-			// check if the first thing the client sends is the name, close
-			// otherwise this is to be sure that we are following the protocol
 			if ((read = in.read()) == 1) {
 				while ((read = in.read()) != -1) {
 					int[] msg;

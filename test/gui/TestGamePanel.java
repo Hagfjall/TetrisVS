@@ -2,9 +2,10 @@ package test.gui;
 
 import game.Game;
 import gui.GamePanel;
-import gui.KeyListener;
 
 import javax.swing.JFrame;
+
+import client.KeyListener;
 
 public class TestGamePanel {
 

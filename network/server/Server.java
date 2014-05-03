@@ -3,11 +3,11 @@ package network.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Random;
 import java.util.Vector;
 
 public class Server extends Thread {
 
-	private PlayerNames playerNames;
 	private Vector<Socket> allConnections;
 	private TetrisMailbox m;
 
@@ -16,20 +16,22 @@ public class Server extends Thread {
 	}
 
 	public Server() {
-		playerNames = new PlayerNames();
 		allConnections = new Vector<Socket>();
 		m = new TetrisMailbox();
+
 	}
 
 	@Override
 	public void run() {
 		int port = 3000;
-
+		Random rnd = new Random();
+		long rndSeed = rnd.nextLong();
 		try {
 			ServerSocket server = new ServerSocket(port);
 			System.out.println("server up and running on port " + port);
+			System.out.println("rndeed: " + rndSeed);
 			ServerOutputHandler output = new ServerOutputHandler(
-					allConnections, m);
+					allConnections, m, rndSeed);
 			while (true) {
 				Socket s = server.accept();
 				allConnections.add(s);
@@ -37,8 +39,9 @@ public class Server extends Thread {
 				in.start();
 				output.addPlayername(in.getPlayername());
 				if (allConnections.size() == 2) {
+					output.initiateGameOnClients();
 					output.start();
-				} else {
+				} else if (allConnections.size() > 2) {
 					// send all player names since its a spectator
 				}
 

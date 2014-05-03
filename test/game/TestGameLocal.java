@@ -1,7 +1,6 @@
 package test.game;
 
 import game.Game;
-import gui.KeyListener;
 import gui.TetrisGui;
 import gui.TetrisPanel;
 
@@ -10,6 +9,7 @@ import java.net.Socket;
 
 import javax.swing.JFrame;
 
+import client.KeyListener;
 import client.NetworkInputHandler;
 import client.NetworkOutputHandler;
 

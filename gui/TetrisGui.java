@@ -7,6 +7,8 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import client.KeyListener;
+
 public class TetrisGui extends JFrame {
 	/**
 	 * 
@@ -30,6 +32,7 @@ public class TetrisGui extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		localGame.start();
 	}
 
 }

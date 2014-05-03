@@ -1,11 +1,10 @@
-package gui;
+package client;
 
 import game.Game;
 
 import java.awt.event.KeyEvent;
 
 import network.ProtocolConstants;
-import client.NetworkOutputHandler;
 
 public class KeyListener implements java.awt.event.KeyListener {
 

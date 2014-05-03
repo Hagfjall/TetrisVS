@@ -12,7 +12,6 @@ public class Input {
 		message = msg;
 	}
 
-
 	public int[] getMessage() {
 		return message;
 	}

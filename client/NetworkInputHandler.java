@@ -11,34 +11,12 @@ import network.ProtocolConstants;
 
 public class NetworkInputHandler extends Thread {
 	private Socket socket;
-	private DataInputStream in;
 	private Game game;
-	private String name;
-	private long randomSeed;
 	public NetworkInputHandler(Socket socketIn, Game game) {
 		socket = socketIn;
 		this.game = game;
-		//TODO read name
-		try {
-			name = CommonNetworkMethods.readString(in);
-			randomSeed = in.readLong();
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}
 	}
 
-	public synchronized String getOpponentName() {
-		while (name == null) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		notifyAll();
-		return name;
-	}
 
 	/**
 	 * 1: Name of player, the next byte is the length of the name (String)
@@ -83,18 +61,6 @@ public class NetworkInputHandler extends Thread {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private synchronized void setOpponentName(String s) {
-		while (name != null) {
-			try {
-				wait();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		name = s;
-		notifyAll();
 	}
 
 	

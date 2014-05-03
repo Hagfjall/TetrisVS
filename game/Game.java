@@ -39,6 +39,11 @@ public class Game extends Observable implements Observer {
 			addTimer();
 	}
 
+	// TODO ta bort innan release
+	public Game(int row, int col) {
+		this(row, col, 1000);
+	}
+
 	private void addTimer() {
 		timer = new Timer(750 / level, new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
@@ -56,12 +61,6 @@ public class Game extends Observable implements Observer {
 		});
 
 		timer.setRepeats(true);
-		timer.start();
-	}
-
-	// TODO ta bort innan release
-	public Game(int row, int col) {
-		this(row, col, 1000);
 	}
 
 	public int getWidth() {
@@ -125,6 +124,11 @@ public class Game extends Observable implements Observer {
 		}
 		System.out.println("false");
 		return false;
+	}
+
+	public void start() {
+		if (timer != null)
+			timer.start();
 	}
 
 	public void update(Observable o, Object arg) {
