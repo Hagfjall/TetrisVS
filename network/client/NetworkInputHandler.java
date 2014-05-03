@@ -1,4 +1,4 @@
-package client;
+package network.client;
 
 import game.Game;
 
@@ -6,7 +6,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import network.CommonNetworkMethods;
 import network.ProtocolConstants;
 
 public class NetworkInputHandler extends Thread {

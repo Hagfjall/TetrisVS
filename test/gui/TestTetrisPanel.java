@@ -7,7 +7,7 @@ import gui.TetrisPanel;
 
 import javax.swing.JFrame;
 
-import client.KeyListener;
+import network.client.KeyListener;
 
 public class TestTetrisPanel {
 

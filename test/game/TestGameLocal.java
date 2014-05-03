@@ -9,9 +9,9 @@ import java.net.Socket;
 
 import javax.swing.JFrame;
 
-import client.KeyListener;
-import client.NetworkInputHandler;
-import client.NetworkOutputHandler;
+import network.client.KeyListener;
+import network.client.NetworkInputHandler;
+import network.client.NetworkOutputHandler;
 
 public class TestGameLocal {
 

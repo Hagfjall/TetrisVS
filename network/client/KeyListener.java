@@ -1,9 +1,7 @@
-package client;
+package network.client;
 
 import game.Game;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import network.ProtocolConstants;

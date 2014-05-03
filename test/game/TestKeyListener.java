@@ -5,7 +5,7 @@ import game.Game;
 import java.awt.event.KeyEvent;
 
 import network.ProtocolConstants;
-import client.NetworkOutputHandler;
+import network.client.NetworkOutputHandler;
 
 public class TestKeyListener implements java.awt.event.KeyListener {
 

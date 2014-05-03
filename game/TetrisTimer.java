@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import network.ProtocolConstants;
-import client.NetworkOutputHandler;
+import network.client.NetworkOutputHandler;
 
 public class TetrisTimer implements ActionListener {
 	

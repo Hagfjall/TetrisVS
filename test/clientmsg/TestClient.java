@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.util.Random;
 
 import network.ProtocolConstants;
-import client.NetworkInputHandler;
-import client.NetworkOutputHandler;
+import network.client.NetworkInputHandler;
+import network.client.NetworkOutputHandler;
 
 public class TestClient {
 

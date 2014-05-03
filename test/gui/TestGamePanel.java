@@ -5,7 +5,7 @@ import gui.GamePanel;
 
 import javax.swing.JFrame;
 
-import client.KeyListener;
+import network.client.KeyListener;
 
 public class TestGamePanel {
 

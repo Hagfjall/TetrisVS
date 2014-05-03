@@ -9,10 +9,10 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-import client.InitiateConnectionClient;
-import client.KeyListener;
-import client.NetworkInputHandler;
-import client.NetworkOutputHandler;
+import network.client.InitiateConnectionClient;
+import network.client.KeyListener;
+import network.client.NetworkInputHandler;
+import network.client.NetworkOutputHandler;
 
 public class TestStartup {
 	public static void main(String[] args) throws UnknownHostException,

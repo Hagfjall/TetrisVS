@@ -2,7 +2,7 @@ package game;
 
 import java.util.Observable;
 
-public class Board extends Observable {
+public abstract class Board extends Observable {
 
 	protected byte[][] board;
 	protected int width;
@@ -53,6 +53,7 @@ public class Board extends Observable {
 		return row >= 0 && row < getHeight() && col >= 0 && col < getWidth();
 	}
 
+	//TODO ta bort innan release
 	public void print() {
 		for (int r = 0; r < getHeight(); r++) {
 			for (int c = 0; c < getWidth(); c++) {
@@ -67,7 +68,7 @@ public class Board extends Observable {
 	}
 
 	protected void updated() {
-//		setChanged();
-//		notifyObservers();
+		setChanged();
+		notifyObservers();
 	}
 }

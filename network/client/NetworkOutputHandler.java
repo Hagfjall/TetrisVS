@@ -1,11 +1,8 @@
-package client;
+package network.client;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-
-import network.CommonNetworkMethods;
-import network.ProtocolConstants;
 
 public class NetworkOutputHandler {
 

@@ -9,13 +9,12 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
-import client.KeyListener;
-import client.NetworkOutputHandler;
+import network.client.NetworkOutputHandler;
 
 public class Game extends Observable implements Observer {
 	// TODO change to private
-	public GameBoard gameBoard;
-	public ShapeBoard shapeBoard;
+	private GameBoard gameBoard;
+	private ShapeBoard shapeBoard;
 	private Timer timer;
 
 	private ShapeFactory shapeFactory;
@@ -23,16 +22,30 @@ public class Game extends Observable implements Observer {
 
 	// TODO implement the score system.
 
+	/**
+	 * Used for opponent game, aka without a timer.
+	 * 
+	 * @param row
+	 * @param col
+	 * @param randomSeed
+	 *            used for generating the bricks
+	 */
 	public Game(int row, int col, long randomSeed) {
 		this(row, col, randomSeed, null);
 	}
 
 	/**
+	 * Used for the localgame when it should use a local timer and send the
+	 * events to the opponent
 	 * 
 	 * @param row
+	 *            size
 	 * @param col
+	 *            size
 	 * @param randomSeed
+	 *            used for generating the bricks
 	 * @param nout
+	 *            , used for sending the timer-events (aka moving down)
 	 */
 	public Game(int row, int col, long randomSeed, NetworkOutputHandler nout) {
 		shapeFactory = new ShapeFactory(randomSeed);
@@ -46,14 +59,9 @@ public class Game extends Observable implements Observer {
 		}
 	}
 
-	// TODO ta bort innan release
+	// TODO ta bort innan release, används bara för test
 	public Game(int row, int col) {
 		this(row, col, 1000);
-	}
-
-	private void addTimer(TetrisTimer timerListener) {
-		timer = new Timer(750 / level, timerListener);
-		timer.setRepeats(true);
 	}
 
 	public int getWidth() {
@@ -65,10 +73,17 @@ public class Game extends Observable implements Observer {
 		return gameBoard.getHeight();
 	}
 
+	/**
+	 * @return the current score for the game
+	 */
 	public int getScore() {
 		return score;
 	}
 
+	/**
+	 * getting a representation of the both board, game and shape. 
+	 * @return
+	 */
 	public byte[][] getBoard() {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
@@ -86,11 +101,10 @@ public class Game extends Observable implements Observer {
 	}
 
 	/**
-	 * 
-	 * @return true if the move was possible, otherwise false
+	 * @return true if there isn't any hit, otherwise false
 	 */
 	// TODO private
-	public boolean checkHit() {
+	private boolean noHit() {
 		Shape s = shapeBoard.getShape();
 		int x = shapeBoard.getX();
 		int y = shapeBoard.getY();
@@ -103,10 +117,15 @@ public class Game extends Observable implements Observer {
 		return true;
 	}
 
-	// TODO private
-	public boolean canMoveDown() {
+	/**
+	 * Checks if the current shape are able to move down without hitting
+	 * something (do a movedown and then rolling back)
+	 * 
+	 * @return
+	 */
+	private boolean canMoveDown() {
 		if (shapeBoard.moveDown()) {
-			if (checkHit()) {
+			if (noHit()) {
 				shapeBoard.rollBack();
 				return true;
 			} else {
@@ -117,31 +136,45 @@ public class Game extends Observable implements Observer {
 		return false;
 	}
 
+	/**
+	 * starting the timer and the game, only used for local games
+	 */
 	public void start() {
 		if (timer != null)
 			timer.start();
 	}
 
+	/**
+	 * updates from the GameBoard (when removing rows and so)
+	 */
 	public void update(Observable o, Object arg) {
-		if (o instanceof GameBoard) {
-			update();
-		}
-
+		updated();
 	}
 
-	private void update() {
+	/**
+	 * inform the Observer , most likely GUI
+	 */
+	private void updated() {
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * Checking the move, is the move is illegal we are rolling back the move
+	 */
 	private void checkMove() {
 		if (timer != null)
 			timer.restart();
-		if (checkHit()) {
-			update();
+		if (noHit()) {
+			updated();
 		} else {
 			shapeBoard.rollBack();
 		}
+	}
+
+	private void addTimer(TetrisTimer timerListener) {
+		timer = new Timer(750 / level, timerListener);
+		timer.setRepeats(true);
 	}
 
 	// ----------------------------------- INTERATCTIONS
@@ -169,7 +202,7 @@ public class Game extends Observable implements Observer {
 					s);
 			shapeBoard.setShape(shapeFactory.getShape());
 		}
-		update();
+		updated();
 	}
 
 	public void moveBottom() {

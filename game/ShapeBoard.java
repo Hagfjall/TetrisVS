@@ -2,7 +2,6 @@ package game;
 
 import game.blocks.Shape;
 
-//Hello
 public class ShapeBoard extends Board {
 	private int currentX, oldX;
 	private int currentY, oldY;
@@ -43,7 +42,6 @@ public class ShapeBoard extends Board {
 				}
 			}
 		}
-		updated();
 	}
 
 	private void clear() {
@@ -59,7 +57,6 @@ public class ShapeBoard extends Board {
 	private void updateOld() {
 		oldX = currentX;
 		oldY = currentY;
-
 	}
 
 	private void rotate(boolean clockwise) {
@@ -91,10 +88,7 @@ public class ShapeBoard extends Board {
 		rotate(turnedClockwise);
 	}
 
-	// TODO funkar inte!! roterar fastän den inte ska ( tror jag )
 	public void rollBack() {
-
-		// rotated if true
 		if (oldX == currentX && oldY == currentY) {
 			clear();
 			s.rotate(!turnedClockwise);
@@ -109,7 +103,6 @@ public class ShapeBoard extends Board {
 	}
 
 	public void moveLeft() {
-		int i = s.getMostWest();
 		if (currentX + s.getMostWest() > 0) {
 			clear();
 			updateOld();
@@ -119,7 +112,6 @@ public class ShapeBoard extends Board {
 	}
 
 	public void moveRight() {
-		int i = s.getMostEast();
 		if (currentX + s.getMostEast() < width - 1) {
 			clear();
 			updateOld();
@@ -129,7 +121,6 @@ public class ShapeBoard extends Board {
 	}
 
 	public boolean moveDown() {
-		int i = s.getMostSouth();
 		if (currentY + s.getMostSouth() < height - 1) {
 			clear();
 			updateOld();
