@@ -56,6 +56,9 @@ public class NetworkInputHandler extends Thread {
 				case ProtocolConstants.POWERUP:
 					game.usePowerup();
 					break;
+				case ProtocolConstants.MOVEDOWN:
+					game.moveDown();
+					break;
 				} // TODO implementera resten
 			}
 		} catch (IOException e) {

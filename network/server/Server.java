@@ -18,7 +18,6 @@ public class Server extends Thread {
 	public Server() {
 		allConnections = new Vector<Socket>();
 		m = new TetrisMailbox();
-
 	}
 
 	@Override

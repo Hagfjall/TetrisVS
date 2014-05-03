@@ -19,13 +19,12 @@ public class TestStartup {
 			IOException {
 		String name ="he2";
 		String address = "localhost";
-		int port = 3001;
+		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		Game local = new Game(22, 10, rndSeed);
-		Game opponent = new Game(22, 10, rndSeed, false);
+		Game opponent = new Game(22, 10, rndSeed);
 		NetworkOutputHandler nout = new NetworkOutputHandler(s);
 		NetworkInputHandler nin = new NetworkInputHandler(s, opponent);
 		nin.start();

@@ -4,14 +4,13 @@ import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.Timer;
 
-import test.TestMethods;
+import client.KeyListener;
+import client.NetworkOutputHandler;
 
 public class Game extends Observable implements Observer {
 	// TODO change to private
@@ -25,18 +24,26 @@ public class Game extends Observable implements Observer {
 	// TODO implement the score system.
 
 	public Game(int row, int col, long randomSeed) {
-		this(row, col, randomSeed, true);
+		this(row, col, randomSeed, null);
 	}
 
-	public Game(int row, int col, long randomSeed, boolean withTimer) {
+	/**
+	 * 
+	 * @param row
+	 * @param col
+	 * @param randomSeed
+	 * @param nout
+	 */
+	public Game(int row, int col, long randomSeed, NetworkOutputHandler nout) {
 		shapeFactory = new ShapeFactory(randomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
-		if (withTimer)
-			addTimer();
+		if (nout != null) {
+			addTimer(new TetrisTimer(this, nout));
+		}
 	}
 
 	// TODO ta bort innan release
@@ -44,22 +51,8 @@ public class Game extends Observable implements Observer {
 		this(row, col, 1000);
 	}
 
-	private void addTimer() {
-		timer = new Timer(750 / level, new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				if (canMoveDown()) {
-					shapeBoard.moveDown();
-				} else {
-					Shape s = shapeBoard.getShape();
-					gameBoard.setShape(
-							new Point(shapeBoard.getX(), shapeBoard.getY()), s);
-					shapeBoard.setShape(shapeFactory.getShape());
-				}
-				update();
-				// TestMethods.printMatrix(getBoard());
-			}
-		});
-
+	private void addTimer(TetrisTimer timerListener) {
+		timer = new Timer(750 / level, timerListener);
 		timer.setRepeats(true);
 	}
 
@@ -113,7 +106,6 @@ public class Game extends Observable implements Observer {
 	// TODO private
 	public boolean canMoveDown() {
 		if (shapeBoard.moveDown()) {
-			System.out.println("checkMove: " + checkHit());
 			if (checkHit()) {
 				shapeBoard.rollBack();
 				return true;
@@ -122,7 +114,6 @@ public class Game extends Observable implements Observer {
 				return false;
 			}
 		}
-		System.out.println("false");
 		return false;
 	}
 
@@ -144,7 +135,8 @@ public class Game extends Observable implements Observer {
 	}
 
 	private void checkMove() {
-		timer.restart();
+		if (timer != null)
+			timer.restart();
 		if (checkHit()) {
 			update();
 		} else {
@@ -166,6 +158,18 @@ public class Game extends Observable implements Observer {
 	public void moveRight() {
 		shapeBoard.moveRight();
 		checkMove();
+	}
+
+	public void moveDown() {
+		if (canMoveDown()) {
+			shapeBoard.moveDown();
+		} else {
+			Shape s = shapeBoard.getShape();
+			gameBoard.setShape(new Point(shapeBoard.getX(), shapeBoard.getY()),
+					s);
+			shapeBoard.setShape(shapeFactory.getShape());
+		}
+		update();
 	}
 
 	public void moveBottom() {

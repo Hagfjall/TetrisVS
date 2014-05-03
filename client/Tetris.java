@@ -26,9 +26,9 @@ public class Tetris {
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		Game local = new Game(22, 10, rndSeed);
-		Game opponent = new Game(22, 10, rndSeed, false);
 		NetworkOutputHandler nout = new NetworkOutputHandler(s);
+		Game local = new Game(22, 10, rndSeed, nout);
+		Game opponent = new Game(22, 10, rndSeed);
 		NetworkInputHandler nin = new NetworkInputHandler(s, opponent);
 		nin.start();
 		KeyListener keyListener = new KeyListener(local, nout);

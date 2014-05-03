@@ -31,24 +31,26 @@ public class InputHandler extends Thread {
 		try {
 			DataInputStream in = new DataInputStream(is);
 			int read;
-			if ((read = in.read()) == 1) {
-				while ((read = in.read()) != -1) {
-					int[] msg;
-					if (read == 2) {
-						msg = new int[5];
-						msg[0] = 2;
-						byte[] integer = ByteBuffer.allocate(4)
-								.putInt(in.readInt()).array();
-						for (int i = 0; i < 4; i++) {
-							msg[i + 1] = integer[i];
-						}
-					} else {
-						msg = new int[1];
-						msg[0] = read;
-					}
-					m.insert(new Input(socket, msg));
-				}
+			while ((read = in.read()) != -1) {
+				int[] msg = new int[1];
+				msg[0] = read;
+				m.insert(new Input(socket,msg));
+//				int[] msg;
+//				if (read == 2) {
+//					msg = new int[5];
+//					msg[0] = 2;
+//					byte[] integer = ByteBuffer.allocate(4)
+//							.putInt(in.readInt()).array();
+//					for (int i = 0; i < 4; i++) {
+//						msg[i + 1] = integer[i];
+//					}
+//				} else {
+//					msg = new int[1];
+//					msg[0] = read;
+//				}
+//				m.insert(new Input(socket, msg));
 			}
+
 			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

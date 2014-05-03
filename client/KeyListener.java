@@ -2,6 +2,8 @@ package client;
 
 import game.Game;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import network.ProtocolConstants;
@@ -18,7 +20,6 @@ public class KeyListener implements java.awt.event.KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -55,8 +56,8 @@ public class KeyListener implements java.awt.event.KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
+
+	
 
 }
