@@ -2,6 +2,8 @@ package game;
 
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
+import game.powerups.Powerup;
+import game.powerups.PowerupFactory;
 
 import java.awt.Point;
 import java.util.Observable;
@@ -18,6 +20,7 @@ public class Game extends Observable implements Observer {
 	private Timer timer;
 
 	private ShapeFactory shapeFactory;
+	private Powerup powerUps[];
 	private int score, level = 1;
 
 	// TODO implement the score system.
@@ -54,6 +57,7 @@ public class Game extends Observable implements Observer {
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
+		powerUps = new Powerup[2];
 		if (nout != null) {
 			addTimer(new TetrisTimer(this, nout));
 		}
@@ -80,8 +84,15 @@ public class Game extends Observable implements Observer {
 		return score;
 	}
 
+	// TODO Hur ska vi göra med powerups, de ska väl agera på just ett game?
+	// Måste få vilken powerup det gället från motståndaren.
+	public Powerup getPowerup() {
+		return null;
+	}
+
 	/**
-	 * getting a representation of the both board, game and shape. 
+	 * getting a representation of the both board, game and shape.
+	 * 
 	 * @return
 	 */
 	public byte[][] getBoard() {
@@ -222,9 +233,14 @@ public class Game extends Observable implements Observer {
 		checkMove();
 	}
 
-	public void usePowerup() {
-		// TODO implementera
-		System.out.println("powerup should be sent to opponent");
+	public void usePowerup(byte type) {
+		Powerup pwrUp;
+		if (type == 0) {
+			pwrUp = PowerupFactory.getPowerup(); // randomized
+		} else {
+			pwrUp = PowerupFactory.getPowerup(type);
+		}
+		// TODO fixa så att powerupsen gör något...
 	}
 
 }

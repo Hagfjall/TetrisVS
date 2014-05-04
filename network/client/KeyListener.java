@@ -45,9 +45,12 @@ public class KeyListener implements java.awt.event.KeyListener {
 			network.sendKey(ProtocolConstants.SPACE);
 			break;
 		case KeyEvent.VK_X:
-			localGame.usePowerup();
-			network.sendKey(ProtocolConstants.POWERUP);
-			break;	
+			//TODO ska väl bara skickas något om det finns något att skicka?
+			if (localGame.getPowerup() != null) {
+				localGame.usePowerup((byte) 0);
+				network.sendKey(ProtocolConstants.POWERUP);
+			}
+			break;
 		}
 
 	}
@@ -55,7 +58,5 @@ public class KeyListener implements java.awt.event.KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 	}
-
-	
 
 }

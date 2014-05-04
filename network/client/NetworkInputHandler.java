@@ -8,6 +8,11 @@ import java.net.Socket;
 
 import network.ProtocolConstants;
 
+/**
+ * Used for steering the opponentGame 
+ * @author Fredrik Hagfjäll
+ *
+ */
 public class NetworkInputHandler extends Thread {
 	private Socket socket;
 	private Game game;
@@ -53,7 +58,8 @@ public class NetworkInputHandler extends Thread {
 					game.moveBottom();
 					break;
 				case ProtocolConstants.POWERUP:
-					game.usePowerup();
+					byte pwrUp = in.readByte();
+					game.usePowerup(pwrUp);
 					break;
 				case ProtocolConstants.MOVEDOWN:
 					game.moveDown();

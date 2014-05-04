@@ -12,6 +12,14 @@ public class CommonNetworkMethods {
 			return -1;
 		return in.readLong();
 	}
+//	
+//	public static byte readPowerup(DataInputStream in) throws IOException {
+//		byte type = in.readByte();
+//		if(type != ProtocolConstants.POWERUP) {
+//			return -1;
+//		}
+//		return in.readByte();
+//	}
 
 	public static String readString(DataInputStream in) throws IOException {
 		byte type = in.readByte();
@@ -21,14 +29,7 @@ public class CommonNetworkMethods {
 		byte[] data=new byte[length];
 		in.readFully(data);
 		return new String(data,"UTF-8");
-//		StringBuilder sb = new StringBuilder(length);
-//		for (int i = 0; i < length; i++) {
-//			sb.append(in.readChar());
-//		}
-//		return sb.toString();
-
 	}
-	
 	
 	public static void sendLong(DataOutputStream out, long nbr) throws IOException {
 		out.write(ProtocolConstants.LONG);
@@ -48,5 +49,10 @@ public class CommonNetworkMethods {
 		out.writeInt(length);
 		out.write(msg.getBytes("UTF-8"));
 	}
+	
+//	public static void sendPowerup(DataOutputStream out, byte powerupType) throws IOException {
+//		out.write(ProtocolConstants.POWERUP);
+//		out.write(powerupType);
+//	}
 
 }

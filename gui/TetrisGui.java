@@ -5,6 +5,7 @@ import game.Game;
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import network.client.KeyListener;
@@ -33,6 +34,10 @@ public class TetrisGui extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		localGame.start();
+	}
+	
+	public static void showMessage(String msg) {
+		JOptionPane.showMessageDialog(null, msg);
 	}
 
 }
