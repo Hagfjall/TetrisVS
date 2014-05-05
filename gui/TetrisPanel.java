@@ -52,6 +52,10 @@ public class TetrisPanel extends JPanel implements Observer {
 					typeColor(type);
 					g2.fillRect(c * square + square + 1, r * square + square
 							+ 1, square - 1, square - 1);
+				}else{
+					g2.setColor(Color.gray);
+					g2.fillRect(c * square + square + 1, r * square + square
+							+ 1, square - 1, square - 1);
 				}
 			}
 		}
@@ -60,6 +64,9 @@ public class TetrisPanel extends JPanel implements Observer {
 	public void typeColor(Byte type) {
 
 		switch (type) {
+//		case 0:
+//			g2.setColor(Color.GRAY);
+//			break;
 		case 1:
 			g2.setColor(Color.RED);
 			break;

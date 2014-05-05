@@ -11,6 +11,8 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
+import test.TestMethods;
+
 import network.client.NetworkOutputHandler;
 
 public class Game extends Observable implements Observer {
@@ -108,6 +110,7 @@ public class Game extends Observable implements Observer {
 				}
 			}
 		}
+		TestMethods.printMatrix(ret);
 		return ret;
 	}
 

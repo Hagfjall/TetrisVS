@@ -1,13 +1,16 @@
 package game;
 
+import game.blocks.Shape;
+
 import java.awt.Point;
 
-import game.blocks.Shape;
+import test.TestMethods;
 
 public class GameBoard extends Board {
 
 	/**
-	 * creating the GameBoard with size 
+	 * creating the GameBoard with size
+	 * 
 	 * @param width
 	 * @param height
 	 */
@@ -16,9 +19,13 @@ public class GameBoard extends Board {
 	}
 
 	/**
-	 * saving the shape s in the place p in to the big array with all the blocks.
-	 * @param p, point of the shape
-	 * @param s the shape to burn in. 
+	 * saving the shape s in the place p in to the big array with all the
+	 * blocks.
+	 * 
+	 * @param p
+	 *            , point of the shape
+	 * @param s
+	 *            the shape to burn in.
 	 */
 	public void setShape(Point p, Shape s) {
 		int[] rowsAffected = new int[s.getWidth()];
@@ -40,6 +47,7 @@ public class GameBoard extends Board {
 		if (count == 4) {
 			// TELL SOMEONE ABOUT THIS SHIT
 		}
+//		TestMethods.printMatrix(board);
 		updated();
 	}
 
@@ -51,15 +59,20 @@ public class GameBoard extends Board {
 	public void removeRow(int startRow) {
 		for (int row = startRow; row > 0; row--) {
 			for (int col = 0; col < getWidth(); col++) {
-				if (row == 0) {
+				if (row == startRow) {
 					board[row][col] = 0;
 				} else {
-					board[row][col] = board[row - 1][col];
+					if (row == 0) {
+						board[row][col] = 0;
+					} else {
+						board[row + 1][col] = board[row][col];
+						board[row][col] = 0;
+					}
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param row

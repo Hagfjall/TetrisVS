@@ -42,7 +42,7 @@ public class TestKeyListener implements java.awt.event.KeyListener {
 			localGame.moveBottom();
 			break;
 		case KeyEvent.VK_X:
-			localGame.usePowerup();
+//			localGame.usePowerup();
 			break;	
 		}
 
