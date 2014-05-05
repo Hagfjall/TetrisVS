@@ -49,7 +49,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 			if (localGame.getPowerup() != null) {
 				System.out.println("sending popweup");
 				network.sendKey(ProtocolConstants.POWERUP);
-				network.sendKey(Powerup.NULLPOWERUP);
+				network.sendKey(Powerup.SINGLEBLOCK);
 			}
 			break;
 		}

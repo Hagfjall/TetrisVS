@@ -58,8 +58,9 @@ public class NetworkInputHandler extends Thread {
 					game.moveBottom();
 					break;
 				case ProtocolConstants.POWERUP:
-					System.out.println("recieving powerup");
+					System.out.print("recieving powerup");
 					byte pwrUp = in.readByte();
+					System.out.println(" nbr " + pwrUp);
 					game.usePowerup(pwrUp);
 					break;
 				case ProtocolConstants.MOVEDOWN:
