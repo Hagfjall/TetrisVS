@@ -1,7 +1,5 @@
 package game.powerups;
 
-import javax.swing.Timer;
-
 public abstract class Powerup {
 
 	public static final byte NULLPOWERUP = 0;
