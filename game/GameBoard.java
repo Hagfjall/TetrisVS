@@ -7,7 +7,8 @@ import game.blocks.Shape;
 public class GameBoard extends Board {
 
 	/**
-	 * creating the GameBoard with size 
+	 * creating the GameBoard with size
+	 * 
 	 * @param width
 	 * @param height
 	 */
@@ -16,9 +17,13 @@ public class GameBoard extends Board {
 	}
 
 	/**
-	 * saving the shape s in the place p in to the big array with all the blocks.
-	 * @param p, point of the shape
-	 * @param s the shape to burn in. 
+	 * saving the shape s in the place p in to the big array with all the
+	 * blocks.
+	 * 
+	 * @param p
+	 *            , point of the shape
+	 * @param s
+	 *            the shape to burn in.
 	 */
 	public void setShape(Point p, Shape s) {
 		int[] rowsAffected = new int[s.getWidth()];
@@ -37,10 +42,6 @@ public class GameBoard extends Board {
 				count++;
 			}
 		}
-		if (count == 4) {
-			// TELL SOMEONE ABOUT THIS SHIT
-		}
-		updated();
 	}
 
 	/**
@@ -59,7 +60,7 @@ public class GameBoard extends Board {
 			}
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param row
