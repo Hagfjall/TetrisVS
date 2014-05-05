@@ -21,8 +21,7 @@ public class TestClient {
 			server = new Socket(addr, port);
 			System.out.println("Connected to "
 					+ server.getInetAddress().getHostName());
-			NetworkOutputHandler nout = new NetworkOutputHandler(server,
-					"testclient2");
+			NetworkOutputHandler nout = new NetworkOutputHandler(server);
 			Game local = new Game(22, 10);
 			new Thread(new NetworkInputHandler(server, local)).start();
 			Random rnd = new Random();
