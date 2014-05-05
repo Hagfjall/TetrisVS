@@ -247,6 +247,7 @@ public class Game extends Observable implements Observer {
 			pwrUp = PowerupFactory.getPowerup(type);
 		}
 		opponentPowerup = pwrUp;
+		System.out.println("Game: usePowerup(): using " + pwrUp.getType());
 	}
 
 	public void usePowerup() {

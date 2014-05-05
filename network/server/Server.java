@@ -43,7 +43,6 @@ public class Server extends Thread {
 				} else if (allConnections.size() > 2) {
 					// send all player names since its a spectator
 				}
-
 			}
 
 		} catch (IOException e) {

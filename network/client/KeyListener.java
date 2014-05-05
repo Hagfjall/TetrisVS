@@ -1,6 +1,7 @@
 package network.client;
 
 import game.Game;
+import game.powerups.Powerup;
 
 import java.awt.event.KeyEvent;
 
@@ -45,10 +46,10 @@ public class KeyListener implements java.awt.event.KeyListener {
 			network.sendKey(ProtocolConstants.SPACE);
 			break;
 		case KeyEvent.VK_X:
-			//TODO ska väl bara skickas något om det finns något att skicka?
 			if (localGame.getPowerup() != null) {
-				localGame.usePowerup((byte) 0);
+				System.out.println("sending popweup");
 				network.sendKey(ProtocolConstants.POWERUP);
+				network.sendKey(Powerup.NULLPOWERUP);
 			}
 			break;
 		}

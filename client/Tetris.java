@@ -21,12 +21,12 @@ public class Tetris {
 		String name = JOptionPane.showInputDialog("Please enter your name");
 		if (name == null)
 			return;
-		 String address = JOptionPane
-		 .showInputDialog("Please enter the server address");
-		 int port = Integer.parseInt(JOptionPane
-		 .showInputDialog("Please enter the portnumber"));
-		// String address = "localhost"; //"31.208.39.174";
-		// int port = 3000;
+		// String address = JOptionPane
+		// .showInputDialog("Please enter the server address");
+		// int port = Integer.parseInt(JOptionPane
+		// .showInputDialog("Please enter the portnumber"));
+		String address = "localhost"; // "31.208.39.174";
+		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
