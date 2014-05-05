@@ -71,4 +71,5 @@ public abstract class Board extends Observable {
 		setChanged();
 		notifyObservers();
 	}
+	
 }
