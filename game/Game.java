@@ -2,9 +2,11 @@ package game;
 
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
-import game.powerups.Mirror;
+import game.blocks.Z_Left;
+import game.powerups.NullPowerup;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
+import game.powerups.SingleBlock;
 
 import java.awt.Point;
 import java.util.Observable;
@@ -58,6 +60,7 @@ public class Game extends Observable implements Observer {
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
+		localPowerup =new SingleBlock();
 		if (nout != null) {
 			addTimer(new TetrisTimer(this, nout));
 		}
@@ -83,7 +86,7 @@ public class Game extends Observable implements Observer {
 	public int getScore() {
 		return score;
 	}
-	
+
 	public Powerup getPowerup() {
 		return localPowerup;
 	}
@@ -209,7 +212,12 @@ public class Game extends Observable implements Observer {
 			Shape s = shapeBoard.getShape();
 			gameBoard.setShape(new Point(shapeBoard.getX(), shapeBoard.getY()),
 					s);
-			shapeBoard.setShape(shapeFactory.getShape());
+			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
+					&& opponentPowerup.isActive()) {
+				shapeBoard.setShape(new Z_Left());
+			} else {
+				shapeBoard.setShape(shapeFactory.getShape());
+			}
 		}
 		updated();
 	}
