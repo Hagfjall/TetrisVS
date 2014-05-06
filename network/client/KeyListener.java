@@ -50,6 +50,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 				System.out.println("sending popweup");
 				network.sendKey(ProtocolConstants.POWERUP);
 				network.sendKey(Powerup.SINGLEBLOCK);
+				
 			}
 			break;
 		}
