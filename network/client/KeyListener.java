@@ -10,9 +10,9 @@ import network.ProtocolConstants;
 public class KeyListener implements java.awt.event.KeyListener {
 
 	private Game localGame;
-	private NetworkOutputHandler network;
+	private Network network;
 
-	public KeyListener(Game localGame, NetworkOutputHandler network) {
+	public KeyListener(Game localGame, Network network) {
 		this.localGame = localGame;
 		this.network = network;
 	}
@@ -46,11 +46,11 @@ public class KeyListener implements java.awt.event.KeyListener {
 			network.sendKey(ProtocolConstants.SPACE);
 			break;
 		case KeyEvent.VK_X:
-			if (localGame.getPowerup() != null) {
+			Powerup pwrUp;
+			if ((pwrUp = localGame.getPowerup()) != null) {
 				System.out.println("sending popweup");
-				network.sendKey(ProtocolConstants.POWERUP);
-				network.sendKey(Powerup.SINGLEBLOCK);
-				
+				network.sendKey(ProtocolConstants.X);
+				network.sendKey(pwrUp.getType());
 			}
 			break;
 		}

@@ -26,6 +26,8 @@ public class Network implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 	public void sendKey(byte key) {
