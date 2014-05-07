@@ -92,11 +92,10 @@ public class Game extends Observable implements Observer {
 	 * 
 	 * @return
 	 */
-	public byte[][] getBoard() {
+	public byte[][] getBoard() {		
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		TestMethods.printMatrix(ret);
 		for (int r = 0; r < height; r++) {
 			for (int c = 0; c < width; c++) {
 				if (gameBoard.checkSlot(r, c)) {
@@ -107,6 +106,7 @@ public class Game extends Observable implements Observer {
 			}
 		}
 		
+//		TestMethods.printMatrix(ret);
 		return ret;
 	}
 

@@ -1,5 +1,6 @@
 package game;
 
+import test.TestMethods;
 import game.blocks.Shape;
 
 public class ShapeBoard extends Board {
@@ -15,11 +16,13 @@ public class ShapeBoard extends Board {
 	}
 
 	public void setShape(Shape s) {
+		clearTheENTIREFUCKEINGMATRIX();
 		this.s = s;
 		currentX = (int) Math.round(((double) getWidth() / 2)
 				- ((double) s.getWidth() / 2));
 		currentY = 0;
 		printShape();
+		TestMethods.printMatrix(board);
 	}
 
 	public int getX() {
@@ -40,6 +43,13 @@ public class ShapeBoard extends Board {
 				if (s.checkSlot(r, c)) {
 					setSlot(r + currentY, c + currentX, s.getType());
 				}
+			}
+		}
+	}
+	private void clearTheENTIREFUCKEINGMATRIX(){
+		for(int r = 0; r < getHeight(); r++){
+			for(int c = 0; c < getWidth(); c++){
+				setSlot(r, c, (byte)0);
 			}
 		}
 	}
