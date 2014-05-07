@@ -54,7 +54,7 @@ public class Network implements Runnable {
 					System.err.println("Read Int ska inte göras");
 					break;
 				case ProtocolConstants.LEFT:
-					localGame.moveLeft();
+					opponentGame.moveLeft();
 					break;
 				case ProtocolConstants.UP:
 					opponentGame.rotateClockwise();

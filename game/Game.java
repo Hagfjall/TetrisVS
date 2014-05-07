@@ -12,8 +12,6 @@ import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.Timer;
-
 import test.TestMethods;
 
 public class Game extends Observable implements Observer {
@@ -96,7 +94,6 @@ public class Game extends Observable implements Observer {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		TestMethods.printMatrix(ret);
 		for (int r = 0; r < height; r++) {
 			for (int c = 0; c < width; c++) {
 				if (gameBoard.checkSlot(r, c)) {
@@ -107,6 +104,7 @@ public class Game extends Observable implements Observer {
 			}
 		}
 		
+//		TestMethods.printMatrix(ret);
 		return ret;
 	}
 

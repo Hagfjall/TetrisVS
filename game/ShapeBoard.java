@@ -15,6 +15,8 @@ public class ShapeBoard extends Board {
 	}
 
 	public void setShape(Shape s) {
+		if (this.s != null)
+			clear();
 		this.s = s;
 		currentX = (int) Math.round(((double) getWidth() / 2)
 				- ((double) s.getWidth() / 2));
