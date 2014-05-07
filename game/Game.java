@@ -20,7 +20,6 @@ import test.TestMethods;
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
-	private Timer timer;
 
 	private ShapeFactory shapeFactory;
 	private Powerup opponentPowerup, localPowerup;
@@ -98,6 +97,7 @@ public class Game extends Observable implements Observer {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
+		TestMethods.printMatrix(ret);
 		for (int r = 0; r < height; r++) {
 			for (int c = 0; c < width; c++) {
 				if (gameBoard.checkSlot(r, c)) {
@@ -107,7 +107,7 @@ public class Game extends Observable implements Observer {
 				}
 			}
 		}
-		TestMethods.printMatrix(ret);
+		
 		return ret;
 	}
 
@@ -150,10 +150,10 @@ public class Game extends Observable implements Observer {
 	/**
 	 * starting the timer and the game, only used for local games
 	 */
-	public void start() {
-		if (timer != null)
-			timer.start();
-	}
+//	public void start() {
+//		if (timer != null)
+//			timer.start();
+//	}
 
 	/**
 	 * updates from the GameBoard (when removing rows and so)
@@ -174,8 +174,8 @@ public class Game extends Observable implements Observer {
 	 * Checking the move, is the move is illegal we are rolling back the move
 	 */
 	private void checkMove() {
-		if (timer != null)
-			timer.restart();
+//		if (timer != null)
+//			timer.restart();
 		if (noHit()) {
 			updated();
 		} else {

@@ -33,7 +33,6 @@ public class TetrisGui extends JFrame {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
-		localGame.start();
 	}
 	
 	public static void showMessage(String msg) {

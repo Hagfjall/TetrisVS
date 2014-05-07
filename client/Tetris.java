@@ -1,6 +1,7 @@
 package client;
 
 import game.Game;
+import game.TetrisTimer;
 import gui.TetrisGui;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class Tetris {
 		Game opponent = new Game(22, 10, rndSeed);
 		new NetworkInputHandler(s, opponent).start();
 		KeyListener keyListener = new KeyListener(local, nout);
+		new TetrisTimer(keyListener, 750);
 		new TetrisGui(name, opponentName, local, opponent, keyListener);
 
 	}

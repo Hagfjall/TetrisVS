@@ -13,7 +13,10 @@ public class TetrisTimer{
 	private KeyListener keyListener;
 
 	public TetrisTimer(KeyListener keyListener, int delay) {
-		new Timer(delay, new TimeListener());
+		Timer timer = new Timer(delay, new TimeListener());
+		timer.setRepeats(true);
+		timer.setInitialDelay(1000);
+		timer.start();
 		this.keyListener = keyListener;
 	}
 
