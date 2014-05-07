@@ -4,24 +4,26 @@ package game;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import network.ProtocolConstants;
-import network.client.NetworkOutputHandler;
+import javax.swing.Timer;
 
-public class TetrisTimer implements ActionListener {
+import network.client.KeyListener;
+
+public class TetrisTimer{
 	
-	private Game localGame;
-	private NetworkOutputHandler network;
+	private KeyListener keyListener;
 
-	public TetrisTimer(Game local, NetworkOutputHandler nout) {
-		localGame = local;
-		network = nout;
+	public TetrisTimer(KeyListener keyListener, int delay) {
+		new Timer(delay, new TimeListener());
+		this.keyListener = keyListener;
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		localGame.moveDown();
-		network.sendKey(ProtocolConstants.MOVEDOWN);
+	private class TimeListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			keyListener.moveDown();	
+		}
+		
 	}
-	
 
 }

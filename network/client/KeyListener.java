@@ -56,6 +56,9 @@ public class KeyListener implements java.awt.event.KeyListener {
 		}
 
 	}
+	public void moveDown(){
+		localGame.moveDown();
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
