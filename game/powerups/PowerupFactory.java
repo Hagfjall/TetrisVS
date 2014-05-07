@@ -21,6 +21,7 @@ public abstract class PowerupFactory {
 	 * @return the shape that matches type, otherwise NULL
 	 */
 	public static Powerup getPowerup(byte type) {
+		//TODO rensa bort de som inte behövs
 		switch (type) {
 		case Powerup.INCSPEED:
 			return new IncreaseSpeed();
@@ -28,6 +29,8 @@ public abstract class PowerupFactory {
 			return new Mirror();
 		case Powerup.SINGLEBLOCK:
 			return new SingleBlock();
+		case Powerup.INVISIBLE:
+			return new Invisible();
 		default:
 			return new NullPowerup();
 		}
