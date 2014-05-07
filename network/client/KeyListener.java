@@ -47,8 +47,8 @@ public class KeyListener implements java.awt.event.KeyListener {
 			break;
 		case KeyEvent.VK_X:
 			Powerup pwrUp;
-			if ((pwrUp = localGame.getPowerup()) != null) {
-				System.out.println("sending popweup");
+			if ((pwrUp = localGame.usePowerup()) != null) {
+				System.out.println("sending powerup");
 				network.sendKey(ProtocolConstants.X);
 				network.sendKey(pwrUp.getType());
 			}
