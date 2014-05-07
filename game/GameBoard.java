@@ -44,14 +44,12 @@ public class GameBoard extends Board {
 				count++;
 			}
 		}
-<<<<<<< HEAD
 		if (count == 4) {
 			// TELL SOMEONE ABOUT THIS SHIT
 		}
 //		TestMethods.printMatrix(board);
 		updated();
-=======
->>>>>>> 25fc534c3fef02ea3bacde111e412a1d4df507de
+
 	}
 
 	/**
@@ -66,6 +64,7 @@ public class GameBoard extends Board {
 					board[row][col] = 0;
 				} else {
 					if (row == 0) {
+						//TODO Sista rade
 						board[row][col] = 0;
 					} else {
 						board[row + 1][col] = board[row][col];

@@ -58,6 +58,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 	}
 	public void moveDown(){
 		localGame.moveDown();
+		network.sendKey(ProtocolConstants.MOVEDOWN);
 	}
 
 	@Override
