@@ -44,11 +44,14 @@ public class GameBoard extends Board {
 				count++;
 			}
 		}
+<<<<<<< HEAD
 		if (count == 4) {
 			// TELL SOMEONE ABOUT THIS SHIT
 		}
 //		TestMethods.printMatrix(board);
 		updated();
+=======
+>>>>>>> 25fc534c3fef02ea3bacde111e412a1d4df507de
 	}
 
 	/**

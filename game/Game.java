@@ -2,8 +2,11 @@ package game;
 
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
+import game.blocks.Z_Left;
+import game.powerups.NullPowerup;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
+import game.powerups.SingleBlock;
 
 import java.awt.Point;
 import java.util.Observable;
@@ -16,13 +19,12 @@ import test.TestMethods;
 import network.client.NetworkOutputHandler;
 
 public class Game extends Observable implements Observer {
-	// TODO change to private
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
 	private Timer timer;
 
 	private ShapeFactory shapeFactory;
-	private Powerup powerUps[];
+	private Powerup opponentPowerup, localPowerup;
 	private int score, level = 1;
 
 	// TODO implement the score system.
@@ -59,7 +61,8 @@ public class Game extends Observable implements Observer {
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
-		powerUps = new Powerup[2];
+		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
+		localPowerup =new SingleBlock();
 		if (nout != null) {
 			addTimer(new TetrisTimer(this, nout));
 		}
@@ -86,10 +89,8 @@ public class Game extends Observable implements Observer {
 		return score;
 	}
 
-	// TODO Hur ska vi göra med powerups, de ska väl agera på just ett game?
-	// Måste få vilken powerup det gället från motståndaren.
 	public Powerup getPowerup() {
-		return null;
+		return localPowerup;
 	}
 
 	/**
@@ -214,7 +215,12 @@ public class Game extends Observable implements Observer {
 			Shape s = shapeBoard.getShape();
 			gameBoard.setShape(new Point(shapeBoard.getX(), shapeBoard.getY()),
 					s);
-			shapeBoard.setShape(shapeFactory.getShape());
+			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
+					&& opponentPowerup.isActive()) {
+				shapeBoard.setShape(new Z_Left());
+			} else {
+				shapeBoard.setShape(shapeFactory.getShape());
+			}
 		}
 		updated();
 	}
@@ -243,7 +249,12 @@ public class Game extends Observable implements Observer {
 		} else {
 			pwrUp = PowerupFactory.getPowerup(type);
 		}
-		// TODO fixa så att powerupsen gör något...
+		opponentPowerup = pwrUp;
+		System.out.println("Game: usePowerup(): using " + pwrUp.getType());
+	}
+
+	public void usePowerup() {
+		usePowerup((byte) 0);
 	}
 
 }

@@ -26,8 +26,10 @@ public abstract class PowerupFactory {
 			return new IncreaseSpeed();
 		case Powerup.MIRROR:
 			return new Mirror();
+		case Powerup.SINGLEBLOCK:
+			return new SingleBlock();
 		default:
-			return null;
+			return new NullPowerup();
 		}
 	}
 }
