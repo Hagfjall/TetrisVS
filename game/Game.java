@@ -101,7 +101,8 @@ public class Game extends Observable implements Observer {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		if (opponentPowerup.getType() == Powerup.INVISIBLE) {
+		if (opponentPowerup.getType() == Powerup.INVISIBLE
+				&& opponentPowerup.isActive()) {
 			for (int r = 0; r < height; r++) {
 				for (int c = 0; c < width; c++) {
 					ret[r][c] = shapeBoard.getType(r, c);

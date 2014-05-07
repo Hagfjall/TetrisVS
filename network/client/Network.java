@@ -41,9 +41,7 @@ public class Network implements Runnable {
 
 	@Override
 	public void run() {
-		DataInputStream in;
 		try {
-			in = new DataInputStream(this.socket.getInputStream());
 			int read;
 			while ((read = in.read()) != -1) {
 				switch (read) {
