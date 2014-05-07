@@ -23,7 +23,6 @@ public class ShapeBoard extends Board {
 				- ((double) s.getWidth() / 2));
 		currentY = 0;
 		printShape();
-		TestMethods.printMatrix(board);
 	}
 
 	public int getX() {

@@ -5,16 +5,15 @@ import game.Game;
 import java.awt.event.KeyEvent;
 
 import network.ProtocolConstants;
-import network.client.NetworkOutputHandler;
+import network.client.KeyListener;
 
-public class TestKeyListener implements java.awt.event.KeyListener {
+public class TestKeyListener extends KeyListener implements java.awt.event.KeyListener {
 
 	private Game localGame;
-	private NetworkOutputHandler network;
 
-	public TestKeyListener(Game localGame, NetworkOutputHandler network) {
+	public TestKeyListener(Game localGame) {
+		super(localGame,null);
 		this.localGame = localGame;
-		this.network = network;
 	}
 
 	@Override
@@ -52,6 +51,10 @@ public class TestKeyListener implements java.awt.event.KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void moveDown(){
+		localGame.moveDown();
 	}
 
 }

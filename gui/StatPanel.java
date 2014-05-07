@@ -24,7 +24,7 @@ public class StatPanel extends JPanel implements Observer {
 		nameLabel.setFont(new Font("Serif", Font.PLAIN, 22));
 		scoreLabel = new JLabel(0 + " p");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 18));
-		powerupLabel = new JLabel("0 powerup");
+		powerupLabel = new JLabel("Powerup: ");
 		powerupLabel.setFont(new Font("Serif", Font.PLAIN, 18));
 
 		setLayout(new BorderLayout());
