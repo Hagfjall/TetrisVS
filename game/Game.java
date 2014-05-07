@@ -14,9 +14,8 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
-import test.TestMethods;
-
 import network.client.NetworkOutputHandler;
+import test.TestMethods;
 
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
@@ -63,9 +62,6 @@ public class Game extends Observable implements Observer {
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
 		localPowerup =new SingleBlock();
-		if (nout != null) {
-			addTimer(new TetrisTimer(this, nout));
-		}
 	}
 
 	// TODO ta bort innan release, används bara för test
@@ -185,11 +181,6 @@ public class Game extends Observable implements Observer {
 		} else {
 			shapeBoard.rollBack();
 		}
-	}
-
-	private void addTimer(TetrisTimer timerListener) {
-		timer = new Timer(750 / level, timerListener);
-		timer.setRepeats(true);
 	}
 
 	// ----------------------------------- INTERATCTIONS
