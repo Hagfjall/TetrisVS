@@ -36,11 +36,6 @@ public class CommonNetworkMethods {
 		out.writeLong(nbr);
 	}
 
-	public static void sendScore(DataOutputStream out, int score)
-			throws IOException {
-		out.write(ProtocolConstants.INT);
-		out.writeInt(score);
-	}
 
 	public static void sendString(DataOutputStream out, String msg)
 			throws IOException {

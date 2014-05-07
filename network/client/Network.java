@@ -6,7 +6,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Observable;
+import java.util.Observer;
 
+import network.CommonNetworkMethods;
 import network.ProtocolConstants;
 
 public class Network implements Runnable {
@@ -101,4 +104,5 @@ public class Network implements Runnable {
 			}
 		}
 	}
+
 }
