@@ -1,5 +1,6 @@
 package game;
 
+import test.TestMethods;
 import game.blocks.Shape;
 
 public class ShapeBoard extends Board {
@@ -22,6 +23,7 @@ public class ShapeBoard extends Board {
 				- ((double) s.getWidth() / 2));
 		currentY = 0;
 		printShape();
+		TestMethods.printMatrix(board);
 	}
 
 	public int getX() {

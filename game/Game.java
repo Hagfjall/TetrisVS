@@ -90,7 +90,7 @@ public class Game extends Observable implements Observer {
 	 * 
 	 * @return
 	 */
-	public byte[][] getBoard() {
+	public byte[][] getBoard() {		
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];

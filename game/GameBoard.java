@@ -28,7 +28,7 @@ public class GameBoard extends Board {
 	 *            the shape to burn in.
 	 */
 	public void setShape(Point p, Shape s) {
-		int[] rowsAffected = new int[s.getWidth()];
+		int[] rowsAffected = new int[s.getHeight()];
 		for (int row = 0; row < s.getWidth(); row++) {
 			for (int col = 0; col < s.getHeight(); col++) {
 				if (s.checkSlot(row, col)) {
@@ -48,8 +48,7 @@ public class GameBoard extends Board {
 			// TELL SOMEONE ABOUT THIS SHIT
 		}
 //		TestMethods.printMatrix(board);
-		updated();
-
+//		updated();
 	}
 
 	/**
