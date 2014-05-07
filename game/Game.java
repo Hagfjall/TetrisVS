@@ -3,6 +3,7 @@ package game;
 import game.blocks.Shape;
 import game.blocks.ShapeFactory;
 import game.blocks.Z_Left;
+import game.powerups.Invisible;
 import game.powerups.NullPowerup;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
@@ -57,7 +58,7 @@ public class Game extends Observable implements Observer {
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
-		localPowerup = new SingleBlock();
+		localPowerup = new Invisible();
 	}
 
 	// TODO ta bort innan release, används bara för test
@@ -80,7 +81,7 @@ public class Game extends Observable implements Observer {
 	public int getScore() {
 		return score;
 	}
-	
+
 	public Powerup usePowerup() {
 		Powerup ret = localPowerup;
 		localPowerup = new NullPowerup();
@@ -90,8 +91,6 @@ public class Game extends Observable implements Observer {
 	public Powerup getPowerup() {
 		return localPowerup;
 	}
-	
-	
 
 	/**
 	 * getting a representation of the both board, game and shape.
@@ -102,16 +101,23 @@ public class Game extends Observable implements Observer {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		for (int r = 0; r < height; r++) {
-			for (int c = 0; c < width; c++) {
-				if (gameBoard.checkSlot(r, c)) {
-					ret[r][c] = gameBoard.getType(r, c);
-				} else if (shapeBoard.checkSlot(r, c)) {
+		if (opponentPowerup.getType() == Powerup.INVISIBLE) {
+			for (int r = 0; r < height; r++) {
+				for (int c = 0; c < width; c++) {
 					ret[r][c] = shapeBoard.getType(r, c);
 				}
 			}
+		} else {
+			for (int r = 0; r < height; r++) {
+				for (int c = 0; c < width; c++) {
+					if (gameBoard.checkSlot(r, c)) {
+						ret[r][c] = gameBoard.getType(r, c);
+					} else if (shapeBoard.checkSlot(r, c)) {
+						ret[r][c] = shapeBoard.getType(r, c);
+					}
+				}
+			}
 		}
-
 		// TestMethods.printMatrix(ret);
 		return ret;
 	}
@@ -211,7 +217,7 @@ public class Game extends Observable implements Observer {
 			Shape s = shapeBoard.getShape();
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
-			if(removedRows == 4) {
+			if (removedRows == 4) {
 				localPowerup = PowerupFactory.getPowerup();
 			}
 			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
@@ -220,7 +226,7 @@ public class Game extends Observable implements Observer {
 			} else {
 				shapeBoard.setShape(shapeFactory.getShape());
 			}
-			
+
 		}
 		updated();
 	}
