@@ -12,8 +12,7 @@ import javax.swing.JOptionPane;
 
 import network.client.InitiateConnectionClient;
 import network.client.KeyListener;
-import network.client.NetworkInputHandler;
-import network.client.NetworkOutputHandler;
+import network.client.Network;
 
 public class Tetris {
 
@@ -33,11 +32,11 @@ public class Tetris {
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		NetworkOutputHandler nout = new NetworkOutputHandler(s);
-		Game local = new Game(22, 10, rndSeed, nout);
+		Game local = new Game(22, 10, rndSeed);
 		Game opponent = new Game(22, 10, rndSeed);
-		new NetworkInputHandler(s, opponent).start();
-		KeyListener keyListener = new KeyListener(local, nout);
+		Network network = new Network(s,local,opponent);
+		new Thread(network).start();
+		KeyListener keyListener = new KeyListener(local, network);
 		new TetrisTimer(keyListener, 750);
 		new TetrisGui(name, opponentName, local, opponent, keyListener);
 

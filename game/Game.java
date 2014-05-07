@@ -14,7 +14,6 @@ import java.util.Observer;
 
 import javax.swing.Timer;
 
-import network.client.NetworkOutputHandler;
 import test.TestMethods;
 
 public class Game extends Observable implements Observer {
@@ -35,9 +34,9 @@ public class Game extends Observable implements Observer {
 	 * @param randomSeed
 	 *            used for generating the bricks
 	 */
-	public Game(int row, int col, long randomSeed) {
-		this(row, col, randomSeed, null);
-	}
+//	public Game(int row, int col, long randomSeed) {
+//		this(row, col, randomSeed, null);
+//	}
 
 	/**
 	 * Used for the localgame when it should use a local timer and send the
@@ -52,7 +51,7 @@ public class Game extends Observable implements Observer {
 	 * @param nout
 	 *            , used for sending the timer-events (aka moving down)
 	 */
-	public Game(int row, int col, long randomSeed, NetworkOutputHandler nout) {
+	public Game(int row, int col, long randomSeed) {
 		shapeFactory = new ShapeFactory(randomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
@@ -243,9 +242,9 @@ public class Game extends Observable implements Observer {
 		opponentPowerup = pwrUp;
 		System.out.println("Game: usePowerup(): using " + pwrUp.getType());
 	}
-
-	public void usePowerup() {
-		usePowerup((byte) 0);
-	}
+//
+//	public void usePowerup() {
+//		usePowerup((byte) 0);
+//	}
 
 }
