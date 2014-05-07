@@ -25,6 +25,8 @@ public class StatPanel extends JPanel implements Observer {
 		scoreLabel = new JLabel(0 + " p");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 18));
 		powerupLabel = new JLabel("Powerup: ");
+		powerupLabel.setHorizontalTextPosition(JLabel.LEFT);
+		powerupLabel.setVerticalTextPosition(JLabel.BOTTOM);
 		powerupLabel.setFont(new Font("Serif", Font.PLAIN, 18));
 
 		setLayout(new BorderLayout());
@@ -41,14 +43,17 @@ public class StatPanel extends JPanel implements Observer {
 	public void update(Observable o, Object arg) {
 		Powerup pwrUp = game.getPowerup();
 		switch (pwrUp.getType()) {
-		
+
 		case Powerup.SINGLEBLOCK:
 			ImageIcon icon = new ImageIcon("resources/duplcBlocks.png");
 			powerupLabel.setIcon(icon);
-			powerupLabel.setPreferredSize(new Dimension(50,50));
 			break;
+		case Powerup.INVISIBLE: 
+			icon = new ImageIcon("resources/invBlocks.png");
+		default:
+			powerupLabel.setIcon(null);
 		}
-//		powerupLabel.setText("(POWERUPICON)"); // TODO ändra till icon
+		// powerupLabel.setText("(POWERUPICON)"); // TODO ändra till icon
 		scoreLabel.setText(Integer.toString(game.getScore()) + " p");
 	}
 
