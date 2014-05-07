@@ -11,7 +11,7 @@ public abstract class PowerupFactory {
 	 * @return new randomized powerup
 	 */
 	public static Powerup getPowerup() {
-		return getPowerup((byte) (rand.nextInt(Powerup.MIRROR ) + 1));
+		return getPowerup((byte) (rand.nextInt(Powerup.SINGLEBLOCK ) + 1));
 	}
 
 	/**

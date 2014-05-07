@@ -32,9 +32,9 @@ public class Game extends Observable implements Observer {
 	 * @param randomSeed
 	 *            used for generating the bricks
 	 */
-//	public Game(int row, int col, long randomSeed) {
-//		this(row, col, randomSeed, null);
-//	}
+	// public Game(int row, int col, long randomSeed) {
+	// this(row, col, randomSeed, null);
+	// }
 
 	/**
 	 * Used for the localgame when it should use a local timer and send the
@@ -57,7 +57,7 @@ public class Game extends Observable implements Observer {
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
-		localPowerup =new SingleBlock();
+		localPowerup = new SingleBlock();
 	}
 
 	// TODO ta bort innan release, används bara för test
@@ -80,17 +80,25 @@ public class Game extends Observable implements Observer {
 	public int getScore() {
 		return score;
 	}
+	
+	public Powerup usePowerup() {
+		Powerup ret = localPowerup;
+		localPowerup = new NullPowerup();
+		return ret;
+	}
 
 	public Powerup getPowerup() {
 		return localPowerup;
 	}
+	
+	
 
 	/**
 	 * getting a representation of the both board, game and shape.
 	 * 
 	 * @return
 	 */
-	public byte[][] getBoard() {		
+	public byte[][] getBoard() {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
@@ -103,8 +111,8 @@ public class Game extends Observable implements Observer {
 				}
 			}
 		}
-		
-//		TestMethods.printMatrix(ret);
+
+		// TestMethods.printMatrix(ret);
 		return ret;
 	}
 
@@ -147,10 +155,10 @@ public class Game extends Observable implements Observer {
 	/**
 	 * starting the timer and the game, only used for local games
 	 */
-//	public void start() {
-//		if (timer != null)
-//			timer.start();
-//	}
+	// public void start() {
+	// if (timer != null)
+	// timer.start();
+	// }
 
 	/**
 	 * updates from the GameBoard (when removing rows and so)
@@ -171,8 +179,8 @@ public class Game extends Observable implements Observer {
 	 * Checking the move, is the move is illegal we are rolling back the move
 	 */
 	private void checkMove() {
-//		if (timer != null)
-//			timer.restart();
+		// if (timer != null)
+		// timer.restart();
 		if (noHit()) {
 			updated();
 		} else {
@@ -201,14 +209,18 @@ public class Game extends Observable implements Observer {
 			shapeBoard.moveDown();
 		} else {
 			Shape s = shapeBoard.getShape();
-			gameBoard.setShape(new Point(shapeBoard.getX(), shapeBoard.getY()),
-					s);
+			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
+			int removedRows = gameBoard.setShape(p, s);
+			if(removedRows == 4) {
+				localPowerup = PowerupFactory.getPowerup();
+			}
 			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
 					&& opponentPowerup.isActive()) {
 				shapeBoard.setShape(new Z_Left());
 			} else {
 				shapeBoard.setShape(shapeFactory.getShape());
 			}
+			
 		}
 		updated();
 	}
@@ -230,7 +242,7 @@ public class Game extends Observable implements Observer {
 		checkMove();
 	}
 
-	public void usePowerup(byte type) {
+	public void activatePowerup(byte type) {
 		Powerup pwrUp;
 		if (type == 0) {
 			pwrUp = PowerupFactory.getPowerup(); // randomized
@@ -240,9 +252,5 @@ public class Game extends Observable implements Observer {
 		opponentPowerup = pwrUp;
 		System.out.println("Game: usePowerup(): using " + pwrUp.getType());
 	}
-//
-//	public void usePowerup() {
-//		usePowerup((byte) 0);
-//	}
 
 }
