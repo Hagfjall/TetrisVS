@@ -48,10 +48,13 @@ public class StatPanel extends JPanel implements Observer {
 			ImageIcon icon = new ImageIcon("resources/duplcBlocks.png");
 			powerupLabel.setIcon(icon);
 			break;
-		case Powerup.INVISIBLE: 
+		case Powerup.INVISIBLE:
 			icon = new ImageIcon("resources/invBlocks.png");
+			powerupLabel.setIcon(icon);
+			break;
 		default:
 			powerupLabel.setIcon(null);
+			break;
 		}
 		// powerupLabel.setText("(POWERUPICON)"); // TODO ändra till icon
 		scoreLabel.setText(Integer.toString(game.getScore()) + " p");

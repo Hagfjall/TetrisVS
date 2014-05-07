@@ -7,13 +7,10 @@ import game.powerups.Invisible;
 import game.powerups.NullPowerup;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
-import game.powerups.SingleBlock;
 
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
-
-import test.TestMethods;
 
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
