@@ -23,7 +23,7 @@ public class Tetris {
 			name = JOptionPane.showInputDialog("Please enter your name");
 			if (name == null)
 				return;
-		}else {
+		} else {
 			name = args[0];
 		}
 		// String address = JOptionPane
@@ -32,13 +32,14 @@ public class Tetris {
 		// .showInputDialog("Please enter the portnumber"));
 		String address = "localhost"; // "31.208.39.174";
 		int port = 3000;
-
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		Game local = new Game(22, 10, rndSeed);
-		Game opponent = new Game(22, 10, rndSeed);
+		long opponentPowerupRandomSeed = opponentName.hashCode();
+		long localPowerupRandomSeed = name.hashCode();
+		Game local = new Game(22, 10, rndSeed, localPowerupRandomSeed);
+		Game opponent = new Game(22, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);
 		new Thread(network).start();
 		KeyListener keyListener = new KeyListener(local, network);

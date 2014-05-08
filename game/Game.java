@@ -7,63 +7,43 @@ import game.powerups.Invisible;
 import game.powerups.NullPowerup;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
-import game.powerups.SingleBlock;
 
 import java.awt.Point;
 import java.util.Observable;
 import java.util.Observer;
-
-import test.TestMethods;
 
 public class Game extends Observable implements Observer {
 	private GameBoard gameBoard;
 	private ShapeBoard shapeBoard;
 
 	private ShapeFactory shapeFactory;
+	private PowerupFactory powerupFactory;
 	private Powerup opponentPowerup, localPowerup;
 	private int score, level = 1;
 
-	// TODO implement the score system.
-
 	/**
-	 * Used for opponent game, aka without a timer.
-	 * 
-	 * @param row
-	 * @param col
-	 * @param randomSeed
-	 *            used for generating the bricks
-	 */
-	// public Game(int row, int col, long randomSeed) {
-	// this(row, col, randomSeed, null);
-	// }
-
-	/**
-	 * Used for the localgame when it should use a local timer and send the
+	 * Used for the local game when it should use a local timer and send the
 	 * events to the opponent
 	 * 
 	 * @param row
 	 *            size
 	 * @param col
 	 *            size
-	 * @param randomSeed
+	 * @param shapeRandomSeed
 	 *            used for generating the bricks
 	 * @param nout
 	 *            , used for sending the timer-events (aka moving down)
 	 */
-	public Game(int row, int col, long randomSeed) {
-		shapeFactory = new ShapeFactory(randomSeed);
+	public Game(int row, int col, long shapeRandomSeed, long powerupRandomSeed) {
+		shapeFactory = new ShapeFactory(shapeRandomSeed);
+		powerupFactory = new PowerupFactory(powerupRandomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.addObserver(this);
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
-		localPowerup = new Invisible();
-	}
-
-	// TODO ta bort innan release, används bara för test
-	public Game(int row, int col) {
-		this(row, col, 1000);
+		localPowerup = powerupFactory.getPowerup();
 	}
 
 	public int getWidth() {
@@ -219,14 +199,16 @@ public class Game extends Observable implements Observer {
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
 			if (removedRows == 4) {
-				localPowerup = PowerupFactory.getPowerup();
+				localPowerup = powerupFactory.getPowerup();
 			}
+			
 			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
 					&& opponentPowerup.isActive()) {
 				shapeBoard.setShape(new Z_Left());
 			} else {
 				shapeBoard.setShape(shapeFactory.getShape());
 			}
+			score += 1 * removedRows * removedRows;
 
 		}
 		updated();
@@ -252,9 +234,9 @@ public class Game extends Observable implements Observer {
 	public void activatePowerup(byte type) {
 		Powerup pwrUp;
 		if (type == 0) {
-			pwrUp = PowerupFactory.getPowerup(); // randomized
+			pwrUp = powerupFactory.getPowerup(); // randomized
 		} else {
-			pwrUp = PowerupFactory.getPowerup(type);
+			pwrUp = powerupFactory.getPowerup(type);
 		}
 		opponentPowerup = pwrUp;
 		System.out.println("Game: usePowerup(): using " + pwrUp.getType());

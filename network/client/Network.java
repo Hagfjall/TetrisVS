@@ -74,6 +74,7 @@ public class Network implements Runnable {
 					byte pwrUp = in.readByte();
 					System.out.println(" nbr " + pwrUp);
 					localGame.activatePowerup(pwrUp);
+					opponentGame.usePowerup();
 					sendPowerupAck(pwrUp);
 					break;
 				case ProtocolConstants.POWERUP_ACK:
@@ -84,6 +85,11 @@ public class Network implements Runnable {
 					break;
 				case ProtocolConstants.MOVEDOWN:
 					opponentGame.moveDown();
+					break;
+				case ProtocolConstants.POWERUP_TYPE:
+					pwrUp = in.readByte();
+				case ProtocolConstants.WHOLE_GAME:
+					CommonNetworkMethods.sendBoard(out, localGame.getBoard());
 					break;
 				} // TODO implementera resten
 			}

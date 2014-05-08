@@ -9,16 +9,15 @@ public class TestFactory {
 
 	public static void main(String[] args) {
 		int shapes[] = new int[7];
-		int powers[] = new int[4];
+		int powers[] = new int[2];
 		ShapeFactory s = new ShapeFactory(System.currentTimeMillis());
+		PowerupFactory p = new PowerupFactory(System.currentTimeMillis());
 		for (int i = 0; i < 10000; i++){
-			Powerup p = PowerupFactory.getPowerup();
-			System.out.println(p);
-			powers[p.getType()-1]++;
+			Powerup pwrUp = p.getPowerup();
+			powers[pwrUp.getType()-1]++;
 		}
 		for (int i = 0; i < 10000; i++){
 			Shape sh = s.getShape();
-			System.out.println(s);
 			shapes[sh.getType()-1]++;
 		}
 		System.out.print("powers: ");

@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import network.CommonNetworkMethods;
+import network.ProtocolConstants;
 
 public class ServerOutputHandler extends Thread {
 
@@ -54,6 +55,10 @@ public class ServerOutputHandler extends Thread {
 			DataOutputStream out;
 			int[] msgarr = msg.getMessage();
 			Iterator<Socket> it = allConnections.iterator();
+			if (msgarr[0] == ProtocolConstants.WHOLE_GAME) {
+				
+				System.out.println("outputhandler: move down");
+			}
 			while (it.hasNext()) {
 				Socket s = it.next();
 				if (!s.equals(msg.getSocket())) {
