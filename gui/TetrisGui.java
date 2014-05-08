@@ -3,6 +3,7 @@ package gui;
 import game.Game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -30,6 +31,7 @@ public class TetrisGui extends JFrame {
 		add(opponentPanel,BorderLayout.CENTER);
 		add(statsPanel,BorderLayout.EAST);
 		pack();
+		setBackground(Color.white);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
