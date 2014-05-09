@@ -1,6 +1,6 @@
 package game;
 
-import game.blocks.Shape;
+import game.shapes.Shape;
 
 import java.awt.Point;
 

@@ -24,25 +24,24 @@ public class Server extends Thread {
 	public void run() {
 		int port = 3000;
 		Random rnd = new Random();
-		long rndSeed = rnd.nextLong();
 		try {
 			ServerSocket server = new ServerSocket(port);
 			System.out.println("server up and running on port " + port);
-			System.out.println("rndeed: " + rndSeed);
 			ServerOutputHandler output = new ServerOutputHandler(
-					allConnections, m, rndSeed);
+					allConnections, m, rnd.nextLong());
+			output.start();
+
 			while (true) {
 				Socket s = server.accept();
 				allConnections.add(s);
-				InputHandler in = new InputHandler(s, m);
+				InputHandler in = new InputHandler(s, m, allConnections);
 				in.start();
 				output.addPlayername(in.getPlayername());
 				if (allConnections.size() == 2) {
+					output.setRandomSeed(rnd.nextLong());
 					output.initiateGameOnClients();
-					output.start();
 				} else if (allConnections.size() > 2) {
 					allConnections.add(s);
-					// TODO send all player names since its a spectator
 				}
 			}
 

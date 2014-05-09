@@ -2,9 +2,9 @@ package test;
 
 import game.GameBoard;
 import game.ShapeBoard;
-import game.blocks.I;
-import game.blocks.Shape;
-import game.blocks.Square;
+import game.shapes.I;
+import game.shapes.Shape;
+import game.shapes.Square;
 
 public class TestBoard {
 

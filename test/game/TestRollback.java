@@ -7,7 +7,7 @@ import test.TestMethods;
 import game.Game;
 import game.GameBoard;
 import game.ShapeBoard;
-import game.blocks.I;
+import game.shapes.I;
 
 public class TestRollback {
 

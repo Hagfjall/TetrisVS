@@ -16,10 +16,10 @@ public class TestGameLocal {
 	}
 
 	public void run() {
-		Game local = new Game(22, 10, 200);
-		Game opponent = new Game(22, 10, 200);
+		Game local = new Game(12, 10, 210, 100);
+		Game opponent = new Game(12, 10, 200, 200);
 		TestKeyListener keyListener = new TestKeyListener(local);
-		new TetrisTimer(keyListener, 750);
+		new TetrisTimer(keyListener, 200); 
 		new TetrisGui("testlocal", "testOpponent", local, opponent, keyListener);
 	}
 

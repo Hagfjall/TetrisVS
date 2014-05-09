@@ -2,8 +2,8 @@ package test;
 
 import game.Board;
 import game.ShapeBoard;
-import game.blocks.L_Right;
-import game.blocks.Shape;
+import game.shapes.L_Right;
+import game.shapes.Shape;
 
 public class RotateTest {
 	public Shape s;

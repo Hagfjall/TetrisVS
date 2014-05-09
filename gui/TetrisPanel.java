@@ -9,6 +9,8 @@ import java.awt.Graphics2D;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class TetrisPanel extends JPanel implements Observer {
@@ -23,6 +25,7 @@ public class TetrisPanel extends JPanel implements Observer {
 
 	public TetrisPanel(Game game) {
 		this.game = game;
+		
 		col = game.getWidth() + 1;
 		row = game.getHeight() + 1;
 		width = col * (square + 2);
@@ -31,7 +34,7 @@ public class TetrisPanel extends JPanel implements Observer {
 		game.addObserver(this);
 	}
 
-	public void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g2 = (Graphics2D) g;
 
@@ -42,7 +45,7 @@ public class TetrisPanel extends JPanel implements Observer {
 		g2.dispose();
 	}
 
-	public void drawBricks() {
+	private void drawBricks() {
 
 		byte[][] board = game.getBoard();
 		for (int r = 0; r < row - 1; r++) {
@@ -52,7 +55,7 @@ public class TetrisPanel extends JPanel implements Observer {
 					typeColor(type);
 					g2.fillRect(c * square + square + 1, r * square + square
 							+ 1, square - 1, square - 1);
-				}else{
+				} else {
 					g2.setColor(Color.gray);
 					g2.fillRect(c * square + square + 1, r * square + square
 							+ 1, square - 1, square - 1);
@@ -61,12 +64,12 @@ public class TetrisPanel extends JPanel implements Observer {
 		}
 	}
 
-	public void typeColor(Byte type) {
+	private void typeColor(Byte type) {
 
 		switch (type) {
-//		case 0:
-//			g2.setColor(Color.GRAY);
-//			break;
+		// case 0:
+		// g2.setColor(Color.GRAY);
+		// break;
 		case 1:
 			g2.setColor(Color.RED);
 			break;
@@ -91,7 +94,7 @@ public class TetrisPanel extends JPanel implements Observer {
 		}
 	}
 
-	public void drawGrid() {
+	private void drawGrid() {
 		// Vertical
 		for (int i = 1; i <= col; i++)
 			g2.drawLine(i * square, square, i * square, row * square);
@@ -102,6 +105,12 @@ public class TetrisPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		repaint();
+		if (arg instanceof Integer) {
+			Integer i = (Integer) arg;
+			if (i == Game.GAME_LOST) {
+				JOptionPane.showMessageDialog(this, "LOSER");
+			}
+		} else
+			repaint();
 	}
 }

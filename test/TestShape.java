@@ -1,13 +1,13 @@
 package test;
 
-import game.blocks.I;
-import game.blocks.L_Left;
-import game.blocks.L_Right;
-import game.blocks.Shape;
-import game.blocks.Square;
-import game.blocks.T;
-import game.blocks.Z_Left;
-import game.blocks.Z_Right;
+import game.shapes.I;
+import game.shapes.L_Left;
+import game.shapes.L_Right;
+import game.shapes.Shape;
+import game.shapes.Square;
+import game.shapes.T;
+import game.shapes.Z_Left;
+import game.shapes.Z_Right;
 
 public class TestShape {
 

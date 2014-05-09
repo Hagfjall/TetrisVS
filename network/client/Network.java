@@ -88,9 +88,7 @@ public class Network implements Runnable {
 					break;
 				case ProtocolConstants.POWERUP_TYPE:
 					pwrUp = in.readByte();
-				case ProtocolConstants.WHOLE_GAME:
-					CommonNetworkMethods.sendBoard(out, localGame.getBoard());
-					break;
+					
 				} // TODO implementera resten
 			}
 		} catch (IOException e) {

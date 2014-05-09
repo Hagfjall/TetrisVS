@@ -1,8 +1,7 @@
 package game;
 
-import java.util.Observable;
 
-public abstract class Board extends Observable {
+public abstract class Board {
 
 	protected byte[][] board;
 	protected int width;
@@ -22,11 +21,23 @@ public abstract class Board extends Observable {
 		return height;
 	}
 
-	public void setSlot(int row, int col, byte type) {
+	/**
+	 * Setting the value type (from Shape) in cell [row][col]
+	 * @param row 
+	 * @param col
+	 * @param type
+	 */
+	protected void setSlot(int row, int col, byte type) {
 		if (insideMatrix(row, col))
 			board[row][col] = type;
 	}
 
+	/**
+	 * returning the type from cell [row][col], 0 equals empty. 
+	 * @param row
+	 * @param col
+	 * @return
+	 */
 	public byte getType(int row, int col) {
 		if (insideMatrix(row, col))
 			return board[row][col];
@@ -39,7 +50,7 @@ public abstract class Board extends Observable {
 	 * 
 	 * @param x
 	 * @param y
-	 * @return true when the slot is filled ( == 0) or the coordinate is outside
+	 * @return true when the slot is filled ( not equals 0) or the coordinate is outside
 	 *         the matrix
 	 */
 	public boolean checkSlot(int row, int col) {
@@ -53,23 +64,4 @@ public abstract class Board extends Observable {
 		return row >= 0 && row < getHeight() && col >= 0 && col < getWidth();
 	}
 
-	//TODO ta bort innan release
-	public void print() {
-		for (int r = 0; r < getHeight(); r++) {
-			for (int c = 0; c < getWidth(); c++) {
-				if (checkSlot(r, c))
-					System.out.print(getType(r, c));
-				else
-					System.out.print(".");
-			}
-			System.out.println(" ");
-		}
-		System.out.println();
-	}
-
-	protected void updated() {
-		setChanged();
-		notifyObservers();
-	}
-	
 }

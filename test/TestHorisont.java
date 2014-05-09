@@ -1,8 +1,8 @@
 package test;
 
 import game.Board;
-import game.blocks.Shape;
-import game.blocks.T;
+import game.shapes.Shape;
+import game.shapes.T;
 
 public class TestHorisont extends Thread {
 

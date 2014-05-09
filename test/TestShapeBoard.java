@@ -1,7 +1,7 @@
 package test;
 
 import game.ShapeBoard;
-import game.blocks.*;
+import game.shapes.*;
 
 public class TestShapeBoard {
 	ShapeBoard b;

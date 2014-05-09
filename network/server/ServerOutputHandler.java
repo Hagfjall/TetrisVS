@@ -25,11 +25,15 @@ public class ServerOutputHandler extends Thread {
 	}
 
 	public void addPlayername(String name) {
-		if (names[0] == null) {
+		if (allConnections.size() == 1) {
 			names[0] = name;
-		} else {
+		} else if (allConnections.size() == 2) {
 			names[1] = name;
 		}
+	}
+	
+	public void setRandomSeed(long rnd) {
+		rndSeed = rnd;
 	}
 
 	public void initiateGameOnClients() {
@@ -54,11 +58,10 @@ public class ServerOutputHandler extends Thread {
 			Input msg = m.get();
 			DataOutputStream out;
 			int[] msgarr = msg.getMessage();
+//			if(msgarr[0] == ProtocolConstants.QUIT) {
+//				allConnections.remove(msg.getSocket());
+//			}
 			Iterator<Socket> it = allConnections.iterator();
-			if (msgarr[0] == ProtocolConstants.WHOLE_GAME) {
-				
-				System.out.println("outputhandler: move down");
-			}
 			while (it.hasNext()) {
 				Socket s = it.next();
 				if (!s.equals(msg.getSocket())) {
@@ -67,10 +70,13 @@ public class ServerOutputHandler extends Thread {
 						for (int i = 0; i < msgarr.length; i++) {
 							out.write(msgarr[i]);
 						}
-
 					} catch (IOException e) {
 						System.out.println("OutputHanlder: client " + s
 								+ " is removed");
+						try {
+							s.close();
+						} catch (IOException e1) {
+						}
 						it.remove();
 					}
 				}

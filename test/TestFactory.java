@@ -1,9 +1,9 @@
 package test;
 
-import game.blocks.Shape;
-import game.blocks.ShapeFactory;
 import game.powerups.Powerup;
 import game.powerups.PowerupFactory;
+import game.shapes.Shape;
+import game.shapes.ShapeFactory;
 
 public class TestFactory {
 
