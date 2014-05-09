@@ -3,7 +3,7 @@ package game;
 import game.attacks.Attack;
 import game.attacks.InvisibleAttack;
 import game.attacks.NullAttack;
-import game.attacks.PowerupFactory;
+import game.attacks.AttackFactory;
 import game.shapes.Shape;
 import game.shapes.ShapeFactory;
 import game.shapes.Z_Left;
@@ -18,7 +18,7 @@ public class Game extends Observable {
 	private ShapeBoard shapeBoard; // the current moving block
 
 	private ShapeFactory shapeFactory;
-	private PowerupFactory attackFactory;
+	private AttackFactory attackFactory;
 	private Attack opponentAttack; // storing the power up sent by the opponent
 	private Attack localAttack; // storing the earned power up which can be sent
 								// to the opponent
@@ -42,7 +42,7 @@ public class Game extends Observable {
 	 */
 	public Game(int row, int col, long shapeRandomSeed, long powerupRandomSeed) {
 		shapeFactory = new ShapeFactory(shapeRandomSeed);
-		attackFactory = new PowerupFactory(powerupRandomSeed);
+		attackFactory = new AttackFactory(powerupRandomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
@@ -87,7 +87,7 @@ public class Game extends Observable {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		if (opponentAttack.getType() == Attack.INVISIBLE
+		if (opponentAttack.getType() == Attack.INVISIBLE_GAME
 				&& opponentAttack.isActive()) {
 			for (int r = 0; r < height; r++) {
 				for (int c = 0; c < width; c++) {
@@ -204,11 +204,11 @@ public class Game extends Observable {
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
 			if (removedRows == 4) {
-				localAttack = attackFactory.getPowerup();
+				localAttack = attackFactory.getAttack();
 			}
 			score += 1 * removedRows * removedRows;
 
-			if (opponentAttack.getType() == Attack.SINGLEBLOCK
+			if (opponentAttack.getType() == Attack.SINGLE_SHAPE
 					&& opponentAttack.isActive()) { // checking if the attack
 													// Singleblock is active
 				shapeBoard.setShape(new Z_Left());

@@ -1,7 +1,7 @@
 package test;
 
 import game.attacks.Attack;
-import game.attacks.PowerupFactory;
+import game.attacks.AttackFactory;
 import game.shapes.Shape;
 import game.shapes.ShapeFactory;
 
@@ -11,9 +11,9 @@ public class TestFactory {
 		int shapes[] = new int[7];
 		int powers[] = new int[2];
 		ShapeFactory s = new ShapeFactory(System.currentTimeMillis());
-		PowerupFactory p = new PowerupFactory(System.currentTimeMillis());
+		AttackFactory p = new AttackFactory(System.currentTimeMillis());
 		for (int i = 0; i < 10000; i++){
-			Attack pwrUp = p.getPowerup();
+			Attack pwrUp = p.getAttack();
 			powers[pwrUp.getType()-1]++;
 		}
 		for (int i = 0; i < 10000; i++){

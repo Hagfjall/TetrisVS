@@ -17,8 +17,7 @@ public class GameBoard extends Board {
 	}
 
 	/**
-	 * saving the shape s in the place p in to the big array with all the
-	 * blocks.
+	 * saving the shape s in the cell p in to the big array with all the blocks.
 	 * 
 	 * @param p
 	 *            , point of the shape
@@ -35,15 +34,14 @@ public class GameBoard extends Board {
 				}
 			}
 		}
-		int count = 0;
+		int rowsDeleted = 0;
 		for (int i = 0; i < rowsAffected.length; i++) {
 			if (isRowFull(rowsAffected[i])) {
 				removeRow(rowsAffected[i]);
-				count++;
+				rowsDeleted++;
 			}
 		}
-		return count;
-		// TestMethods.printMatrix(board);
+		return rowsDeleted;
 	}
 
 	/**
@@ -52,30 +50,23 @@ public class GameBoard extends Board {
 	 * @param startRow
 	 */
 	public void removeRow(int startRow) {
-		for (int row = startRow; row > 0; row--) {
+		for (int col = 0; col < getWidth(); col++) {
+			board[startRow][col] = 0;
+		}
+		for (int row = startRow - 1; row >= 0; row--) {
 			for (int col = 0; col < getWidth(); col++) {
-				if (row == startRow) {
+				if (row == 0) { // the most highest rows
 					board[row][col] = 0;
 				} else {
-					if (row == 0) {
-						// TODO Sista rade
-						board[row][col] = 0;
-					} else {
-						board[row + 1][col] = board[row][col];
-						board[row][col] = 0;
-					}
+					board[row + 1][col] = board[row][col];
+					board[row][col] = 0;
 				}
 			}
 		}
 	}
 
-	/**
-	 * 
-	 * @param row
-	 * @return
-	 */
 	private boolean isRowFull(int row) {
-		for (int col = 0; col < width; col++) {
+		for (int col = 0; col < getWidth(); col++) {
 			if (!checkSlot(row, col)) {
 				return false;
 			}

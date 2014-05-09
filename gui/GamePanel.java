@@ -24,7 +24,5 @@ public class GamePanel extends JPanel {
 		nameLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameLabel.setFont(new Font("Serif",Font.PLAIN,22));
 		add(tetrisPanel, BorderLayout.SOUTH);
-		
 	}
-
 }

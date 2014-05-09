@@ -7,13 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShapeBoard extends Board {
-	private int currentX, oldX;
-	private int currentY, oldY;
+	private int currentX, currentY;
 	private Shape shape;
-	private boolean turnedClockwise = true;
 	private String excecuteHistory;
 	private static final String MOVE_DOWN = "mvdn", ROTATE_CLOCKWISE = "rtcl",
-			ROTATE_COUNTERCLOCKWISE = "rtccl", MOVE_RIGHT = "mvrght", MOVE_LEFT = "mvlft";
+			ROTATE_COUNTERCLOCKWISE = "rtccl", MOVE_RIGHT = "mvrght",
+			MOVE_LEFT = "mvlft";
 
 	public ShapeBoard(int row, int col) {
 		super(row, col);
@@ -27,7 +26,7 @@ public class ShapeBoard extends Board {
 		currentX = (int) Math.round(((double) getWidth() / 2)
 				- ((double) s.getWidth() / 2));
 		currentY = 0;
-		printShape();
+		setShapeInMatrix();
 	}
 
 	public int getX() {
@@ -47,7 +46,87 @@ public class ShapeBoard extends Board {
 		shape = new NullShape();
 	}
 
-	private void printShape() {
+	/**
+	 * Rotating the current shape clockwise
+	 */
+	public void rotateClockwise() {
+		excecuteHistory = ROTATE_CLOCKWISE;
+		rotate(true);
+	}
+
+	/**
+	 * Rotating the current shape counterclockwise
+	 */
+	public void rotateCounterClockwise() {
+		excecuteHistory = ROTATE_COUNTERCLOCKWISE;
+		rotate(false);
+	}
+
+	/**
+	 * Undo the last used command
+	 */
+	public void rollBack() {
+		clear();
+		if (excecuteHistory.equals(MOVE_DOWN)) {
+			currentY--;
+		} else if (excecuteHistory.equals(MOVE_LEFT)) {
+			currentX++;
+		} else if (excecuteHistory.equals(MOVE_RIGHT)) {
+			currentX--;
+		} else if (excecuteHistory.equals(ROTATE_CLOCKWISE)) {
+			shape.rotate(false);
+		} else if (excecuteHistory.equals(ROTATE_COUNTERCLOCKWISE)) {
+			shape.rotate(true);
+		}
+		excecuteHistory = "";
+		setShapeInMatrix();
+	}
+
+	/**
+	 * Moving the current shape to the left of possible
+	 */
+	public void moveLeft() {
+		excecuteHistory = MOVE_LEFT;
+		if (currentX + shape.getMostWest() > 0) {
+			clear();
+			currentX--;
+			setShapeInMatrix();
+		}
+	}
+
+	/**
+	 * Moving the current shape to the right of possible
+	 */
+	public void moveRight() {
+		excecuteHistory = MOVE_RIGHT;
+		if (currentX + shape.getMostEast() < width - 1) {
+			clear();
+			currentX++;
+			setShapeInMatrix();
+		}
+	}
+
+	/**
+	 * Return true if the move was possible otherwise false (i.e only inside
+	 * this board)
+	 * 
+	 * @return
+	 */
+	public boolean moveDown() {
+		excecuteHistory = MOVE_DOWN;
+		if (currentY + shape.getMostSouth() < height - 1) {
+			clear();
+			currentY++;
+			setShapeInMatrix();
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Saving the shape to the byte matrix inside board.
+	 */
+	private void setShapeInMatrix() {
 		for (int r = 0; r < shape.getHeight(); r++) {
 			for (int c = 0; c < shape.getWidth(); c++) {
 				if (shape.checkSlot(r, c)) {
@@ -57,6 +136,9 @@ public class ShapeBoard extends Board {
 		}
 	}
 
+	/**
+	 * removing the shape in the byte matrix inside board.
+	 */
 	private void clear() {
 		for (int r = 0; r < shape.getHeight(); r++) {
 			for (int c = 0; c < shape.getWidth(); c++) {
@@ -67,16 +149,17 @@ public class ShapeBoard extends Board {
 		}
 	}
 
-	private void updateOld() {
-		oldX = currentX;
-		oldY = currentY;
-	}
-
+	/**
+	 * Rotating the shape clockwise, moving the shape so that the whole shape
+	 * stays inside the byte matrix
+	 * 
+	 * @param clockwise
+	 */
 	private void rotate(boolean clockwise) {
 
 		clear();
 		shape.rotate(clockwise);
-		// left
+		// lefts
 		while (currentX + shape.getMostWest() < 0) {
 			currentX++;
 		}
@@ -88,78 +171,7 @@ public class ShapeBoard extends Board {
 		while (currentY + shape.getMostSouth() > height - 1) {
 			currentY--;
 		}
-		printShape();
+		setShapeInMatrix();
 	}
 
-	public void rotateClockwise() {
-		excecuteHistory = ROTATE_CLOCKWISE;
-		turnedClockwise = true;
-		rotate(turnedClockwise);
-	}
-
-	public void rotateCounterClockwise() {
-		excecuteHistory = ROTATE_COUNTERCLOCKWISE;
-		turnedClockwise = false;
-		rotate(turnedClockwise);
-	}
-
-	public void rollBack() {
-		clear();
-		if(excecuteHistory.equals(MOVE_DOWN)) {
-			currentY--;
-		}else if(excecuteHistory.equals(MOVE_LEFT)) {
-			currentX++;
-		}else if(excecuteHistory.equals(MOVE_RIGHT)) {
-			currentX--;
-		}else if(excecuteHistory.equals(ROTATE_CLOCKWISE)) {
-			shape.rotate(false);
-		}else if(excecuteHistory.equals(ROTATE_COUNTERCLOCKWISE)) {
-			shape.rotate(true);
-		}
-		excecuteHistory = "";
-		printShape();
-//		if (oldX == currentX && oldY == currentY) {
-//			clear();
-//			shape.rotate(!turnedClockwise);
-//		} else {
-//
-//			clear();
-//			currentX = oldX;
-//			currentY = oldY;
-//		}
-//		printShape();
-
-	}
-
-	public void moveLeft() {
-		excecuteHistory = MOVE_LEFT;
-		if (currentX + shape.getMostWest() > 0) {
-			clear();
-			updateOld();
-			currentX--;
-			printShape();
-		}
-	}
-
-	public void moveRight() {
-		excecuteHistory = MOVE_RIGHT;
-		if (currentX + shape.getMostEast() < width - 1) {
-			clear();
-			updateOld();
-			currentX++;
-			printShape();
-		}
-	}
-
-	public boolean moveDown() {
-		excecuteHistory = MOVE_DOWN;
-		if (currentY + shape.getMostSouth() < height - 1) {
-			clear();
-			updateOld();
-			currentY++;
-			printShape();
-			return true;
-		}
-		return false;
-	}
 }

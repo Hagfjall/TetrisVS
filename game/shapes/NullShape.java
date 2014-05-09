@@ -4,6 +4,6 @@ public class NullShape extends Shape {
 
 	public NullShape() {
 		super(Shape.NULL);
-		matrix = new boolean[4][4];
+		matrix = new boolean[2][2];
 	}
 }

@@ -14,7 +14,8 @@ public class Square extends Shape {
 				matrix[i][j] = true;
 	}
 
-	public void rotate(boolean clockwise) {
-		// Do nothing, no point of rotating the square.
+	@Override
+	public void rotate(boolean clockwise) { // A square has no meaning of
+											// rotating
 	}
 }

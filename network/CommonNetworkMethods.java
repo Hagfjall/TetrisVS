@@ -6,6 +6,12 @@ import java.io.IOException;
 
 public class CommonNetworkMethods {
 
+	/**
+	 * Makes sure that we are following the protocol, returns -1 if not
+	 * @param in 
+	 * @return long 
+	 * @throws IOException if {in} is throwing a exception.
+	 */
 	public static long readLong(DataInputStream in) throws IOException {
 		byte type = in.readByte();
 		if (type != ProtocolConstants.LONG)
@@ -13,15 +19,12 @@ public class CommonNetworkMethods {
 		return in.readLong();
 	}
 
-	//
-	// public static byte readPowerup(DataInputStream in) throws IOException {
-	// byte type = in.readByte();
-	// if(type != ProtocolConstants.POWERUP) {
-	// return -1;
-	// }
-	// return in.readByte();
-	// }
-
+	/**
+	 * Makes sure that we are following the protocol, returns null if not
+	 * @param in
+	 * @return the string sent 
+	 * @throws IOException if {in} is throwing a exception.
+	 */
 	public static String readString(DataInputStream in) throws IOException {
 		byte type = in.readByte();
 		if (type != ProtocolConstants.STRING)
@@ -32,6 +35,12 @@ public class CommonNetworkMethods {
 		return new String(data, "UTF-8");
 	}
 
+	/**
+	 * Sending the long nbr according to the protocol.
+	 * @param out
+	 * @param nbr to send
+	 * @throws IOException
+	 */
 	public static void sendLong(DataOutputStream out, long nbr)
 			throws IOException {
 		out.write(ProtocolConstants.LONG);

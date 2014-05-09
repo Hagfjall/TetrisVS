@@ -3,7 +3,7 @@ package game.attacks;
 public class InvisibleAttack extends Attack {
 	
 	public InvisibleAttack() {
-		super(Attack.INVISIBLE);
+		super(Attack.INVISIBLE_GAME);
 	}
 
 }

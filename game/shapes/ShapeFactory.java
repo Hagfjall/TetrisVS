@@ -43,7 +43,7 @@ public class ShapeFactory {
 		case Shape.Z_RIGHT:
 			return new Z_Right();
 		default:
-			return null;
+			return new NullShape();
 		}
 	}
 

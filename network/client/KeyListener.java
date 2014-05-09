@@ -47,7 +47,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 			break;
 		case KeyEvent.VK_X:
 			Attack attack = localGame.useAttack();
-			if (attack.getType() != Attack.NULLATTACK) {
+			if (attack.getType() != Attack.NULL_ATTACK) {
 				network.sendKey(ProtocolConstants.X);
 			}
 			break;

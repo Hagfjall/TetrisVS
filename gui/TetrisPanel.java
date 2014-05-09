@@ -9,7 +9,6 @@ import java.awt.Graphics2D;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -25,7 +24,6 @@ public class TetrisPanel extends JPanel implements Observer {
 
 	public TetrisPanel(Game game) {
 		this.game = game;
-		
 		col = game.getWidth() + 1;
 		row = game.getHeight() + 1;
 		width = col * (square + 2);
@@ -67,11 +65,8 @@ public class TetrisPanel extends JPanel implements Observer {
 	private void typeColor(Byte type) {
 
 		switch (type) {
-		// case 0:
-		// g2.setColor(Color.GRAY);
-		// break;
 		case 1:
-			g2.setColor(Color.RED);
+			g2.setColor(Color.red);
 			break;
 		case 2:
 			g2.setColor(Color.magenta);
@@ -108,7 +103,7 @@ public class TetrisPanel extends JPanel implements Observer {
 		if (arg instanceof Integer) {
 			Integer i = (Integer) arg;
 			if (i == Game.GAME_LOST) {
-				JOptionPane.showMessageDialog(this, "LOSER");
+				JOptionPane.showMessageDialog(this, "Game over!");
 			}
 		} else
 			repaint();

@@ -4,7 +4,6 @@ import game.Game;
 import game.attacks.Attack;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
@@ -17,9 +16,15 @@ public class StatPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1373658622537354861L;
 	private Game game;
 
+	private static ImageIcon singleShapeIcon = new ImageIcon(
+			"resources/duplcBlocks.png");
+	private static ImageIcon invisibleIcon = new ImageIcon(
+			"resources/invBlocks.png");
+
 	private JLabel nameLabel, scoreLabel, powerupLabel;
 
 	public StatPanel(String name, Game game) {
+		this.game = game;
 		nameLabel = new JLabel(name);
 		nameLabel.setFont(new Font("Serif", Font.PLAIN, 22));
 		scoreLabel = new JLabel(0 + " p");
@@ -35,28 +40,23 @@ public class StatPanel extends JPanel implements Observer {
 		add(powerupLabel, BorderLayout.SOUTH);
 
 		game.addObserver(this);
-		this.game = game;
-		update(null, null);
+		update(null, null); // for getting all the information from the game to start with
 
 	}
 
 	public void update(Observable o, Object arg) {
-		Attack pwrUp = game.getAttack();
-		switch (pwrUp.getType()) {
-
-		case Attack.SINGLEBLOCK:
-			ImageIcon icon = new ImageIcon("resources/duplcBlocks.png");
-			powerupLabel.setIcon(icon);
+		Attack attack = game.getAttack();
+		switch (attack.getType()) {
+		case Attack.SINGLE_SHAPE:
+			powerupLabel.setIcon(invisibleIcon);
 			break;
-		case Attack.INVISIBLE:
-			icon = new ImageIcon("resources/invBlocks.png");
-			powerupLabel.setIcon(icon);
+		case Attack.INVISIBLE_GAME:
+			powerupLabel.setIcon(singleShapeIcon);
 			break;
 		default:
 			powerupLabel.setIcon(null);
 			break;
 		}
-		// powerupLabel.setText("(POWERUPICON)"); // TODO ändra till icon
 		scoreLabel.setText(Integer.toString(game.getScore()) + " p");
 	}
 
