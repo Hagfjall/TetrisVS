@@ -4,8 +4,6 @@ import game.shapes.Shape;
 
 import java.awt.Point;
 
-import test.TestMethods;
-
 public class GameBoard extends Board {
 
 	/**
@@ -45,7 +43,7 @@ public class GameBoard extends Board {
 			}
 		}
 		return count;
-//		TestMethods.printMatrix(board);
+		// TestMethods.printMatrix(board);
 	}
 
 	/**
@@ -60,7 +58,7 @@ public class GameBoard extends Board {
 					board[row][col] = 0;
 				} else {
 					if (row == 0) {
-						//TODO Sista rade
+						// TODO Sista rade
 						board[row][col] = 0;
 					} else {
 						board[row + 1][col] = board[row][col];

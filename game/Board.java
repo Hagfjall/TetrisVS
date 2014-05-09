@@ -7,7 +7,7 @@ public abstract class Board {
 	protected int width;
 	protected int height;
 
-	public Board(int row, int col) {
+	protected Board(int row, int col) {
 		this.width = col;
 		this.height = row;
 		board = new byte[row][col];

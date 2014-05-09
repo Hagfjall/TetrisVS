@@ -1,15 +1,13 @@
 package network.client;
 
 import game.Game;
+import game.attacks.Attack;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.Observable;
-import java.util.Observer;
 
-import network.CommonNetworkMethods;
 import network.ProtocolConstants;
 
 public class Network implements Runnable {
@@ -29,17 +27,16 @@ public class Network implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 	public void sendKey(byte key) {
 		send(key);
 	}
 
-	public void sendPowerupAck(byte pwrUp) {
+	public void sendPowerupAck(Attack attack) {
 		send(ProtocolConstants.POWERUP_ACK);
-		send(pwrUp);
+//		send(attack.getType());
 	}
 
 	@Override
@@ -70,25 +67,20 @@ public class Network implements Runnable {
 					opponentGame.moveBottom();
 					break;
 				case ProtocolConstants.X:
-					System.out.print("recieving powerup");
-					byte pwrUp = in.readByte();
-					System.out.println(" nbr " + pwrUp);
-					localGame.activatePowerup(pwrUp);
-					opponentGame.usePowerup();
-					sendPowerupAck(pwrUp);
+					System.out.print("Netwokr: recieving powerup");
+					Attack attack = opponentGame.useAttack();
+					System.out.println("network: attacktype: " + attack.getType());
+					localGame.activateAttack(attack);
+					sendPowerupAck(attack);
 					break;
 				case ProtocolConstants.POWERUP_ACK:
-					System.out.print("recieving powerupACK");
-					pwrUp = in.readByte();
-					System.out.println(" nbr " + pwrUp);
-					opponentGame.activatePowerup(pwrUp);
+					attack = opponentGame.useAttack();
+					opponentGame.activateAttack(attack);
 					break;
 				case ProtocolConstants.MOVEDOWN:
 					opponentGame.moveDown();
 					break;
-				case ProtocolConstants.POWERUP_TYPE:
-					pwrUp = in.readByte();
-					
+
 				} // TODO implementera resten
 			}
 		} catch (IOException e) {

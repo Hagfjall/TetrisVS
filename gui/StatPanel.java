@@ -1,7 +1,7 @@
 package gui;
 
 import game.Game;
-import game.powerups.Powerup;
+import game.attacks.Attack;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -41,14 +41,14 @@ public class StatPanel extends JPanel implements Observer {
 	}
 
 	public void update(Observable o, Object arg) {
-		Powerup pwrUp = game.getPowerup();
+		Attack pwrUp = game.getAttack();
 		switch (pwrUp.getType()) {
 
-		case Powerup.SINGLEBLOCK:
+		case Attack.SINGLEBLOCK:
 			ImageIcon icon = new ImageIcon("resources/duplcBlocks.png");
 			powerupLabel.setIcon(icon);
 			break;
-		case Powerup.INVISIBLE:
+		case Attack.INVISIBLE:
 			icon = new ImageIcon("resources/invBlocks.png");
 			powerupLabel.setIcon(icon);
 			break;

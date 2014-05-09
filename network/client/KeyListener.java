@@ -1,7 +1,7 @@
 package network.client;
 
 import game.Game;
-import game.powerups.Powerup;
+import game.attacks.Attack;
 
 import java.awt.event.KeyEvent;
 
@@ -46,17 +46,16 @@ public class KeyListener implements java.awt.event.KeyListener {
 			network.sendKey(ProtocolConstants.SPACE);
 			break;
 		case KeyEvent.VK_X:
-			Powerup pwrUp;
-			if ((pwrUp = localGame.usePowerup()) != null) {
-				System.out.println("sending powerup");
+			Attack attack = localGame.useAttack();
+			if (attack.getType() != Attack.NULLATTACK) {
 				network.sendKey(ProtocolConstants.X);
-				network.sendKey(pwrUp.getType());
 			}
 			break;
 		}
 
 	}
-	public void moveDown(){
+
+	public void moveDown() {
 		localGame.moveDown();
 		network.sendKey(ProtocolConstants.MOVEDOWN);
 	}

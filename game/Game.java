@@ -1,8 +1,9 @@
 package game;
 
-import game.powerups.NullPowerup;
-import game.powerups.Powerup;
-import game.powerups.PowerupFactory;
+import game.attacks.Attack;
+import game.attacks.InvisibleAttack;
+import game.attacks.NullAttack;
+import game.attacks.PowerupFactory;
 import game.shapes.Shape;
 import game.shapes.ShapeFactory;
 import game.shapes.Z_Left;
@@ -17,12 +18,13 @@ public class Game extends Observable {
 	private ShapeBoard shapeBoard; // the current moving block
 
 	private ShapeFactory shapeFactory;
-	private PowerupFactory powerupFactory;
-	private Powerup opponentPowerup; // storing the power up sent by the opponent
-	private Powerup localPowerup; // storing the earned power up which can be sent
-									// to the opponent
-	private int score; 
-	private boolean lost; // if true the game will not react on any interactions. 
+	private PowerupFactory attackFactory;
+	private Attack opponentAttack; // storing the power up sent by the opponent
+	private Attack localAttack; // storing the earned power up which can be sent
+								// to the opponent
+	private int score;
+	private boolean lost; // if true the game will not react on any
+							// interactions.
 
 	/**
 	 * Creating a game with the specified size and setting the random seed for
@@ -40,13 +42,13 @@ public class Game extends Observable {
 	 */
 	public Game(int row, int col, long shapeRandomSeed, long powerupRandomSeed) {
 		shapeFactory = new ShapeFactory(shapeRandomSeed);
-		powerupFactory = new PowerupFactory(powerupRandomSeed);
+		attackFactory = new PowerupFactory(powerupRandomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		opponentPowerup = new NullPowerup(); // powerup to avoid nullPointer
-		localPowerup = powerupFactory.getPowerup();
+		opponentAttack = new NullAttack(); // attack to avoid nullPointerException
+		localAttack = new InvisibleAttack();
 	}
 
 	public int getWidth() {
@@ -57,6 +59,7 @@ public class Game extends Observable {
 	public int getHeight() {
 		return gameBoard.getHeight();
 	}
+
 	public int getScore() {
 		return score;
 	}
@@ -65,27 +68,27 @@ public class Game extends Observable {
 	 * 
 	 * @return
 	 */
-	public Powerup getPowerup() {
-		return localPowerup;
+	public Attack getAttack() {
+		return localAttack;
 	}
 
-	public Powerup usePowerup() {
-		Powerup ret = localPowerup;
-		localPowerup = new NullPowerup();
+	public Attack useAttack() {
+		Attack ret = localAttack;
+		localAttack = new NullAttack();
 		return ret;
 	}
 
 	/**
-	 * getting a representation of the both board, game and shape.
+	 * Merging the shapeBoard and gameBoard to one new matrix and returning
 	 * 
-	 * @return
+	 * @return representation of both boards.
 	 */
 	public byte[][] getBoard() {
 		int width = gameBoard.getWidth();
 		int height = gameBoard.getHeight();
 		byte[][] ret = new byte[height][width];
-		if (opponentPowerup.getType() == Powerup.INVISIBLE
-				&& opponentPowerup.isActive()) {
+		if (opponentAttack.getType() == Attack.INVISIBLE
+				&& opponentAttack.isActive()) {
 			for (int r = 0; r < height; r++) {
 				for (int c = 0; c < width; c++) {
 					ret[r][c] = shapeBoard.getType(r, c);
@@ -102,35 +105,34 @@ public class Game extends Observable {
 				}
 			}
 		}
-		// TestMethods.printMatrix(ret);
 		return ret;
 	}
 
 	/**
 	 * @return true if there isn't any hit, otherwise false
 	 */
-	private boolean noHit() {
+	private boolean hit() {
 		Shape s = shapeBoard.getShape();
 		int x = shapeBoard.getX();
 		int y = shapeBoard.getY();
 		for (int r = 0; r < s.getHeight(); r++) {
 			for (int c = 0; c < s.getWidth(); c++) {
 				if (gameBoard.checkSlot(r + y, c + x) && s.checkSlot(r, c))
-					return false;
+					return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	/**
 	 * Checks if the current shape are able to move down without hitting
-	 * something (do a movedown and then rolling back)
+	 * something (does a moveDown() and then roll back)
 	 * 
 	 * @return
 	 */
 	private boolean canMoveDown() {
 		if (shapeBoard.moveDown()) {
-			if (noHit()) {
+			if (!hit()) {
 				shapeBoard.rollBack();
 				return true;
 			} else {
@@ -142,7 +144,7 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * inform the Observer , most likely GUI
+	 * Informs the Observer(s)
 	 */
 	private void updated() {
 		setChanged();
@@ -155,12 +157,11 @@ public class Game extends Observable {
 	}
 
 	/**
-	 * Checking the move, is the move is illegal we are rolling back the move
+	 * Checking the move, is the move is illegal we are rolling back the move,
+	 * otherwise notifying the observers
 	 */
 	private void checkMove() {
-		// if (timer != null)
-		// timer.restart();
-		if (noHit()) {
+		if (!hit()) {
 			updated();
 		} else {
 			shapeBoard.rollBack();
@@ -170,7 +171,7 @@ public class Game extends Observable {
 	// ----------------------------------- INTERATCTIONS
 
 	/**
-	 * 
+	 * Moving the current shape one step to left if possible
 	 */
 	public void moveLeft() {
 		if (lost)
@@ -179,6 +180,9 @@ public class Game extends Observable {
 		checkMove();
 	}
 
+	/**
+	 * Moving the current shape one step to right if possible
+	 */
 	public void moveRight() {
 		if (lost)
 			return;
@@ -186,36 +190,44 @@ public class Game extends Observable {
 		checkMove();
 	}
 
+	/**
+	 * Moving the current shape one step down if possible
+	 */
 	public void moveDown() {
 		if (lost)
 			return;
 		if (canMoveDown()) {
 			shapeBoard.moveDown();
-		} else {
+		} else { // sets the shape in gameBoard, getting a new shape to interact
+					// with
 			Shape s = shapeBoard.getShape();
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
 			if (removedRows == 4) {
-				localPowerup = powerupFactory.getPowerup();
+				localAttack = attackFactory.getPowerup();
 			}
+			score += 1 * removedRows * removedRows;
 
-			if (opponentPowerup.getType() == Powerup.SINGLEBLOCK
-					&& opponentPowerup.isActive()) {
+			if (opponentAttack.getType() == Attack.SINGLEBLOCK
+					&& opponentAttack.isActive()) { // checking if the attack
+													// Singleblock is active
 				shapeBoard.setShape(new Z_Left());
-			} else {
+			} else { // getting next shape from the factory
 				shapeBoard.setShape(shapeFactory.getShape());
-				if (!noHit()) {
+				if (hit()) {
 					lost = true;
 					updated(GAME_LOST);
 					shapeBoard.removeShape();
 				}
 			}
-			score += 1 * removedRows * removedRows;
 
 		}
 		updated();
 	}
 
+	/**
+	 * Moving the current shape to the bottom
+	 */
 	public void moveBottom() {
 		if (lost)
 			return;
@@ -225,6 +237,9 @@ public class Game extends Observable {
 		checkMove();
 	}
 
+	/**
+	 * rotating the current shape if possible
+	 */
 	public void rotateClockwise() {
 		if (lost)
 			return;
@@ -232,6 +247,9 @@ public class Game extends Observable {
 		checkMove();
 	}
 
+	/**
+	 * rotating the current shape if possible
+	 */
 	public void rotateCounterClockwise() {
 		if (lost)
 			return;
@@ -239,17 +257,24 @@ public class Game extends Observable {
 		checkMove();
 	}
 
-	public void activatePowerup(byte type) {
+	/**
+	 * setting the opponentAttack as type made by the factory
+	 * 
+	 * @param type
+	 *            of the attack
+	 */
+	public void activateAttack(Attack attack) {
 		if (lost)
 			return;
-		Powerup pwrUp;
-		if (type == 0) {
-			pwrUp = powerupFactory.getPowerup(); // randomized
-		} else {
-			pwrUp = powerupFactory.getPowerup(type);
-		}
-		opponentPowerup = pwrUp;
-		System.out.println("Game: usePowerup(): using " + pwrUp.getType());
+		opponentAttack = attack;
+		attack.activate();
+//		Attack pwrUp;
+//		if (type == 0) {
+//			pwrUp = attackFactory.getPowerup(); // randomized
+//		} else {
+//			pwrUp = attackFactory.getPowerup(type);
+//		}
+//		opponentAttack = pwrUp;
 	}
 
 }
