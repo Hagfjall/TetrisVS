@@ -47,7 +47,9 @@ public class KeyListener implements java.awt.event.KeyListener {
 			break;
 		case KeyEvent.VK_X:
 			Attack attack = localGame.useAttack();
-			if (attack.getType() != Attack.NULL_ATTACK) {
+			if (attack.getType() != Attack.NULL_ATTACK) { // only sending if
+															// there are
+															// anything to send.
 				network.sendKey(ProtocolConstants.X);
 			}
 			break;
@@ -55,6 +57,9 @@ public class KeyListener implements java.awt.event.KeyListener {
 
 	}
 
+	/**
+	 * used for the timer that moves the block downwards.
+	 */
 	public void moveDown() {
 		localGame.moveDown();
 		network.sendKey(ProtocolConstants.MOVEDOWN);

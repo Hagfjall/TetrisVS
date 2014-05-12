@@ -7,6 +7,10 @@ import java.net.Socket;
 
 import network.CommonNetworkMethods;
 
+/**
+ * Getting all the information needed from the other player in order to start a game. 
+ *
+ */
 public class InitiateConnectionClient {
 	private String opponentName;
 	private long randomSeed;
