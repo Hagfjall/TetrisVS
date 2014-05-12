@@ -81,7 +81,7 @@ public class Network implements Runnable {
 					opponentGame.moveDown();
 					break;
 
-				} // TODO implementera resten
+				} 
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

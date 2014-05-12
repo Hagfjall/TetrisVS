@@ -7,7 +7,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import network.CommonNetworkMethods;
-import network.ProtocolConstants;
 
 public class ServerOutputHandler extends Thread {
 
@@ -31,7 +30,7 @@ public class ServerOutputHandler extends Thread {
 			names[1] = name;
 		}
 	}
-	
+
 	public void setRandomSeed(long rnd) {
 		rndSeed = rnd;
 	}
@@ -40,14 +39,13 @@ public class ServerOutputHandler extends Thread {
 		DataOutputStream out;
 		try {
 			out = new DataOutputStream(allConnections.get(0).getOutputStream());
-			CommonNetworkMethods.sendString(out, names[1]);
+			CommonNetworkMethods.sendString(out, names[1]); // sending opponent
+															// name
 			CommonNetworkMethods.sendLong(out, rndSeed);
 			out = new DataOutputStream(allConnections.get(1).getOutputStream());
 			CommonNetworkMethods.sendString(out, names[0]);
 			CommonNetworkMethods.sendLong(out, rndSeed);
 		} catch (IOException e1) {
-			// TODO AUTO
-			e1.printStackTrace();
 		}
 	}
 
@@ -58,9 +56,6 @@ public class ServerOutputHandler extends Thread {
 			Input msg = m.get();
 			DataOutputStream out;
 			int[] msgarr = msg.getMessage();
-//			if(msgarr[0] == ProtocolConstants.QUIT) {
-//				allConnections.remove(msg.getSocket());
-//			}
 			Iterator<Socket> it = allConnections.iterator();
 			while (it.hasNext()) {
 				Socket s = it.next();
@@ -71,8 +66,7 @@ public class ServerOutputHandler extends Thread {
 							out.write(msgarr[i]);
 						}
 					} catch (IOException e) {
-						System.out.println("OutputHanlder: client " + s
-								+ " is removed");
+						System.out.println("Client " + s + " is removed");
 						try {
 							s.close();
 						} catch (IOException e1) {

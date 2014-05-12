@@ -15,7 +15,8 @@ public class InputHandler extends Thread {
 	private String playerName;
 	private List<Socket> allConnections;
 
-	public InputHandler(Socket socket, TetrisMailbox m, List<Socket> allConnections) throws IOException {
+	public InputHandler(Socket socket, TetrisMailbox m,
+			List<Socket> allConnections) throws IOException {
 		this.m = m;
 		this.socket = socket;
 		is = socket.getInputStream();
@@ -35,15 +36,13 @@ public class InputHandler extends Thread {
 			int read;
 			while ((read = in.read()) != -1) {
 				int[] msg = new int[1];
-				msg[0] = read;
-				m.insert(new Input(socket,msg));
+				msg[0] = read; // all the keystrokes are only one byte
+				m.insert(new Input(socket, msg));
 			}
 			allConnections.remove(socket);
 			socket.close();
-			
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 
 	}

@@ -4,10 +4,6 @@ public class TetrisMailbox {
 
 	private Input input;
 
-	public TetrisMailbox() {
-
-	}
-
 	public synchronized void insert(Input in) {
 		while (input != null) {
 			try {

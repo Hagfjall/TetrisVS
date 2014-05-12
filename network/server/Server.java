@@ -10,22 +10,29 @@ public class Server extends Thread {
 
 	private Vector<Socket> allConnections;
 	private TetrisMailbox m;
+	private int port;
 
 	public static void main(String[] args) {
-		new Server().start();
+		int port;
+		if(args.length != 1) {
+			System.out.println("Usage: server <port> \nUsing standard port 3000");
+			port = 3000;
+		}else {
+			port = Integer.parseInt(args[0]);
+		}
+		new Server(port).start();
 	}
 
-	public Server() {
+	public Server(int port) {
+		this.port = port;
 		allConnections = new Vector<Socket>();
 		m = new TetrisMailbox();
 	}
 
 	@Override
 	public void run() {
-		int port = 3000;
 		Random rnd = new Random();
-		try {
-			ServerSocket server = new ServerSocket(port);
+		try (ServerSocket server = new ServerSocket(port)) {
 			System.out.println("server up and running on port " + port);
 			ServerOutputHandler output = new ServerOutputHandler(
 					allConnections, m, rnd.nextLong());
@@ -44,7 +51,6 @@ public class Server extends Thread {
 					allConnections.add(s);
 				}
 			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
