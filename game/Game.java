@@ -48,7 +48,7 @@ public class Game extends Observable {
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
 		opponentAttack = new NullAttack(); // attack to avoid nullPointerException
-		localAttack = new InvisibleAttack();
+		localAttack = new NullAttack();
 	}
 
 	public int getWidth() {
