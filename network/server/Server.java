@@ -41,7 +41,7 @@ public class Server extends Thread {
 			while (true) {
 				Socket s = server.accept();
 				allConnections.add(s);
-				InputHandler in = new InputHandler(s, m, allConnections);
+				ServerInputHandler in = new ServerInputHandler(s, m, allConnections);
 				in.start();
 				output.addPlayername(in.getPlayername());
 				if (allConnections.size() == 2) {

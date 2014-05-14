@@ -2,6 +2,7 @@ package network.client;
 
 import game.Game;
 import game.attacks.Attack;
+import game.attacks.NullAttack;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,7 +17,7 @@ public class Network implements Runnable {
 	private final Socket socket;
 	private DataOutputStream out;
 	private DataInputStream in;
-
+	private Attack attack;
 	/**
 	 * Handles the output and input at the client.
 	 * @param socket
@@ -27,6 +28,7 @@ public class Network implements Runnable {
 		this.socket = socket;
 		this.localGame = localGame;
 		this.opponentGame = opponentGame;
+		attack = new NullAttack();
 		try {
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
@@ -76,13 +78,13 @@ public class Network implements Runnable {
 					break;
 				case ProtocolConstants.X:
 					System.out.print("Netwokr: recieving powerup");
-					Attack attack = opponentGame.useAttack();
+					attack = opponentGame.useAttack();
 					System.out.println("network: attacktype: " + attack.getType());
 					localGame.activateAttack(attack);
 					sendPowerupAck(attack);
 					break;
 				case ProtocolConstants.POWERUP_ACK:
-					attack = opponentGame.useAttack();
+//					attack = opponentGame.useAttack();
 					System.out.println("Powerupack: type: " + attack.getType());
 					opponentGame.activateAttack(attack);
 					break;

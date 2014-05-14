@@ -15,6 +15,12 @@ import network.client.KeyListener;
 import network.client.Network;
 
 public class Tetris {
+	/**
+	 * Initializes everything needed for the Client 
+	 * @param args
+	 * @throws UnknownHostException
+	 * @throws IOException
+	 */
 
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
@@ -23,7 +29,7 @@ public class Tetris {
 //				.showInputDialog("Please enter the server address");
 //		int port = Integer.parseInt(JOptionPane
 //				.showInputDialog("Please enter the portnumber"));
-		String address = "localhost";
+		String address = "192.168.43.180";
 		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
