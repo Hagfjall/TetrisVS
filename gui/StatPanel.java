@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -16,9 +17,9 @@ public class StatPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 1373658622537354861L;
 	private Game game;
 
-	private static ImageIcon singleShapeIcon = new ImageIcon(
+	private static Icon singleShapeIcon = new ImageIcon(
 			"resources/duplcBlocks.png");
-	private static ImageIcon invisibleIcon = new ImageIcon(
+	private static Icon invisibleIcon = new ImageIcon(
 			"resources/invBlocks.png");
 
 	private JLabel nameLabel, scoreLabel, powerupLabel;
@@ -40,7 +41,8 @@ public class StatPanel extends JPanel implements Observer {
 		add(powerupLabel, BorderLayout.SOUTH);
 
 		game.addObserver(this);
-		update(null, null); // for getting all the information from the game to start with
+		update(null, null); // for getting all the information from the game to
+							// start with
 
 	}
 

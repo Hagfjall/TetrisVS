@@ -3,11 +3,6 @@ package test.game;
 import game.Game;
 import game.TetrisTimer;
 import gui.TetrisGui;
-import gui.TetrisPanel;
-
-import java.awt.Color;
-
-import javax.swing.JFrame;
 
 public class TestGameLocal {
 
