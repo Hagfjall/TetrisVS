@@ -36,7 +36,7 @@ public class CommonNetworkMethods {
 		int length = in.readInt();
 		byte[] data = new byte[length];
 		in.readFully(data);
-		return new String(data, "UTF-16");
+		return new String(data, "UTF-8");
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class CommonNetworkMethods {
 		int length = msg.length();
 		out.write(ProtocolConstants.STRING);
 		out.writeInt(length);
-		out.write(msg.getBytes("UTF-16"));
+		out.write(msg.getBytes("UTF-8"));
 	}
 
 }

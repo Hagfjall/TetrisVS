@@ -17,6 +17,12 @@ public class Network implements Runnable {
 	private DataOutputStream out;
 	private DataInputStream in;
 
+	/**
+	 * Handles the output and input at the client.
+	 * @param socket
+	 * @param localGame
+	 * @param opponentGame
+	 */
 	public Network(Socket socket, Game localGame, Game opponentGame) {
 		this.socket = socket;
 		this.localGame = localGame;
@@ -38,7 +44,9 @@ public class Network implements Runnable {
 		send(ProtocolConstants.POWERUP_ACK);
 //		send(attack.getType());
 	}
-
+	/**
+	 * Reads the input from sent by the server.
+	 */
 	@Override
 	public void run() {
 		try {
@@ -46,10 +54,10 @@ public class Network implements Runnable {
 			while ((read = in.read()) != -1) {
 				switch (read) {
 				case ProtocolConstants.STRING:
-					System.err.println("read String ska inte göras");
+					System.err.println("read String should not be done");
 					break;
 				case ProtocolConstants.INT:
-					System.err.println("Read Int ska inte göras");
+					System.err.println("Read Int should not be done");
 					break;
 				case ProtocolConstants.LEFT:
 					opponentGame.moveLeft();
@@ -81,7 +89,6 @@ public class Network implements Runnable {
 				case ProtocolConstants.MOVEDOWN:
 					opponentGame.moveDown();
 					break;
-
 				} 
 			}
 		} catch (IOException e) {

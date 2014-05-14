@@ -8,9 +8,14 @@ import java.awt.event.KeyEvent;
 import network.ProtocolConstants;
 
 public class KeyListener implements java.awt.event.KeyListener {
-
 	private Game localGame;
 	private Network network;
+	
+	/**
+	 * Listens for keys pressed on the keyboard locally and send pass them to the server and the local game.
+	 * @param localGame
+	 * @param network
+	 */
 
 	public KeyListener(Game localGame, Network network) {
 		this.localGame = localGame;
@@ -21,6 +26,9 @@ public class KeyListener implements java.awt.event.KeyListener {
 	public void keyTyped(KeyEvent e) {
 	}
 
+	/**
+	 * Calls the appropriate method in local game and sends the key pressed to the server.
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int input = e.getKeyCode();
@@ -58,7 +66,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 	}
 
 	/**
-	 * used for the timer that moves the block downwards.
+	 * Called by the timer.
 	 */
 	public void moveDown() {
 		localGame.moveDown();

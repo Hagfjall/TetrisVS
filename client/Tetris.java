@@ -29,11 +29,8 @@ public class Tetris {
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		String toHashO = opponentName.replaceAll("[Â‰ˆ≈ƒ÷]", "");
-		String toHashL = name.replaceAll("[Â‰ˆ≈ƒ÷]", "");
-		System.out.println(toHashL);
-		long opponentPowerupRandomSeed = toHashO.hashCode();
-		long localPowerupRandomSeed = toHashL.hashCode();
+		long opponentPowerupRandomSeed = name.hashCode();
+		long localPowerupRandomSeed = opponentName.hashCode();
 		Game local = new Game(22, 10, rndSeed, localPowerupRandomSeed);
 		Game opponent = new Game(22, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);

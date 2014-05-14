@@ -29,7 +29,7 @@ public class TetrisGui extends JFrame {
 		add(statsPanel,BorderLayout.EAST);
 		pack();
 		setBackground(Color.white);
-		
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 	}

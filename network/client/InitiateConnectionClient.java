@@ -14,6 +14,12 @@ import network.CommonNetworkMethods;
 public class InitiateConnectionClient {
 	private String opponentName;
 	private long randomSeed;
+	
+	/**
+	 * Initiates the connection, exchanges player name with the other client.
+	 * @param socket
+	 * @param name
+	 */
 
 	public InitiateConnectionClient(Socket socket, String name) {
 		DataInputStream in;

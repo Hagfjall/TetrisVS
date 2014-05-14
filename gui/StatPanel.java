@@ -21,6 +21,9 @@ public class StatPanel extends JPanel implements Observer {
 			"resources/duplcBlocks.png");
 	private static Icon invisibleIcon = new ImageIcon(
 			"resources/invBlocks.png");
+	private static Icon nullIcon = new ImageIcon(
+			"resources/nullBlocks.png");
+	
 
 	private JLabel nameLabel, scoreLabel, powerupLabel;
 
@@ -34,6 +37,7 @@ public class StatPanel extends JPanel implements Observer {
 		powerupLabel.setHorizontalTextPosition(JLabel.LEFT);
 		powerupLabel.setVerticalTextPosition(JLabel.BOTTOM);
 		powerupLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+		powerupLabel.setIcon(nullIcon);
 
 		setLayout(new BorderLayout());
 		add(nameLabel, BorderLayout.NORTH);
@@ -56,7 +60,7 @@ public class StatPanel extends JPanel implements Observer {
 			powerupLabel.setIcon(singleShapeIcon);
 			break;
 		default:
-			powerupLabel.setIcon(null);
+			powerupLabel.setIcon(nullIcon);
 			break;
 		}
 		scoreLabel.setText(Integer.toString(game.getScore()) + " p");
