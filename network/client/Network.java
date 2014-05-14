@@ -77,7 +77,7 @@ public class Network implements Runnable {
 					opponentGame.moveBottom();
 					break;
 				case ProtocolConstants.X:
-					System.out.print("Netwokr: recieving powerup");
+					System.out.println("Netwokr: recieving powerup");
 					attack = opponentGame.useAttack();
 					System.out.println("network: attacktype: " + attack.getType());
 					localGame.activateAttack(attack);
@@ -109,6 +109,10 @@ public class Network implements Runnable {
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	public void setAttack(Attack attack) {
+		this.attack = attack;
 	}
 
 }

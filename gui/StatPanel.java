@@ -54,10 +54,10 @@ public class StatPanel extends JPanel implements Observer {
 		Attack attack = game.getAttack();
 		switch (attack.getType()) {
 		case Attack.SINGLE_SHAPE:
-			powerupLabel.setIcon(invisibleIcon);
+			powerupLabel.setIcon(singleShapeIcon);
 			break;
 		case Attack.INVISIBLE_GAME:
-			powerupLabel.setIcon(singleShapeIcon);
+			powerupLabel.setIcon(invisibleIcon);
 			break;
 		default:
 			powerupLabel.setIcon(nullIcon);

@@ -29,14 +29,14 @@ public class Tetris {
 //				.showInputDialog("Please enter the server address");
 //		int port = Integer.parseInt(JOptionPane
 //				.showInputDialog("Please enter the portnumber"));
-		String address = "192.168.43.180";
+		String address = "localhost";
 		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		long opponentPowerupRandomSeed = name.hashCode();
-		long localPowerupRandomSeed = opponentName.hashCode();
+		long opponentPowerupRandomSeed = opponentName.hashCode();
+		long localPowerupRandomSeed = name.hashCode();
 		Game local = new Game(22, 10, rndSeed, localPowerupRandomSeed);
 		Game opponent = new Game(22, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);

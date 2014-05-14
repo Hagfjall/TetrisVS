@@ -47,7 +47,8 @@ public class Game extends Observable {
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);
 		shapeBoard.setShape(shapeFactory.getShape());
-		opponentAttack = new NullAttack(); // attack to avoid nullPointerException
+		opponentAttack = new NullAttack(); // attack to avoid
+											// nullPointerException
 		localAttack = new NullAttack();
 	}
 
@@ -203,7 +204,8 @@ public class Game extends Observable {
 			Shape s = shapeBoard.getShape();
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
-			if (removedRows == 4) {
+			// if (removedRows == 4) {
+			if (removedRows >= 1) {
 				localAttack = attackFactory.getAttack();
 			}
 			score += 1 * removedRows * removedRows;
@@ -214,11 +216,12 @@ public class Game extends Observable {
 				shapeBoard.setShape(new Z_Left());
 			} else { // getting next shape from the factory
 				shapeBoard.setShape(shapeFactory.getShape());
-				if (hit()) {
-					lost = true;
-					updated(GAME_LOST);
-					shapeBoard.removeShape();
-				}
+
+			}
+			if (hit()) {
+				lost = true;
+				updated(GAME_LOST);
+				shapeBoard.removeShape();
 			}
 
 		}
@@ -268,13 +271,13 @@ public class Game extends Observable {
 			return;
 		opponentAttack = attack;
 		attack.activate();
-//		Attack pwrUp;
-//		if (type == 0) {
-//			pwrUp = attackFactory.getPowerup(); // randomized
-//		} else {
-//			pwrUp = attackFactory.getPowerup(type);
-//		}
-//		opponentAttack = pwrUp;
+		// Attack pwrUp;
+		// if (type == 0) {
+		// pwrUp = attackFactory.getPowerup(); // randomized
+		// } else {
+		// pwrUp = attackFactory.getPowerup(type);
+		// }
+		// opponentAttack = pwrUp;
 	}
 
 }
