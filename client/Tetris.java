@@ -19,19 +19,28 @@ public class Tetris {
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
 		String name = JOptionPane.showInputDialog("Please enter your name");
-		String address = JOptionPane
-				.showInputDialog("Please enter the server address");
-		int port = Integer.parseInt(JOptionPane
-				.showInputDialog("Please enter the portnumber"));
+//		String address = JOptionPane
+//				.showInputDialog("Please enter the server address");
+//		int port = Integer.parseInt(JOptionPane
+//				.showInputDialog("Please enter the portnumber"));
+		String address = "localhost";
+		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
 		String opponentName = init.getOpponentName();
-		long opponentPowerupRandomSeed = opponentName.hashCode();
-		long localPowerupRandomSeed = name.hashCode();
+		String toHashO = opponentName.replaceAll("[Â‰ˆ≈ƒ÷]", "");
+		String toHashL = name.replaceAll("[Â‰ˆ≈ƒ÷]", "");
+		System.out.println(toHashL);
+		long opponentPowerupRandomSeed = toHashO.hashCode();
+		long localPowerupRandomSeed = toHashL.hashCode();
 		Game local = new Game(22, 10, rndSeed, localPowerupRandomSeed);
 		Game opponent = new Game(22, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);
+		System.out.println("Local name: "+ name);
+		System.out.println("Local seed: " + localPowerupRandomSeed);
+		System.out.println("Opponent name: " + opponentName);
+		System.out.println("Opponent seed: " + opponentPowerupRandomSeed);
 		new Thread(network).start();
 		KeyListener keyListener = new KeyListener(local, network);
 		new TetrisTimer(keyListener, 750);

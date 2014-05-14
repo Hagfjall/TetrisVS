@@ -75,6 +75,7 @@ public class Network implements Runnable {
 					break;
 				case ProtocolConstants.POWERUP_ACK:
 					attack = opponentGame.useAttack();
+					System.out.println("Powerupack: type: " + attack.getType());
 					opponentGame.activateAttack(attack);
 					break;
 				case ProtocolConstants.MOVEDOWN:
