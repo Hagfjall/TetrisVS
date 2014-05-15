@@ -47,7 +47,6 @@ public class StatPanel extends JPanel implements Observer {
 		game.addObserver(this);
 		update(null, null); // for getting all the information from the game to
 							// start with
-
 	}
 
 	public void update(Observable o, Object arg) {

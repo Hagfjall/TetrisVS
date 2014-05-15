@@ -56,6 +56,12 @@ public class ServerOutputHandler extends Thread {
 			Input msg = m.get();
 			DataOutputStream out;
 			int[] msgarr = msg.getMessage();
+			try {
+				sleep(200);
+			} catch (InterruptedException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
 			Iterator<Socket> it = allConnections.iterator();
 			while (it.hasNext()) {
 				Socket s = it.next();

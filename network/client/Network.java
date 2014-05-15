@@ -2,6 +2,7 @@ package network.client;
 
 import game.Game;
 import game.attacks.Attack;
+import game.attacks.AttackFactory;
 import game.attacks.NullAttack;
 
 import java.io.DataInputStream;
@@ -44,7 +45,7 @@ public class Network implements Runnable {
 
 	public void sendPowerupAck(Attack attack) {
 		send(ProtocolConstants.POWERUP_ACK);
-//		send(attack.getType());
+		send(attack.getType());
 	}
 	/**
 	 * Reads the input from sent by the server.
@@ -84,8 +85,9 @@ public class Network implements Runnable {
 					sendPowerupAck(attack);
 					break;
 				case ProtocolConstants.POWERUP_ACK:
-//					attack = opponentGame.useAttack();
-					System.out.println("Powerupack: type: " + attack.getType());
+					byte attackType = in.readByte();
+					attack = AttackFactory.getAttack(attackType);
+					System.out.println("PowerupACK: type: " + attack.getType());
 					opponentGame.activateAttack(attack);
 					break;
 				case ProtocolConstants.MOVEDOWN:
@@ -109,10 +111,6 @@ public class Network implements Runnable {
 				e1.printStackTrace();
 			}
 		}
-	}
-
-	public void setAttack(Attack attack) {
-		this.attack = attack;
 	}
 
 }

@@ -10,9 +10,11 @@ import network.ProtocolConstants;
 public class KeyListener implements java.awt.event.KeyListener {
 	private Game localGame;
 	private Network network;
-	
+
 	/**
-	 * Listens for keys pressed on the keyboard locally and send pass them to the server and the local game.
+	 * Listens for keys pressed on the keyboard locally and send pass them to
+	 * the server and the local game.
+	 * 
 	 * @param localGame
 	 * @param network
 	 */
@@ -27,7 +29,8 @@ public class KeyListener implements java.awt.event.KeyListener {
 	}
 
 	/**
-	 * Calls the appropriate method in local game and sends the key pressed to the server.
+	 * Calls the appropriate method in local game and sends the key pressed to
+	 * the server.
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -55,9 +58,8 @@ public class KeyListener implements java.awt.event.KeyListener {
 			break;
 		case KeyEvent.VK_X:
 			Attack attack = localGame.useAttack();
-			if (attack.getType() != Attack.NULL_ATTACK) { // only sending if
-															// there are
-				network.setAttack(attack);					// anything to send.
+			// only sending if there are anything to send.
+			if (attack.getType() != Attack.NULL_ATTACK) {
 				network.sendKey(ProtocolConstants.X);
 			}
 			break;

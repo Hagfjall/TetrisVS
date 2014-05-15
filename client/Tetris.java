@@ -37,8 +37,8 @@ public class Tetris {
 		String opponentName = init.getOpponentName();
 		long opponentPowerupRandomSeed = opponentName.hashCode();
 		long localPowerupRandomSeed = name.hashCode();
-		Game local = new Game(22, 10, rndSeed, localPowerupRandomSeed);
-		Game opponent = new Game(22, 10, rndSeed, opponentPowerupRandomSeed);
+		Game local = new Game(26, 10, rndSeed, localPowerupRandomSeed);
+		Game opponent = new Game(26, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);
 		System.out.println("Local name: "+ name);
 		System.out.println("Local seed: " + localPowerupRandomSeed);
@@ -46,7 +46,7 @@ public class Tetris {
 		System.out.println("Opponent seed: " + opponentPowerupRandomSeed);
 		new Thread(network).start();
 		KeyListener keyListener = new KeyListener(local, network);
-		new TetrisTimer(keyListener, 750);
+		new TetrisTimer(keyListener, 1000);
 		new TetrisGui(name, opponentName, local, opponent, keyListener);
 
 	}

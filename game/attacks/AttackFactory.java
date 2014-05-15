@@ -24,7 +24,7 @@ public class AttackFactory {
 	 *            which type of attack to create
 	 * @return the attack that matches type, otherwise NullAttack
 	 */
-	public Attack getAttack(byte type) {
+	public static Attack getAttack(byte type) {
 		switch (type) {
 		case Attack.SINGLE_SHAPE:
 			return new SingleBlockAttack();

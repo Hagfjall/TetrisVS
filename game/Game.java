@@ -204,15 +204,13 @@ public class Game extends Observable {
 			Shape s = shapeBoard.getShape();
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
-			// if (removedRows == 4) {
-			if (removedRows >= 1) {
+			if (removedRows > 0) {
 				localAttack = attackFactory.getAttack();
 			}
 			score += 1 * removedRows * removedRows;
-
+			// checking if the attack Singleblock is active
 			if (opponentAttack.getType() == Attack.SINGLE_SHAPE
-					&& opponentAttack.isActive()) { // checking if the attack
-													// Singleblock is active
+					&& opponentAttack.isActive()) {
 				shapeBoard.setShape(new Z_Left());
 			} else { // getting next shape from the factory
 				shapeBoard.setShape(shapeFactory.getShape());
@@ -271,13 +269,6 @@ public class Game extends Observable {
 			return;
 		opponentAttack = attack;
 		attack.activate();
-		// Attack pwrUp;
-		// if (type == 0) {
-		// pwrUp = attackFactory.getPowerup(); // randomized
-		// } else {
-		// pwrUp = attackFactory.getPowerup(type);
-		// }
-		// opponentAttack = pwrUp;
 	}
 
 }

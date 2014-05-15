@@ -36,7 +36,7 @@ public class CommonNetworkMethods {
 		int length = in.readInt();
 		byte[] data = new byte[length];
 		in.readFully(data);
-		return new String(data, "UTF-8");
+		return new String(data, "UTF-16");
 	}
 
 	/**
@@ -62,10 +62,11 @@ public class CommonNetworkMethods {
 	 */
 	public static void sendString(DataOutputStream out, String msg)
 			throws IOException {
-		int length = msg.length();
+		byte[] sndMsg = msg.getBytes("UTF-16");
+		int length = sndMsg.length;
 		out.write(ProtocolConstants.STRING);
 		out.writeInt(length);
-		out.write(msg.getBytes("UTF-8"));
+		out.write(sndMsg);
 	}
 
 }
