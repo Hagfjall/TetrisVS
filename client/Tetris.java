@@ -40,10 +40,6 @@ public class Tetris {
 		Game local = new Game(26, 10, rndSeed, localPowerupRandomSeed);
 		Game opponent = new Game(26, 10, rndSeed, opponentPowerupRandomSeed);
 		Network network = new Network(s, local, opponent);
-		System.out.println("Local name: "+ name);
-		System.out.println("Local seed: " + localPowerupRandomSeed);
-		System.out.println("Opponent name: " + opponentName);
-		System.out.println("Opponent seed: " + opponentPowerupRandomSeed);
 		new Thread(network).start();
 		KeyListener keyListener = new KeyListener(local, network);
 		new TetrisTimer(keyListener, 1000);
