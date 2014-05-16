@@ -20,6 +20,7 @@ public class Network implements Runnable {
 	private DataOutputStream out;
 	private DataInputStream in;
 	private Attack attack;
+	private AttackTimer attackTimer;
 
 	/**
 	 * Handles the output and input at the client.
@@ -33,6 +34,7 @@ public class Network implements Runnable {
 		this.localGame = localGame;
 		this.opponentGame = opponentGame;
 		attack = new NullAttack();
+		attackTimer = new AttackTimer(this, 30000);
 		try {
 			in = new DataInputStream(socket.getInputStream());
 			out = new DataOutputStream(socket.getOutputStream());
@@ -93,7 +95,7 @@ public class Network implements Runnable {
 				case ProtocolConstants.X:
 					System.out.println("Netwokr: recieving powerup");
 					attack = opponentGame.useAttack();
-					new AttackTimer(this, 30000);
+					attackTimer.start();
 					System.out.println("network: attacktype: "
 							+ attack.getType());
 					localGame.activateAttack(attack);
