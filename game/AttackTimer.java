@@ -14,7 +14,7 @@ public class AttackTimer {
 
 	public AttackTimer(Network network, int delay) {
 		this.network = network;
-		Timer timer = new Timer(delay, new AttackListener());
+		timer = new Timer(delay, new AttackListener());
 		timer.setRepeats(false);
 	}
 
