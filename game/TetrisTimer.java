@@ -29,7 +29,6 @@ public class TetrisTimer {
 		public void actionPerformed(ActionEvent e) {
 			keyListener.moveDown();
 		}
-
 	}
 
 }
