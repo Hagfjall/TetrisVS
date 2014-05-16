@@ -79,6 +79,7 @@ public class Network implements Runnable {
 					break;
 				case ProtocolConstants.X:
 					attack = opponentGame.useAttack();
+					
 					localGame.activateAttack(attack);
 					sendPowerupAck(attack);
 					break;

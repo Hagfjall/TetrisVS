@@ -7,25 +7,27 @@ public abstract class Attack {
 	public static final byte INVISIBLE_GAME = SINGLE_SHAPE + 1;
 
 	protected byte type;
-	protected long startTime;
+	protected boolean active;
 
 	protected Attack(byte type) {
 		this.type = type;
+		active = false;
 	}
 
-	/**
-	 * Makes it active for 30 seconds from the time this runs
-	 */
 	public void activate() {
-		startTime = System.currentTimeMillis() + 30000;
+		active = true;
 	}
-
+	
+	public void deactivate() {
+		active = false;
+	}
+	
 	public byte getType() {
 		return type;
 	}
 
 	public boolean isActive() {
-		return System.currentTimeMillis() < startTime;
+		return active;
 	}
 
 }
