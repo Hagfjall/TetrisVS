@@ -9,28 +9,30 @@ import network.client.Network;
 
 public class AttackTimer {
 
-		private Network network;
+	private Network network;
+	private Timer timer;
 
-		public AttackTimer(Network network, int delay) {
-			this.network = network;
-			Timer timer = new Timer(delay, new AttackListener());
-			timer.setRepeats(false);
+	public AttackTimer(Network network, int delay) {
+		this.network = network;
+		Timer timer = new Timer(delay, new AttackListener());
+		timer.setRepeats(false);
+	}
+
+	public void start() {
+		if (timer.isRunning())
+			timer.restart();
+		else
 			timer.start();
-			network.sendAttackActivated();
+		network.sendAttackActivated();
+	}
+
+	private class AttackListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			network.sendAttackDeactivated();
 		}
 
-		private class AttackListener implements ActionListener {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				network.sendAttackDeactivated();
-			}
-
-		}
-
-
-	public AttackTimer() {
-		// TODO Auto-generated constructor stub
 	}
 
 }
