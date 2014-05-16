@@ -2,26 +2,28 @@ package game;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.Timer;
-import network.client.KeyListener;
+
+import network.client.Network;
 
 public class AttackTimer {
 
-		private KeyListener keyListener;
+		private Network network;
 
-		public AttackTimer(KeyListener keyListener, int delay) {
-			this.keyListener = keyListener;
+		public AttackTimer(Network network, int delay) {
+			this.network = network;
 			Timer timer = new Timer(delay, new AttackListener());
 			timer.setRepeats(false);
 			timer.start();
-			keyListener.startAttack();
+			network.sendAttackActivated();
 		}
 
 		private class AttackListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				keyListener.stopAttack();
+				network.sendAttackDeactivated();
 			}
 
 		}

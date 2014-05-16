@@ -1,9 +1,8 @@
 package game;
 
 import game.attacks.Attack;
-import game.attacks.InvisibleAttack;
-import game.attacks.NullAttack;
 import game.attacks.AttackFactory;
+import game.attacks.NullAttack;
 import game.shapes.Shape;
 import game.shapes.ShapeFactory;
 import game.shapes.Z_Left;
@@ -269,6 +268,12 @@ public class Game extends Observable {
 			return;
 		opponentAttack = attack;
 		attack.activate();
+	}
+
+	public void deactivateAttack() {
+		if (lost)
+			return;
+		opponentAttack.deactivate();
 	}
 
 }

@@ -60,7 +60,7 @@ public class KeyListener implements java.awt.event.KeyListener {
 			Attack attack = localGame.useAttack();
 			// only sending if there are anything to send.
 			if (attack.getType() != Attack.NULL_ATTACK) {
-				network.sendKey(ProtocolConstants.X);
+				network.sendAttack(attack);
 			}
 			break;
 		}

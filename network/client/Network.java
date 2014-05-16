@@ -1,5 +1,6 @@
 package network.client;
 
+import game.AttackTimer;
 import game.Game;
 import game.attacks.Attack;
 import game.attacks.AttackFactory;
@@ -19,8 +20,10 @@ public class Network implements Runnable {
 	private DataOutputStream out;
 	private DataInputStream in;
 	private Attack attack;
+
 	/**
 	 * Handles the output and input at the client.
+	 * 
 	 * @param socket
 	 * @param localGame
 	 * @param opponentGame
@@ -39,14 +42,24 @@ public class Network implements Runnable {
 
 	}
 
+	public void sendAttack(Attack attack) {
+		send(ProtocolConstants.X);
+		this.attack = attack;
+	}
+
 	public void sendKey(byte key) {
 		send(key);
 	}
 
-	public void sendPowerupAck(Attack attack) {
-		send(ProtocolConstants.POWERUP_ACK);
-		send(attack.getType());
+	public void sendAttackActivated() {
+		send(ProtocolConstants.ATTACK_START);
 	}
+
+	public void sendAttackDeactivated() {
+		localGame.deactivateAttack();
+		send(ProtocolConstants.ATTACK_STOP);
+	}
+
 	/**
 	 * Reads the input from sent by the server.
 	 */
@@ -80,20 +93,22 @@ public class Network implements Runnable {
 				case ProtocolConstants.X:
 					System.out.println("Netwokr: recieving powerup");
 					attack = opponentGame.useAttack();
-					System.out.println("network: attacktype: " + attack.getType());
+					new AttackTimer(this, 30000);
+					System.out.println("network: attacktype: "
+							+ attack.getType());
 					localGame.activateAttack(attack);
-					sendPowerupAck(attack);
 					break;
-				case ProtocolConstants.POWERUP_ACK:
-					byte attackType = in.readByte();
-					attack = AttackFactory.getAttack(attackType);
+				case ProtocolConstants.ATTACK_START:
 					System.out.println("PowerupACK: type: " + attack.getType());
 					opponentGame.activateAttack(attack);
+					break;
+				case ProtocolConstants.ATTACK_STOP:
+					opponentGame.deactivateAttack();
 					break;
 				case ProtocolConstants.MOVEDOWN:
 					opponentGame.moveDown();
 					break;
-				} 
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
