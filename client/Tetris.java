@@ -21,7 +21,6 @@ public class Tetris {
 	 * @throws UnknownHostException
 	 * @throws IOException
 	 */
-	
 
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
