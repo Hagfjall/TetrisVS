@@ -203,7 +203,7 @@ public class Game extends Observable {
 			Shape s = shapeBoard.getShape();
 			Point p = new Point(shapeBoard.getX(), shapeBoard.getY());
 			int removedRows = gameBoard.setShape(p, s);
-			if (removedRows > 0) {
+			if (removedRows == 4) {
 				localAttack = attackFactory.getAttack();
 			}
 			score += 1 * removedRows * removedRows;
