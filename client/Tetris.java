@@ -21,6 +21,7 @@ public class Tetris {
 	 * @throws UnknownHostException
 	 * @throws IOException
 	 */
+	
 
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
@@ -44,7 +45,6 @@ public class Tetris {
 		KeyListener keyListener = new KeyListener(local, network);
 		new TetrisTimer(keyListener, 500);
 		new TetrisGui(name, opponentName, local, opponent, keyListener);
-
 	}
 
 }
