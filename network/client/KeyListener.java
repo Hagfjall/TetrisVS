@@ -79,4 +79,13 @@ public class KeyListener implements java.awt.event.KeyListener {
 	public void keyReleased(KeyEvent e) {
 	}
 
+	public void startAttack() {
+		
+	}
+
+	public void stopAttack() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
