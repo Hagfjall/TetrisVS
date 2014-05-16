@@ -25,12 +25,12 @@ public class Tetris {
 	public static void main(String[] args) throws UnknownHostException,
 			IOException {
 		String name = JOptionPane.showInputDialog("Please enter your name");
-//		String address = JOptionPane
-//				.showInputDialog("Please enter the server address");
-//		int port = Integer.parseInt(JOptionPane
-//				.showInputDialog("Please enter the portnumber"));
-		String address = "localhost";
-		int port = 3000;
+		String address = JOptionPane
+				.showInputDialog("Please enter the server address");
+		int port = Integer.parseInt(JOptionPane
+				.showInputDialog("Please enter the portnumber"));
+//		String address = "localhost";
+//		int port = 3000;
 		Socket s = new Socket(address, port);
 		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
 		long rndSeed = init.getRndSeed();
@@ -42,7 +42,7 @@ public class Tetris {
 		Network network = new Network(s, local, opponent);
 		new Thread(network).start();
 		KeyListener keyListener = new KeyListener(local, network);
-		new TetrisTimer(keyListener, 1000);
+		new TetrisTimer(keyListener, 500);
 		new TetrisGui(name, opponentName, local, opponent, keyListener);
 
 	}
