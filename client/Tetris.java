@@ -23,8 +23,7 @@ public class Tetris {
 	 * @throws IOException
 	 */
 
-	public static void main(String[] args) throws UnknownHostException,
-			IOException {
+	public static void main(String[] args) {
 		String name = JOptionPane.showInputDialog("Please enter your name");
 		if (name == null)
 			return;
@@ -38,19 +37,26 @@ public class Tetris {
 			return;
 		// String address = "localhost";
 		// int port = 3000;
-		Socket s = new Socket(address, port);
-		InitiateConnectionClient init = new InitiateConnectionClient(s, name);
-		long rndSeed = init.getRndSeed();
-		String opponentName = init.getOpponentName();
-		long opponentAttackRandomSeed = opponentName.hashCode();
-		long localAttackRandomSeed = name.hashCode();
-		Game local = new Game(26, 10, rndSeed, localAttackRandomSeed);
-		Game opponent = new Game(26, 10, rndSeed, opponentAttackRandomSeed);
-		Network network = new Network(s, local, opponent);
-		new Thread(network).start();
-		KeyListener keyListener = new KeyListener(local, network);
-		new TetrisTimer(keyListener, 500);
-		new TetrisGui(name, opponentName, local, opponent, keyListener);
+		Socket s;
+		try {
+			s = new Socket(address, port);
+			InitiateConnectionClient init = new InitiateConnectionClient(s,
+					name);
+			long rndSeed = init.getRndSeed();
+			String opponentName = init.getOpponentName();
+			long opponentAttackRandomSeed = opponentName.hashCode();
+			long localAttackRandomSeed = name.hashCode();
+			Game local = new Game(26, 10, rndSeed, localAttackRandomSeed);
+			Game opponent = new Game(26, 10, rndSeed, opponentAttackRandomSeed);
+			Network network = new Network(s, local, opponent);
+			new Thread(network).start();
+			KeyListener keyListener = new KeyListener(local, network);
+			new TetrisTimer(keyListener, 500);
+			new TetrisGui(name, opponentName, local, opponent, keyListener);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null,
+					"Could not connect to " + address + ":" + port + " quitting...");
+		}
 	}
 
 }
