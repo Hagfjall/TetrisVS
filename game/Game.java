@@ -35,13 +35,13 @@ public class Game extends Observable {
 	 *            size
 	 * @param shapeRandomSeed
 	 *            used for generating the bricks
-	 * @param powerupRandomSeed
-	 *            used for generating powerups
+	 * @param attackRandomSeed
+	 *            used for generating attacks
 	 * 
 	 */
-	public Game(int row, int col, long shapeRandomSeed, long powerupRandomSeed) {
+	public Game(int row, int col, long shapeRandomSeed, long attackRandomSeed) {
 		shapeFactory = new ShapeFactory(shapeRandomSeed);
-		attackFactory = new AttackFactory(powerupRandomSeed);
+		attackFactory = new AttackFactory(attackRandomSeed);
 		score = 0;
 		gameBoard = new GameBoard(row, col);
 		shapeBoard = new ShapeBoard(row, col);

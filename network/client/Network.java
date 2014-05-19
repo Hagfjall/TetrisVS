@@ -74,9 +74,6 @@ public class Network implements Runnable {
 				case ProtocolConstants.STRING:
 					System.err.println("read String should not be done");
 					break;
-				case ProtocolConstants.INT:
-					System.err.println("Read Int should not be done");
-					break;
 				case ProtocolConstants.LEFT:
 					opponentGame.moveLeft();
 					break;

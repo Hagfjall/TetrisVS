@@ -3,16 +3,12 @@ package game;
 import game.shapes.NullShape;
 import game.shapes.Shape;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ShapeBoard extends Board {
 	private int currentX, currentY;
 	private Shape shape;
-	private String excecuteHistory;
-	private static final String MOVE_DOWN = "mvdn", ROTATE_CLOCKWISE = "rtcl",
-			ROTATE_COUNTERCLOCKWISE = "rtccl", MOVE_RIGHT = "mvrght",
-			MOVE_LEFT = "mvlft";
+	private int excecuteHistory;
+	private static final int MOVE_DOWN = 1, ROTATE_CLOCKWISE = 2,
+			ROTATE_COUNTERCLOCKWISE = 3, MOVE_RIGHT = 4, MOVE_LEFT = 4;
 
 	public ShapeBoard(int row, int col) {
 		super(row, col);
@@ -67,18 +63,18 @@ public class ShapeBoard extends Board {
 	 */
 	public void rollBack() {
 		clear();
-		if (excecuteHistory.equals(MOVE_DOWN)) {
+		if (excecuteHistory == MOVE_DOWN) {
 			currentY--;
-		} else if (excecuteHistory.equals(MOVE_LEFT)) {
+		} else if (excecuteHistory == MOVE_LEFT) {
 			currentX++;
-		} else if (excecuteHistory.equals(MOVE_RIGHT)) {
+		} else if (excecuteHistory == MOVE_RIGHT) {
 			currentX--;
-		} else if (excecuteHistory.equals(ROTATE_CLOCKWISE)) {
+		} else if (excecuteHistory == ROTATE_CLOCKWISE) {
 			shape.rotate(false);
-		} else if (excecuteHistory.equals(ROTATE_COUNTERCLOCKWISE)) {
+		} else if (excecuteHistory == ROTATE_COUNTERCLOCKWISE) {
 			shape.rotate(true);
 		}
-		excecuteHistory = "";
+		excecuteHistory = 0;
 		setShapeInMatrix();
 	}
 

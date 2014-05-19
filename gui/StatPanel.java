@@ -25,7 +25,7 @@ public class StatPanel extends JPanel implements Observer {
 			"resources/nullBlocks.png");
 	
 
-	private JLabel nameLabel, scoreLabel, powerupLabel;
+	private JLabel nameLabel, scoreLabel, attackLabel;
 
 	public StatPanel(String name, Game game) {
 		this.game = game;
@@ -33,16 +33,16 @@ public class StatPanel extends JPanel implements Observer {
 		nameLabel.setFont(new Font("Serif", Font.PLAIN, 22));
 		scoreLabel = new JLabel(0 + " p");
 		scoreLabel.setFont(new Font("Serif", Font.PLAIN, 18));
-		powerupLabel = new JLabel("Powerup: ");
-		powerupLabel.setHorizontalTextPosition(JLabel.LEFT);
-		powerupLabel.setVerticalTextPosition(JLabel.BOTTOM);
-		powerupLabel.setFont(new Font("Serif", Font.PLAIN, 18));
-		powerupLabel.setIcon(nullIcon);
+		attackLabel = new JLabel("Attack: ");
+		attackLabel.setHorizontalTextPosition(JLabel.LEFT);
+		attackLabel.setVerticalTextPosition(JLabel.BOTTOM);
+		attackLabel.setFont(new Font("Serif", Font.PLAIN, 18));
+		attackLabel.setIcon(nullIcon);
 
 		setLayout(new BorderLayout());
 		add(nameLabel, BorderLayout.NORTH);
 		add(scoreLabel, BorderLayout.CENTER);
-		add(powerupLabel, BorderLayout.SOUTH);
+		add(attackLabel, BorderLayout.SOUTH);
 
 		game.addObserver(this);
 		update(null, null); // for getting all the information from the game to
@@ -53,13 +53,13 @@ public class StatPanel extends JPanel implements Observer {
 		Attack attack = game.getAttack();
 		switch (attack.getType()) {
 		case Attack.SINGLE_SHAPE:
-			powerupLabel.setIcon(singleShapeIcon);
+			attackLabel.setIcon(singleShapeIcon);
 			break;
 		case Attack.INVISIBLE_GAME:
-			powerupLabel.setIcon(invisibleIcon);
+			attackLabel.setIcon(invisibleIcon);
 			break;
 		default:
-			powerupLabel.setIcon(nullIcon);
+			attackLabel.setIcon(nullIcon);
 			break;
 		}
 		scoreLabel.setText(Integer.toString(game.getScore()) + " p");
