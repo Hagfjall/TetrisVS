@@ -1,18 +1,17 @@
 package client;
 
-import game.Game;
-import game.TetrisTimer;
-import gui.TetrisGui;
-
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
-import network.client.InitiateConnectionClient;
-import network.client.KeyListener;
-import network.client.Network;
+import client.game.Game;
+import client.game.TetrisTimer;
+import client.gui.TetrisGui;
+import client.network.InitiateConnectionClient;
+import client.network.KeyListener;
+import client.network.Network;
 
 public class Tetris {
 	/**
@@ -35,8 +34,6 @@ public class Tetris {
 				.showInputDialog("Please enter the portnumber"));
 		if (port == 0)
 			return;
-		// String address = "localhost";
-		// int port = 3000;
 		Socket s;
 		try {
 			s = new Socket(address, port);
@@ -54,8 +51,8 @@ public class Tetris {
 			new TetrisTimer(keyListener, 500);
 			new TetrisGui(name, opponentName, local, opponent, keyListener);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null,
-					"Could not connect to " + address + ":" + port + " quitting...");
+			JOptionPane.showMessageDialog(null, "Could not connect to "
+					+ address + ":" + port + ", quitting...");
 		}
 	}
 
