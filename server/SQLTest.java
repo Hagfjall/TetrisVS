@@ -3,6 +3,8 @@ package server;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class SQLTest {
 
@@ -12,17 +14,21 @@ public class SQLTest {
 	
 	public void start(){
 		SQLServer s = new SQLServer();
+		String username = "sql341335";
+		String password = "tY7!qZ3!";
+		s.openConnection(username, password);
 		Connection c = s.getConnection();
 		if(c == null){
 			System.out.println("Connection c is null");
 		}
 		
 		try {
-			String sql = "Insert into Score (name, score,date) values(?,?,?)";
+			String sql = "Insert into Score values(?,?,?,0)";
 			PreparedStatement ps = c.prepareStatement(sql);
-			ps.setString(1, "Testsson");
+			ps.setString(1, "Test4");
 			ps.setInt(2, 1000);
-			ps.setString(3, "Tisdag");
+//			ps.setString(3, time.toString());
+			ps.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			ps.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
